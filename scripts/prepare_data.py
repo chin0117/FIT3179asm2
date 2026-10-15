@@ -81,6 +81,6 @@ for (state_a,state_b), trips_000 in sorted(corridors.items(),key=lambda item:-it
         continue
     for i,state in enumerate((state_a,state_b)):
         lon,lat=positions[state]
-        rows.append({'corridor':f'{state_a}–{state_b}','state':state,'lon':lon,'lat':lat,
+        rows.append({'corridor':f'{state_a}-{state_b}','state':state,'lon':lon,'lat':lat,
                      'point_order':i,'two_way_trips_000':round(trips_000,2)})
 export('two_way_corridors.csv',['corridor','state','lon','lat','point_order','two_way_trips_000'],rows)

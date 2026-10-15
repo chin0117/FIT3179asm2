@@ -1,0 +1,117 @@
+{
+  "description": "Historical reported nature visitors by travel type, 2008–15. Segment measures should not be interpreted as unique people across segments.",
+  "title": "How did the composition of nature-related visits evolve?",
+  "width": 800,
+  "height": 330,
+  "data": {
+    "url": "data/nature_visitors.csv"
+  },
+  "transform": [
+    {
+      "fold": [
+        "International",
+        "Domestic_overnight",
+        "Domestic_day"
+      ],
+      "as": [
+        "type",
+        "visitors_m"
+      ]
+    },
+    {
+      "calculate": "datum.type === 'Domestic_day' ? 'Domestic day' : datum.type === 'Domestic_overnight' ? 'Domestic overnight' : 'International'",
+      "as": "visitor_type"
+    },
+    {
+      "stack": "visitors_m",
+      "as": [
+        "y0",
+        "y1"
+      ],
+      "offset": "center",
+      "groupby": [
+        "Year"
+      ],
+      "sort": [
+        {
+          "field": "visitor_type",
+          "order": "ascending"
+        }
+      ]
+    }
+  ],
+  "mark": {
+    "type": "area",
+    "opacity": 0.92,
+    "interpolate": "monotone"
+  },
+  "encoding": {
+    "x": {
+      "field": "Year",
+      "type": "ordinal",
+      "title": "Year",
+      "axis": {
+        "labelAngle": 0
+      }
+    },
+    "y": {
+      "field": "y0",
+      "type": "quantitative",
+      "title": "Centred segment count (millions)"
+    },
+    "y2": {
+      "field": "y1"
+    },
+    "color": {
+      "field": "visitor_type",
+      "type": "nominal",
+      "title": "Nature-visitor type",
+      "scale": {
+        "domain": [
+          "Domestic day",
+          "Domestic overnight",
+          "International"
+        ],
+        "range": [
+          "#65b89b",
+          "#236b68",
+          "#e4ad6c"
+        ]
+      }
+    },
+    "tooltip": [
+      {
+        "field": "Year",
+        "type": "ordinal"
+      },
+      {
+        "field": "visitor_type",
+        "type": "nominal",
+        "title": "Segment"
+      },
+      {
+        "field": "visitors_m",
+        "type": "quantitative",
+        "title": "Visitors (million)",
+        "format": ".2f"
+      }
+    ]
+  },
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "config": {
+    "font": "Inter, system-ui, sans-serif",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelColor": "#334155",
+      "titleColor": "#334155",
+      "gridColor": "#ecf2f0",
+      "domainColor": "#bac9c5"
+    },
+    "legend": {
+      "labelColor": "#334155",
+      "titleColor": "#334155"
+    }
+  }
+}

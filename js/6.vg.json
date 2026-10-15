@@ -1,0 +1,117 @@
+{
+  "description": "Relative domestic visitor nights; each cell / the state mean of the 5 available quarters. This is a short-term quarter profile, NOT multi-year evidence of seasonality.",
+  "title": "When did states run above or below their recent overnight-demand average?",
+  "width": 590,
+  "height": 290,
+  "data": {
+    "url": "data/visitor_nights_quarterly.csv"
+  },
+  "transform": [
+    {
+      "joinaggregate": [
+        {
+          "op": "mean",
+          "field": "nights",
+          "as": "state_mean"
+        }
+      ],
+      "groupby": [
+        "state"
+      ]
+    },
+    {
+      "calculate": "datum.nights / datum.state_mean",
+      "as": "relative_index"
+    }
+  ],
+  "mark": {
+    "type": "rect",
+    "stroke": "#ffffff",
+    "strokeWidth": 1.8,
+    "cornerRadius": 2
+  },
+  "encoding": {
+    "x": {
+      "field": "quarter",
+      "type": "ordinal",
+      "sort": [
+        "Jun 25",
+        "Sep 25",
+        "Dec 25",
+        "Mar 26",
+        "Jun 26"
+      ],
+      "title": "Quarter",
+      "axis": {
+        "labelAngle": 0
+      }
+    },
+    "y": {
+      "field": "state",
+      "type": "nominal",
+      "title": null,
+      "sort": [
+        "NSW",
+        "VIC",
+        "QLD",
+        "WA",
+        "SA",
+        "TAS",
+        "NT",
+        "ACT"
+      ]
+    },
+    "color": {
+      "field": "relative_index",
+      "type": "quantitative",
+      "title": "Relative to 5-quarter avg",
+      "scale": {
+        "scheme": "redblue",
+        "domain": [
+          0.6,
+          1.5
+        ],
+        "domainMid": 1.0
+      }
+    },
+    "tooltip": [
+      {
+        "field": "state",
+        "type": "nominal"
+      },
+      {
+        "field": "quarter",
+        "type": "nominal"
+      },
+      {
+        "field": "nights",
+        "type": "quantitative",
+        "title": "Nights ('000)",
+        "format": ",.0f"
+      },
+      {
+        "field": "relative_index",
+        "type": "quantitative",
+        "title": "Relative demand",
+        "format": ".2f"
+      }
+    ]
+  },
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "config": {
+    "font": "Inter, system-ui, sans-serif",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelColor": "#334155",
+      "titleColor": "#334155",
+      "gridColor": "#ecf2f0",
+      "domainColor": "#bac9c5"
+    },
+    "legend": {
+      "labelColor": "#334155",
+      "titleColor": "#334155"
+    }
+  }
+}

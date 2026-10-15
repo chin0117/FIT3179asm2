@@ -1,0 +1,6 @@
+step,start,end,delta,kind,order
+2008 total,0,29.29,29.29,total,0
+Domestic day,29.29,35.5,6.21,increase,1
+Domestic overnight,35.5,40.56,5.06,increase,2
+International,40.56,41.63,1.07,increase,3
+2015 total,0,41.63,12.34,total,4

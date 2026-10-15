@@ -1,0 +1,169 @@
+{
+  "description": "Nature visitor segments in 2008 and 2015, based on 2016 State of the Environment series.",
+  "title": "Which nature-tourism visitor segment grew the most?",
+  "width": 630,
+  "height": 350,
+  "data": {
+    "url": "data/nature_endpoints.csv"
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "line",
+        "strokeWidth": 3
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal",
+          "title": null,
+          "sort": [
+            "2008",
+            "2015"
+          ],
+          "axis": {
+            "labelAngle": 0
+          }
+        },
+        "y": {
+          "field": "visitors_m",
+          "type": "quantitative",
+          "title": "Nature visitors (millions)",
+          "scale": {
+            "zero": true
+          }
+        },
+        "detail": {
+          "field": "type",
+          "type": "nominal"
+        },
+        "color": {
+          "field": "type",
+          "type": "nominal",
+          "scale": {
+            "range": [
+              "#ca8a36",
+              "#2f9281",
+              "#346d93"
+            ]
+          },
+          "title": "Segment"
+        },
+        "tooltip": [
+          {
+            "field": "type",
+            "type": "nominal",
+            "title": "Visitor segment"
+          },
+          {
+            "field": "year",
+            "type": "ordinal"
+          },
+          {
+            "field": "visitors_m",
+            "type": "quantitative",
+            "title": "Millions",
+            "format": ".2f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 130
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal",
+          "sort": [
+            "2008",
+            "2015"
+          ]
+        },
+        "y": {
+          "field": "visitors_m",
+          "type": "quantitative"
+        },
+        "color": {
+          "field": "type",
+          "type": "nominal",
+          "legend": null,
+          "scale": {
+            "range": [
+              "#ca8a36",
+              "#2f9281",
+              "#346d93"
+            ]
+          }
+        },
+        "tooltip": [
+          {
+            "field": "type",
+            "type": "nominal"
+          },
+          {
+            "field": "year",
+            "type": "nominal"
+          },
+          {
+            "field": "visitors_m",
+            "type": "quantitative",
+            "format": ".2f"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.year === '2015'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "dx": 12,
+        "align": "left",
+        "fontWeight": 700,
+        "fontSize": 11
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal",
+          "sort": [
+            "2008",
+            "2015"
+          ]
+        },
+        "y": {
+          "field": "visitors_m",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "type",
+          "type": "nominal"
+        }
+      }
+    }
+  ],
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "config": {
+    "font": "Inter, system-ui, sans-serif",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelColor": "#334155",
+      "titleColor": "#334155",
+      "gridColor": "#ecf2f0",
+      "domainColor": "#bac9c5"
+    },
+    "legend": {
+      "labelColor": "#334155",
+      "titleColor": "#334155"
+    }
+  }
+}

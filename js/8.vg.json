@@ -1,0 +1,150 @@
+{
+  "description": "Derived $ spent / number of trips: DoTS June quarter 2025 and June quarter 2026, all-purpose domestic day trips, not park spending.",
+  "title": "How did average day-trip spending change by state?",
+  "width": 645,
+  "height": 340,
+  "data": {
+    "url": "data/spend_per_trip.csv"
+  },
+  "transform": [
+    {
+      "pivot": "period",
+      "value": "spend_per_trip_aud",
+      "groupby": [
+        "state"
+      ]
+    },
+    {
+      "fold": [
+        "Jun 2025",
+        "Jun 2026"
+      ],
+      "as": [
+        "period",
+        "spend"
+      ]
+    }
+  ],
+  "layer": [
+    {
+      "transform": [
+        {
+          "filter": "datum.period === 'Jun 2025'"
+        }
+      ],
+      "mark": {
+        "type": "rule",
+        "stroke": "#b7c9c3",
+        "strokeWidth": 3
+      },
+      "encoding": {
+        "y": {
+          "field": "state",
+          "type": "nominal",
+          "title": null,
+          "sort": [
+            "NSW",
+            "VIC",
+            "QLD",
+            "WA",
+            "SA",
+            "TAS",
+            "NT",
+            "ACT"
+          ]
+        },
+        "x": {
+          "field": "Jun 2025",
+          "type": "quantitative",
+          "title": "Average day-trip spend ($ / trip)",
+          "scale": {
+            "zero": false
+          }
+        },
+        "x2": {
+          "field": "Jun 2026"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 130
+      },
+      "encoding": {
+        "y": {
+          "field": "state",
+          "type": "nominal",
+          "title": null,
+          "sort": [
+            "NSW",
+            "VIC",
+            "QLD",
+            "WA",
+            "SA",
+            "TAS",
+            "NT",
+            "ACT"
+          ]
+        },
+        "x": {
+          "field": "spend",
+          "type": "quantitative",
+          "title": "Average day-trip spend ($ / trip)",
+          "scale": {
+            "zero": false
+          }
+        },
+        "color": {
+          "field": "period",
+          "type": "nominal",
+          "title": "Quarter",
+          "scale": {
+            "domain": [
+              "Jun 2025",
+              "Jun 2026"
+            ],
+            "range": [
+              "#94a3b8",
+              "#e0834c"
+            ]
+          }
+        },
+        "tooltip": [
+          {
+            "field": "state",
+            "type": "nominal"
+          },
+          {
+            "field": "period",
+            "type": "nominal"
+          },
+          {
+            "field": "spend",
+            "type": "quantitative",
+            "title": "AUD per trip",
+            "format": "$,.2f"
+          }
+        ]
+      }
+    }
+  ],
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "config": {
+    "font": "Inter, system-ui, sans-serif",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelColor": "#334155",
+      "titleColor": "#334155",
+      "gridColor": "#ecf2f0",
+      "domainColor": "#bac9c5"
+    },
+    "legend": {
+      "labelColor": "#334155",
+      "titleColor": "#334155"
+    }
+  }
+}

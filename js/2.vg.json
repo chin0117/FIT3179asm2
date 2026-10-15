@@ -1,0 +1,107 @@
+{
+  "description": "NSW NPWS Park Visitation Survey, financial year 2024–25. Figures are total park VISITS (repeat visits possible).",
+  "title": "Where do visits to leading NSW parks concentrate?",
+  "width": 740,
+  "height": 490,
+  "projection": {
+    "type": "mercator",
+    "center": [
+      149.7,
+      -34.55
+    ],
+    "scale": 2900
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/rowanhogan/australian-states/master/states.geojson",
+        "format": {
+          "type": "json",
+          "property": "features"
+        }
+      },
+      "transform": [
+        {
+          "filter": "datum.properties.STATE_NAME === 'New South Wales'"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "fill": "#e8f3ed",
+        "stroke": "#8aa99d",
+        "strokeWidth": 0.8
+      }
+    },
+    {
+      "data": {
+        "url": "data/nsw_parks.csv"
+      },
+      "mark": {
+        "type": "circle",
+        "opacity": 0.67,
+        "stroke": "white",
+        "strokeWidth": 1.3
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "size": {
+          "field": "visitors",
+          "type": "quantitative",
+          "title": "Park visits (millions)",
+          "scale": {
+            "type": "sqrt",
+            "range": [
+              130,
+              3200
+            ]
+          }
+        },
+        "color": {
+          "field": "visitors",
+          "type": "quantitative",
+          "title": "Park visits (millions)",
+          "scale": {
+            "scheme": "goldgreen"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "park",
+            "type": "nominal",
+            "title": "Park / protected area"
+          },
+          {
+            "field": "visitors",
+            "type": "quantitative",
+            "title": "Visits (millions)",
+            "format": ".1f"
+          }
+        ]
+      }
+    }
+  ],
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "config": {
+    "font": "Inter, system-ui, sans-serif",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelColor": "#334155",
+      "titleColor": "#334155",
+      "gridColor": "#ecf2f0",
+      "domainColor": "#bac9c5"
+    },
+    "legend": {
+      "labelColor": "#334155",
+      "titleColor": "#334155"
+    }
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "description": "Lorenz curve computed only over the 10 highest-visit NSW parks, FY2024–25; curve cannot be generalized to all NSW parks.",
+  "title": "How concentrated are visits across the 10 leading NSW parks?",
+  "width": 530,
+  "height": 370,
+  "layer": [
+    {
+      "data": {
+        "url": "data/park_concentration.csv"
+      },
+      "mark": {
+        "type": "line",
+        "strokeWidth": 3,
+        "point": {
+          "filled": true,
+          "size": 43
+        },
+        "color": "#247e70"
+      },
+      "encoding": {
+        "x": {
+          "field": "park_share",
+          "type": "quantitative",
+          "title": "Share of parks included (%)",
+          "scale": {
+            "domain": [
+              0,
+              100
+            ]
+          }
+        },
+        "y": {
+          "field": "visits_share",
+          "type": "quantitative",
+          "title": "Cumulative share of their visits (%)",
+          "scale": {
+            "domain": [
+              0,
+              100
+            ]
+          }
+        },
+        "tooltip": [
+          {
+            "field": "park",
+            "type": "nominal",
+            "title": "Last park included"
+          },
+          {
+            "field": "park_share",
+            "type": "quantitative",
+            "title": "% parks",
+            "format": ".0f"
+          },
+          {
+            "field": "visits_share",
+            "type": "quantitative",
+            "title": "Cumulative visit share",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "s": 0
+          },
+          {
+            "s": 100
+          }
+        ]
+      },
+      "mark": {
+        "type": "line",
+        "strokeDash": [
+          6,
+          5
+        ],
+        "color": "#b1aca6",
+        "strokeWidth": 2
+      },
+      "encoding": {
+        "x": {
+          "field": "s",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "s",
+          "type": "quantitative"
+        }
+      }
+    }
+  ],
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "config": {
+    "font": "Inter, system-ui, sans-serif",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelColor": "#334155",
+      "titleColor": "#334155",
+      "gridColor": "#ecf2f0",
+      "domainColor": "#bac9c5"
+    },
+    "legend": {
+      "labelColor": "#334155",
+      "titleColor": "#334155"
+    }
+  }
+}

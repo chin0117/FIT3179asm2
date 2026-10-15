@@ -1,0 +1,76 @@
+{
+  "description": "Five observations per state, Jun 2025 through Jun 2026. Annual seasonality cannot be inferred from just five quarterly data points.",
+  "title": "Which states have the most variable average overnight-trip length?",
+  "width": 700,
+  "height": 335,
+  "data": {
+    "url": "data/trip_length.csv"
+  },
+  "mark": {
+    "type": "boxplot",
+    "extent": "min-max",
+    "size": 37
+  },
+  "encoding": {
+    "x": {
+      "field": "state",
+      "type": "nominal",
+      "title": null,
+      "sort": [
+        "NSW",
+        "VIC",
+        "QLD",
+        "WA",
+        "SA",
+        "TAS",
+        "NT",
+        "ACT"
+      ]
+    },
+    "y": {
+      "field": "average_nights",
+      "type": "quantitative",
+      "title": "Average nights per overnight trip",
+      "scale": {
+        "zero": false
+      }
+    },
+    "color": {
+      "field": "state",
+      "type": "nominal",
+      "legend": null,
+      "scale": {
+        "scheme": "tealblues"
+      }
+    },
+    "tooltip": [
+      {
+        "field": "state",
+        "type": "nominal"
+      },
+      {
+        "field": "average_nights",
+        "type": "quantitative",
+        "title": "Average nights / trip",
+        "format": ".2f"
+      }
+    ]
+  },
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "config": {
+    "font": "Inter, system-ui, sans-serif",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelColor": "#334155",
+      "titleColor": "#334155",
+      "gridColor": "#ecf2f0",
+      "domainColor": "#bac9c5"
+    },
+    "legend": {
+      "labelColor": "#334155",
+      "titleColor": "#334155"
+    }
+  }
+}

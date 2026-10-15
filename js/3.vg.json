@@ -1,0 +1,109 @@
+{
+  "description": "NVS, year ending December 2024. Bidirectional state-pair counts are added so the same corridor is not hidden under an overlapping reverse-direction line. Not nature-specific.",
+  "title": "Which interstate corridors carry the most overnight tourism?",
+  "width": 720,
+  "height": 460,
+  "projection": {
+    "type": "mercator",
+    "center": [
+      134,
+      -28
+    ],
+    "scale": 540
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/rowanhogan/australian-states/master/states.geojson",
+        "format": {
+          "type": "json",
+          "property": "features"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#f1f6f3",
+        "stroke": "#c2d3cc",
+        "strokeWidth": 1
+      }
+    },
+    {
+      "data": {
+        "url": "data/two_way_corridors.csv"
+      },
+      "mark": {
+        "type": "line",
+        "opacity": 0.53,
+        "strokeCap": "round"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "detail": {
+          "field": "corridor",
+          "type": "nominal"
+        },
+        "order": {
+          "field": "point_order",
+          "type": "quantitative"
+        },
+        "strokeWidth": {
+          "field": "two_way_trips_000",
+          "type": "quantitative",
+          "title": "Two-way overnight trips ('000)",
+          "scale": {
+            "type": "sqrt",
+            "range": [
+              1,
+              11
+            ]
+          }
+        },
+        "color": {
+          "field": "two_way_trips_000",
+          "type": "quantitative",
+          "title": "Trips ('000)",
+          "scale": {
+            "scheme": "orangered"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "corridor",
+            "type": "nominal",
+            "title": "Two-way state pair"
+          },
+          {
+            "field": "two_way_trips_000",
+            "type": "quantitative",
+            "title": "Trips ('000)",
+            "format": ",.0f"
+          }
+        ]
+      }
+    }
+  ],
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "config": {
+    "font": "Inter, system-ui, sans-serif",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelColor": "#334155",
+      "titleColor": "#334155",
+      "gridColor": "#ecf2f0",
+      "domainColor": "#bac9c5"
+    },
+    "legend": {
+      "labelColor": "#334155",
+      "titleColor": "#334155"
+    }
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "description": "The combined reported segment counts are NOT unique individuals; waterfall shows additive change in the three reported nature visitor categories, 2008 to 2015.",
+  "title": "What contributed to the increase in reported nature visitors?",
+  "width": 790,
+  "height": 350,
+  "data": {
+    "url": "data/waterfall_nature.csv"
+  },
+  "mark": {
+    "type": "bar",
+    "size": 72,
+    "cornerRadius": 2
+  },
+  "encoding": {
+    "x": {
+      "field": "step",
+      "type": "ordinal",
+      "sort": [
+        "2008 total",
+        "Domestic day",
+        "Domestic overnight",
+        "International",
+        "2015 total"
+      ],
+      "title": null,
+      "axis": {
+        "labelAngle": -20
+      }
+    },
+    "y": {
+      "field": "start",
+      "type": "quantitative",
+      "title": "Sum of visitor segment counts (millions)",
+      "scale": {
+        "zero": true
+      }
+    },
+    "y2": {
+      "field": "end"
+    },
+    "color": {
+      "field": "kind",
+      "type": "nominal",
+      "legend": null,
+      "scale": {
+        "domain": [
+          "total",
+          "increase",
+          "decrease"
+        ],
+        "range": [
+          "#2a6171",
+          "#56a88c",
+          "#d47c66"
+        ]
+      }
+    },
+    "tooltip": [
+      {
+        "field": "step",
+        "type": "nominal",
+        "title": "Contribution"
+      },
+      {
+        "field": "delta",
+        "type": "quantitative",
+        "title": "Value / change (m)",
+        "format": "+.2f"
+      },
+      {
+        "field": "end",
+        "type": "quantitative",
+        "title": "Cumulative (m)",
+        "format": ".2f"
+      }
+    ]
+  },
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "config": {
+    "font": "Inter, system-ui, sans-serif",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelColor": "#334155",
+      "titleColor": "#334155",
+      "gridColor": "#ecf2f0",
+      "domainColor": "#bac9c5"
+    },
+    "legend": {
+      "labelColor": "#334155",
+      "titleColor": "#334155"
+    }
+  }
+}

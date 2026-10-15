@@ -1,0 +1,106 @@
+{
+  "description": "All-purpose domestic overnight trips, five quarters (Jun 2025–Jun 2026), DoTS. Small multiples count as ONE idiom.",
+  "title": "Do overnight trip trajectories differ across states?",
+  "data": {
+    "url": "data/overnight_trips_quarterly.csv"
+  },
+  "transform": [
+    {
+      "calculate": "datum.quarter === 'Jun 25' ? 1 : datum.quarter === 'Sep 25' ? 2 : datum.quarter === 'Dec 25' ? 3 : datum.quarter === 'Mar 26' ? 4 : 5",
+      "as": "quarter_order"
+    }
+  ],
+  "facet": {
+    "field": "state",
+    "type": "nominal",
+    "columns": 4,
+    "title": null,
+    "sort": [
+      "NSW",
+      "VIC",
+      "QLD",
+      "WA",
+      "SA",
+      "TAS",
+      "NT",
+      "ACT"
+    ]
+  },
+  "spec": {
+    "width": 170,
+    "height": 125,
+    "mark": {
+      "type": "line",
+      "point": {
+        "filled": true,
+        "size": 42
+      },
+      "color": "#287e71",
+      "strokeWidth": 2.4
+    },
+    "encoding": {
+      "x": {
+        "field": "quarter",
+        "type": "ordinal",
+        "sort": [
+          "Jun 25",
+          "Sep 25",
+          "Dec 25",
+          "Mar 26",
+          "Jun 26"
+        ],
+        "title": null,
+        "axis": {
+          "labelAngle": -35,
+          "labelFontSize": 10
+        }
+      },
+      "y": {
+        "field": "trips",
+        "type": "quantitative",
+        "title": "Overnight trips ('000)",
+        "scale": {
+          "zero": false
+        }
+      },
+      "tooltip": [
+        {
+          "field": "state",
+          "type": "nominal"
+        },
+        {
+          "field": "quarter",
+          "type": "nominal"
+        },
+        {
+          "field": "trips",
+          "type": "quantitative",
+          "title": "Trips ('000)",
+          "format": ",.0f"
+        }
+      ]
+    }
+  },
+  "resolve": {
+    "scale": {
+      "y": "independent"
+    }
+  },
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "config": {
+    "font": "Inter, system-ui, sans-serif",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelColor": "#334155",
+      "titleColor": "#334155",
+      "gridColor": "#ecf2f0",
+      "domainColor": "#bac9c5"
+    },
+    "legend": {
+      "labelColor": "#334155",
+      "titleColor": "#334155"
+    }
+  }
+}

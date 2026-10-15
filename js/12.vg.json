@@ -1,0 +1,83 @@
+{
+  "description": "All-purpose domestic overnight trips, June quarter 2025 vs June quarter 2026. Holiday travel does not equate to nature-based tourism.",
+  "title": "Is holiday travel still the largest component of overnight tourism?",
+  "width": 670,
+  "height": 335,
+  "data": {
+    "url": "data/reason_of_visit.csv"
+  },
+  "mark": {
+    "type": "bar",
+    "cornerRadiusEnd": 3
+  },
+  "encoding": {
+    "x": {
+      "field": "reason",
+      "type": "nominal",
+      "title": "Main reason for trip",
+      "sort": [
+        "Holiday",
+        "VFR",
+        "Business",
+        "Other"
+      ]
+    },
+    "xOffset": {
+      "field": "quarter",
+      "type": "nominal"
+    },
+    "y": {
+      "field": "trips",
+      "type": "quantitative",
+      "title": "Overnight trips ('000)"
+    },
+    "color": {
+      "field": "quarter",
+      "type": "nominal",
+      "title": "Comparison",
+      "scale": {
+        "domain": [
+          "Q2 2025",
+          "Q2 2026"
+        ],
+        "range": [
+          "#9ab0a8",
+          "#298878"
+        ]
+      }
+    },
+    "tooltip": [
+      {
+        "field": "reason",
+        "type": "nominal"
+      },
+      {
+        "field": "quarter",
+        "type": "nominal"
+      },
+      {
+        "field": "trips",
+        "type": "quantitative",
+        "title": "Trips ('000)",
+        "format": ",.0f"
+      }
+    ]
+  },
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "config": {
+    "font": "Inter, system-ui, sans-serif",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelColor": "#334155",
+      "titleColor": "#334155",
+      "gridColor": "#ecf2f0",
+      "domainColor": "#bac9c5"
+    },
+    "legend": {
+      "labelColor": "#334155",
+      "titleColor": "#334155"
+    }
+  }
+}

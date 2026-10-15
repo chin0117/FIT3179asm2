@@ -1,94 +1,106 @@
 {
-  "description": "All-purpose domestic overnight trips, five quarters (Jun 2025-Jun 2026), DoTS. Small multiples count as ONE idiom.",
-  "title": "Quarterly overnight trips by state",
+  "description": "Relative domestic visitor nights; each cell / the state mean of the 5 available quarters. This is a short-term quarter profile, NOT multi-year evidence of seasonality.",
+  "title": "Visitor nights indexed to each state's five-quarter average",
+  "width": 460,
+  "height": 255,
   "data": {
-    "url": "data/overnight_trips_quarterly.csv"
+    "url": "data/visitor_nights_quarterly.csv"
   },
   "transform": [
     {
-      "calculate": "datum.quarter === 'Jun 25' ? 1 : datum.quarter === 'Sep 25' ? 2 : datum.quarter === 'Dec 25' ? 3 : datum.quarter === 'Mar 26' ? 4 : 5",
-      "as": "quarter_order"
+      "joinaggregate": [
+        {
+          "op": "mean",
+          "field": "nights",
+          "as": "state_mean"
+        }
+      ],
+      "groupby": [
+        "state"
+      ]
+    },
+    {
+      "calculate": "datum.nights / datum.state_mean",
+      "as": "relative_index"
     }
   ],
-  "facet": {
-    "field": "state",
-    "type": "nominal",
-    "columns": 4,
-    "title": null,
-    "sort": [
-      "NSW",
-      "VIC",
-      "QLD",
-      "WA",
-      "SA",
-      "TAS",
-      "NT",
-      "ACT"
-    ]
+  "mark": {
+    "type": "rect",
+    "stroke": "#ffffff",
+    "strokeWidth": 1.8,
+    "cornerRadius": 2
   },
-  "spec": {
-    "width": 135,
-    "height": 105,
-    "mark": {
-      "type": "line",
-      "point": {
-        "filled": true,
-        "size": 42
-      },
-      "color": "#287e71",
-      "strokeWidth": 2.4
+  "encoding": {
+    "x": {
+      "field": "quarter",
+      "type": "ordinal",
+      "sort": [
+        "Jun 25",
+        "Sep 25",
+        "Dec 25",
+        "Mar 26",
+        "Jun 26"
+      ],
+      "title": "Quarter",
+      "axis": {
+        "labelAngle": 0
+      }
     },
-    "encoding": {
-      "x": {
-        "field": "quarter",
-        "type": "ordinal",
-        "sort": [
-          "Jun 25",
-          "Sep 25",
-          "Dec 25",
-          "Mar 26",
-          "Jun 26"
-        ],
-        "title": null,
-        "axis": {
-          "labelAngle": -35,
-          "labelFontSize": 10
-        }
-      },
-      "y": {
-        "field": "trips",
-        "type": "quantitative",
-        "title": "Overnight trips ('000)",
-        "scale": {
-          "zero": false
-        },
-        "axis": {
-          "titleFontSize": 11,
-          "labelFontSize": 10
-        }
-      },
-      "tooltip": [
-        {
-          "field": "state",
-          "type": "nominal"
-        },
-        {
-          "field": "quarter",
-          "type": "nominal"
-        },
-        {
-          "field": "trips",
-          "type": "quantitative",
-          "title": "Trips ('000)",
-          "format": ",.0f"
-        }
+    "y": {
+      "field": "state",
+      "type": "nominal",
+      "title": null,
+      "sort": [
+        "NSW",
+        "VIC",
+        "QLD",
+        "WA",
+        "SA",
+        "TAS",
+        "NT",
+        "ACT"
       ]
-    }
-  },
-  "resolve": {
-    "scale": {
-      "y": "independent"
-    }
+    },
+    "color": {
+      "field": "relative_index",
+      "type": "quantitative",
+      "title": "Relative to 5-quarter avg",
+      "scale": {
+        "scheme": "redblue",
+        "domain": [
+          0.6,
+          1.5
+        ],
+        "domainMid": 1.0
+      },
+      "legend": {
+        "orient": "bottom",
+        "direction": "horizontal",
+        "titleLimit": 180
+      }
+    },
+    "tooltip": [
+      {
+        "field": "state",
+        "type": "nominal"
+      },
+      {
+        "field": "quarter",
+        "type": "nominal"
+      },
+      {
+        "field": "nights",
+        "type": "quantitative",
+        "title": "Nights ('000)",
+        "format": ",.0f"
+      },
+      {
+        "field": "relative_index",
+        "type": "quantitative",
+        "title": "Relative demand",
+        "format": ".2f"
+      }
+    ]
   },
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "config": {
@@ -105,9 +117,6 @@
     "legend": {
       "labelColor": "#334155",
       "titleColor": "#334155"
-    },
-    "facet": {
-      "spacing": 12
     }
   }
 }

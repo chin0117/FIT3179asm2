@@ -1,6 +1,6 @@
 {
   "description": "All-purpose domestic overnight trips, five quarters (Jun 2025-Jun 2026), DoTS. Small multiples count as ONE idiom.",
-  "title": "Quarterly overnight trips by state",
+  "title": "Quarterly overnight trips by state · June 2025-June 2026",
   "data": {
     "url": "data/overnight_trips_quarterly.csv"
   },
@@ -13,7 +13,6 @@
   "facet": {
     "field": "state",
     "type": "nominal",
-    "columns": 4,
     "title": null,
     "sort": [
       "NSW",
@@ -27,16 +26,16 @@
     ]
   },
   "spec": {
-    "width": 135,
-    "height": 105,
+    "width": 118,
+    "height": 92,
     "mark": {
       "type": "line",
       "point": {
         "filled": true,
-        "size": 42
+        "size": 28
       },
       "color": "#287e71",
-      "strokeWidth": 2.4
+      "strokeWidth": 2.1
     },
     "encoding": {
       "x": {
@@ -52,7 +51,7 @@
         "title": null,
         "axis": {
           "labelAngle": -35,
-          "labelFontSize": 10
+          "labelFontSize": 9
         }
       },
       "y": {
@@ -63,8 +62,8 @@
           "zero": false
         },
         "axis": {
-          "titleFontSize": 11,
-          "labelFontSize": 10
+          "title": null,
+          "labelFontSize": 9
         }
       },
       "tooltip": [
@@ -107,7 +106,8 @@
       "titleColor": "#334155"
     },
     "facet": {
-      "spacing": 12
+      "spacing": 10
     }
-  }
+  },
+  "columns": 4
 }

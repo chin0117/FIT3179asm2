@@ -1,6 +1,6 @@
 {
-  "description": "All-purpose domestic overnight trips, five quarters (Jun 2025–Jun 2026), DoTS. Small multiples count as ONE idiom.",
-  "title": "Do overnight trip trajectories differ across states?",
+  "description": "All-purpose domestic overnight trips, five quarters (Jun 2025-Jun 2026), DoTS. Small multiples count as ONE idiom.",
+  "title": "Quarterly overnight trips by state",
   "data": {
     "url": "data/overnight_trips_quarterly.csv"
   },
@@ -27,8 +27,8 @@
     ]
   },
   "spec": {
-    "width": 170,
-    "height": 125,
+    "width": 135,
+    "height": 105,
     "mark": {
       "type": "line",
       "point": {
@@ -61,6 +61,10 @@
         "title": "Overnight trips ('000)",
         "scale": {
           "zero": false
+        },
+        "axis": {
+          "titleFontSize": 11,
+          "labelFontSize": 10
         }
       },
       "tooltip": [
@@ -101,6 +105,9 @@
     "legend": {
       "labelColor": "#334155",
       "titleColor": "#334155"
+    },
+    "facet": {
+      "spacing": 12
     }
   }
 }

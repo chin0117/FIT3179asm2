@@ -1,8 +1,8 @@
 {
   "description": "Nature visitor segments in 2008 and 2015, based on 2016 State of the Environment series.",
-  "title": "Which nature-tourism visitor segment grew the most?",
-  "width": 630,
-  "height": 350,
+  "title": "Nature visitors by travel segment · 2008 vs 2015",
+  "width": 440,
+  "height": 300,
   "data": {
     "url": "data/nature_endpoints.csv"
   },
@@ -47,7 +47,8 @@
               "#346d93"
             ]
           },
-          "title": "Segment"
+          "title": "Segment",
+          "legend": null
         },
         "tooltip": [
           {

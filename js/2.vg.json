@@ -1,8 +1,8 @@
 {
-  "description": "NSW NPWS Park Visitation Survey, financial year 2024–25. Figures are total park VISITS (repeat visits possible).",
-  "title": "Where do visits to leading NSW parks concentrate?",
-  "width": 740,
-  "height": 490,
+  "description": "NSW NPWS Park Visitation Survey, financial year 2024-25. Figures are total park VISITS (repeat visits possible).",
+  "title": "Leading NSW parks and protected areas",
+  "width": 650,
+  "height": 410,
   "projection": {
     "type": "mercator",
     "center": [
@@ -61,6 +61,11 @@
               130,
               3200
             ]
+          },
+          "legend": {
+            "orient": "bottom",
+            "direction": "horizontal",
+            "titleLimit": 180
           }
         },
         "color": {
@@ -69,7 +74,8 @@
           "title": "Park visits (millions)",
           "scale": {
             "scheme": "goldgreen"
-          }
+          },
+          "legend": null
         },
         "tooltip": [
           {

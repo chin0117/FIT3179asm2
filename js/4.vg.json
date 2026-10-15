@@ -1,8 +1,8 @@
 {
-  "description": "Historical reported nature visitors by travel type, 2008–15. Segment measures should not be interpreted as unique people across segments.",
-  "title": "How did the composition of nature-related visits evolve?",
-  "width": 800,
-  "height": 330,
+  "description": "Historical reported nature visitors by travel type, 2008-15. Segment measures should not be interpreted as unique people across segments.",
+  "title": "Nature visitors by travel segment",
+  "width": 640,
+  "height": 290,
   "data": {
     "url": "data/nature_visitors.csv"
   },

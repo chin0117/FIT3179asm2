@@ -1,8 +1,8 @@
 {
   "description": "All-purpose domestic overnight trips, June quarter 2025 vs June quarter 2026. Holiday travel does not equate to nature-based tourism.",
-  "title": "Is holiday travel still the largest component of overnight tourism?",
-  "width": 670,
-  "height": 335,
+  "title": "Main reasons for overnight travel · June 2025 vs June 2026",
+  "width": 450,
+  "height": 300,
   "data": {
     "url": "data/reason_of_visit.csv"
   },
@@ -20,7 +20,10 @@
         "VFR",
         "Business",
         "Other"
-      ]
+      ],
+      "axis": {
+        "labelAngle": 0
+      }
     },
     "xOffset": {
       "field": "quarter",
@@ -44,6 +47,10 @@
           "#9ab0a8",
           "#298878"
         ]
+      },
+      "legend": {
+        "orient": "bottom",
+        "direction": "horizontal"
       }
     },
     "tooltip": [

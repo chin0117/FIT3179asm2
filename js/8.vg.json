@@ -1,8 +1,8 @@
 {
   "description": "Derived $ spent / number of trips: DoTS June quarter 2025 and June quarter 2026, all-purpose domestic day trips, not park spending.",
-  "title": "How did average day-trip spending change by state?",
-  "width": 645,
-  "height": 340,
+  "title": "Average spending per day trip · June 2025 vs June 2026",
+  "width": 450,
+  "height": 300,
   "data": {
     "url": "data/spend_per_trip.csv"
   },
@@ -109,6 +109,10 @@
               "#94a3b8",
               "#e0834c"
             ]
+          },
+          "legend": {
+            "orient": "bottom",
+            "direction": "horizontal"
           }
         },
         "tooltip": [

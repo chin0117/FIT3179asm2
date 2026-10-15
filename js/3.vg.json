@@ -1,8 +1,8 @@
 {
   "description": "NVS, year ending December 2024. Bidirectional state-pair counts are added so the same corridor is not hidden under an overlapping reverse-direction line. Not nature-specific.",
-  "title": "Which interstate corridors carry the most overnight tourism?",
-  "width": 720,
-  "height": 460,
+  "title": "Overnight travel between state pairs",
+  "width": 640,
+  "height": 390,
   "projection": {
     "type": "mercator",
     "center": [
@@ -63,6 +63,11 @@
               1,
               11
             ]
+          },
+          "legend": {
+            "orient": "bottom",
+            "direction": "horizontal",
+            "titleLimit": 180
           }
         },
         "color": {
@@ -71,7 +76,8 @@
           "title": "Trips ('000)",
           "scale": {
             "scheme": "orangered"
-          }
+          },
+          "legend": null
         },
         "tooltip": [
           {

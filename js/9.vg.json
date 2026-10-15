@@ -1,14 +1,14 @@
 {
   "description": "The combined reported segment counts are NOT unique individuals; waterfall shows additive change in the three reported nature visitor categories, 2008 to 2015.",
-  "title": "What contributed to the increase in reported nature visitors?",
-  "width": 790,
-  "height": 350,
+  "title": "Contributions to reported nature visitor growth · 2008-2015",
+  "width": 600,
+  "height": 305,
   "data": {
     "url": "data/waterfall_nature.csv"
   },
   "mark": {
     "type": "bar",
-    "size": 72,
+    "size": 58,
     "cornerRadius": 2
   },
   "encoding": {

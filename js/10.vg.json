@@ -1,15 +1,15 @@
 {
   "description": "Five observations per state, Jun 2025 through Jun 2026. Annual seasonality cannot be inferred from just five quarterly data points.",
-  "title": "Which states have the most variable average overnight-trip length?",
-  "width": 700,
-  "height": 335,
+  "title": "Average nights per overnight trip · June 2025-June 2026",
+  "width": 450,
+  "height": 300,
   "data": {
     "url": "data/trip_length.csv"
   },
   "mark": {
     "type": "boxplot",
     "extent": "min-max",
-    "size": 37
+    "size": 28
   },
   "encoding": {
     "x": {

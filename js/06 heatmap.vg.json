@@ -66,12 +66,11 @@
       "type": "quantitative",
       "title": "Relative to 5-quarter avg",
       "scale": {
-        "scheme": "redblue",
+        "scheme": "teals",
         "domain": [
           0.6,
           1.5
-        ],
-        "domainMid": 1.0
+        ]
       },
       "legend": {
         "orient": "bottom",

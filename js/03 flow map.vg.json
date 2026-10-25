@@ -1,6 +1,6 @@
 {
   "description": "NVS, year ending December 2024. Bidirectional state-pair counts are added so the same corridor is not hidden under an overlapping reverse-direction line. Not nature-specific.",
-  "title": "Overnight travel between state pairs · year ending Dec 2024",
+  "title": "Overnight travel between state pairs \u00b7 year ending Dec 2024",
   "width": 640,
   "height": 390,
   "projection": {
@@ -64,7 +64,11 @@
               11
             ]
           },
-          "legend": null
+          "legend": {
+            "orient": "bottom",
+            "direction": "horizontal",
+            "title": "Two-way overnight trips ('000)"
+          }
         },
         "color": {
           "field": "two_way_trips_000",

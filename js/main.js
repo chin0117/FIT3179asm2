@@ -82,7 +82,7 @@ async function renderChart(number) {
     await vegaEmbed(node, spec, {
       mode: 'vega-lite',
       renderer: 'svg',
-      actions: {export: true, source: true, compiled: false, editor: false},
+      actions: false,
       tooltip: {theme: 'light'},
       hover: true
     });

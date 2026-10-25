@@ -1,6 +1,6 @@
 {
   "description": "Five observations per state, Jun 2025 through Jun 2026. Annual seasonality cannot be inferred from just five quarterly data points.",
-  "title": "Average nights per overnight trip · June 2025-June 2026",
+  "title": "Average nights per overnight trip \u00b7 June 2025-June 2026",
   "width": 450,
   "height": 300,
   "data": {
@@ -38,7 +38,10 @@
     "color": {
       "field": "state",
       "type": "nominal",
-      "legend": null,
+      "legend": {
+        "orient": "bottom",
+        "direction": "horizontal"
+      },
       "scale": {
         "scheme": "tealblues"
       }

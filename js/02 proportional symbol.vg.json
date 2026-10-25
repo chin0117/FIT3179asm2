@@ -62,11 +62,7 @@
               3200
             ]
           },
-          "legend": {
-            "orient": "bottom",
-            "direction": "horizontal",
-            "titleLimit": 180
-          }
+          "legend": null
         },
         "color": {
           "field": "visitors",
@@ -107,9 +103,9 @@
       ],
       "mark": {
         "type": "text",
-        "dx": 12,
-        "dy": -15,
-        "fontSize": 11,
+        "dx": 22,
+        "dy": -24,
+        "fontSize": 10,
         "fontWeight": "bold",
         "align": "left",
         "color": "#22584b"

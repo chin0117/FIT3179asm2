@@ -60,7 +60,13 @@
         "color": {
           "field": "kind",
           "type": "nominal",
-          "legend": null,
+          "legend": {
+            "orient": "bottom",
+            "direction": "horizontal",
+            "title": "Bar meaning",
+            "symbolType": "square",
+            "labelLimit": 135
+          },
           "scale": {
             "domain": [
               "total",
@@ -72,7 +78,8 @@
               "#56a88c",
               "#d47c66"
             ]
-          }
+          },
+          "title": "Bar meaning"
         },
         "tooltip": [
           {

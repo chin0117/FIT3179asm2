@@ -53,3 +53,73 @@ footer{padding:45px 0;color:#70857a;font-size:12px;text-align:center}.error{padd
   .panel h3{font-size:17px}
   .plot{min-height:220px}
 }
+
+/* Storytelling enhancements: concise evidence annotations outside each plot. */
+.hero-clarity{font-size:13px;max-width:950px;margin:19px 0 0;color:#e0f0e8;line-height:1.6}
+.chart-insight{margin:4px 0 12px;border-left:3px solid #4b9e8b;padding:8px 13px;background:#f4f8f6;color:#344f48;font-size:13px;line-height:1.55}
+.chart-insight strong{color:#216a59;font-size:12px;white-space:nowrap;letter-spacing:.015em}
+.story-transition{margin:20px 0 35px;padding:15px 20px;background:#e9f0ed;border-top:1px solid #d7e4dd;border-bottom:1px solid #d7e4dd;display:flex;gap:5px;flex-direction:column;color:#435f55;font-size:14px}
+.story-transition strong{font-size:15px;color:#1c4d42}
+.story-transition span{max-width:980px}
+.closing-chapter{padding-bottom:28px}
+.closing-lead{max-width:970px;color:#506c62}
+.conclusion-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin:26px 0}
+.conclusion-item{background:#fff;border:1px solid #dce8e1;padding:21px 22px;border-radius:13px}
+.conclusion-number{font-size:12px;letter-spacing:.14em;font-weight:700;color:#538978}
+.conclusion-item h3{font-size:19px;line-height:1.25;margin:7px 0 8px}
+.conclusion-item p{font-size:14px;line-height:1.55;color:#51685e;margin:0}
+.reading-notes{background:#fff;border:1px solid #dce8e1;border-radius:13px;padding:20px 23px;margin-top:10px;color:#536d63;font-size:13px}
+.reading-notes h3{font-size:17px;color:#17342d;margin:0 0 12px}
+.reading-notes p{margin:0 0 12px;max-width:1100px}
+.reading-notes .assistance-note{font-size:12px;margin-bottom:0;color:#6f8179}
+.chapter{min-width:0}.panel{min-width:0;max-width:100%}
+/* Charts can scroll inside their panel if a very narrow browser cannot fit SVG. */
+@media(max-width:980px){.conclusion-grid{grid-template-columns:1fr}}
+@media(max-width:700px){.hero-clarity{font-size:12px}.chart-insight{font-size:12px}.story-transition{padding:12px 14px}.conclusion-item{padding:16px}.reading-notes{padding:16px}}
+/* Keep two-column figures readable on small laptops; do not require side-scrolling. */
+@media (min-width:981px) and (max-width:1180px) {
+  .panel-half { grid-column:span 12; }
+}
+
+/* ---------- Fit-to-width visualisations (Oct 2026) ---------- */
+html, body {max-width:100%; overflow-x:clip}
+main.container, section.chapter, .panel-grid, .geography-grid, .panel {min-width:0}
+.geography-grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;align-items:start}
+.geography-grid .panel {margin:0;grid-column:span 1;min-width:0}
+.geography-grid .geo-card-wide {grid-column:span 2}
+.geography-grid .panel-top h3 {line-height:1.3}
+/* Vega-Lite specs now adapt to measured panel width: never require page-level scrolling. */
+.plot {width:100%;min-width:0;max-width:100%;overflow-x:hidden;overflow-y:visible;justify-content:center;align-items:flex-start}
+.plot .vega-embed {max-width:100%;min-width:0;display:block}
+.plot .vega-embed > div {max-width:100%;min-width:0}
+.plot svg {max-width:100%;height:auto}
+/* Non-colour/line chart keys are placed immediately after their maps. */
+.visual-key {display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:10px 16px;padding:10px 14px;margin:4px 0 15px;background:#f7faf8;border:1px solid #dfebe4;border-radius:9px;color:#36554b;font-size:12px}
+.visual-key-title {font-weight:700;color:#204d41}
+.visual-key-note {font-size:11px;color:#567468;flex-basis:100%;text-align:center}
+.symbol-key,.line-key {display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}
+.symbol-key-item,.line-key-item {display:inline-flex;align-items:center;justify-content:center;gap:7px;white-space:nowrap}
+.symbol-circle {border-radius:50%;display:inline-block;flex-shrink:0;border:1.5px solid #ffffff;box-shadow:0 0 0 1px #b4c9bc}
+.symbol-circle.small{width:14px;height:14px;background:#e4b65e}
+.symbol-circle.medium{width:45px;height:45px;background:#a4bb50}
+.symbol-circle.large{width:61px;height:61px;background:#3f986f}
+.flow-line{display:inline-block;width:34px;border-radius:12px;background:#d36642;flex-shrink:0}
+.flow-line.small{height:2px;opacity:.55}
+.flow-line.medium{height:6px;opacity:.75}
+.flow-line.large{height:10px;opacity:.95}
+.visual-key-compact {justify-content:center;gap:12px 25px}
+.lorenz-line {width:35px;height:0;border-top:3px solid #247e70;display:inline-block}
+.lorenz-line.equal{border-top-color:#9eaaa3;border-top-style:dashed}
+@media (max-width:1190px) {
+  .geography-grid{grid-template-columns:1fr}
+  .geography-grid .panel,.geography-grid .geo-card-wide{grid-column:span 1}
+}
+@media (max-width:700px) {
+  .geography-grid{gap:17px}
+  .visual-key{gap:8px 10px;padding:9px}
+  .symbol-key{gap:9px}
+  .symbol-key-item{gap:5px;font-size:11px}
+  .symbol-circle.medium{width:34px;height:34px}
+  .symbol-circle.large{width:45px;height:45px}
+  .visual-key-note{line-height:1.45}
+}

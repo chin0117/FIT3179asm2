@@ -64,11 +64,7 @@
               11
             ]
           },
-          "legend": {
-            "orient": "bottom",
-            "direction": "horizontal",
-            "titleLimit": 180
-          }
+          "legend": null
         },
         "color": {
           "field": "two_way_trips_000",

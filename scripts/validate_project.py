@@ -2,7 +2,7 @@
 import json,re
 from pathlib import Path
 root=Path(__file__).resolve().parents[1]
-files = {1: '01 choropleth.vg.json', 2: '02 proportional symbol.vg.json', 3: '03 flow map.vg.json', 4: '04 streamgraph.vg.json', 5: '05 small multiple.vg.json', 6: '06 heatmap.vg.json', 7: '07 slope chart.vg.json', 8: '08 dumbbell.vg.json', 9: '09 waterfall.vg.json', 10: '10 boxplot.vg.json', 11: '11 line.vg.json', 12: '12 grouped bar.vg.json'}
+files = {1: '01 choropleth.vg.json', 2: '02 proportional symbol.vg.json', 3: '03 flow map.vg.json', 4: '04 streamgraph.vg.json', 5: '05 small multiple.vg.json', 6: '06 heatmap.vg.json', 7: '07 slope chart.vg.json', 8: '08 dumbbell.vg.json', 9: '09 waterfall.vg.json', 10: '10 boxplot.vg.json', 11: '11 line.vg.json', 12: '12 grouped bar.vg.json', 13: '13 park pareto.vg.json'}
 failures=[]
 for id,filename in files.items():
     path=root/'js'/filename

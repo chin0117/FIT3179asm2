@@ -14,13 +14,14 @@ const chartFiles = {
   9: "09 waterfall.vg.json",
   10: "10 boxplot.vg.json",
   11: "11 line.vg.json",
-  12: "12 grouped bar.vg.json"
+  12: "12 grouped bar.vg.json",
+  13: "13 park pareto.vg.json"
 };
-const chartOrder = [1, 2, 3, 4, 7, 11, 9, 5, 6, 8, 10, 12];
+const chartOrder = [1, 2, 3, 13, 4, 7, 11, 9, 5, 6, 8, 10, 12];
 const baseSpecs = new Map();
 const lastSizes = new Map();
 const maximumWidths = {
-  1: 900, 2: 900, 3: 960, 4: 950, 6: 680,
+  1: 780, 2: 780, 3: 780, 4: 950, 6: 680, 13: 980,
   7: 510, 8: 525, 9: 880, 10: 525, 11: 510, 12: 525
 };
 const geoCharts = new Set([1, 2, 3]);
@@ -47,7 +48,7 @@ function prepareResponsiveSpec(number, original, availableWidth) {
 
   // Leave comfortable space for axes, titles, endpoint annotations and any
   // internal legends. For maps, legends are below / alongside the plots.
-  const reserve = geoCharts.has(number) ? 48 : [7, 8, 10, 11, 12].includes(number) ? 94 : 78;
+  const reserve = geoCharts.has(number) ? 22 : number === 13 ? 86 : [7, 8, 10, 11, 12].includes(number) ? 94 : 78;
   const targetWidth = Math.max(230, Math.min(maximumWidths[number], contentWidth - reserve));
   const originalWidth = typeof original.width === 'number' ? original.width : targetWidth;
   const originalHeight = typeof original.height === 'number' ? original.height : 310;
@@ -55,8 +56,15 @@ function prepareResponsiveSpec(number, original, availableWidth) {
 
   if (geoCharts.has(number)) {
     const factor = targetWidth / originalWidth;
-    const height = Math.max(250, Math.min(520, Math.round(originalHeight * Math.max(0.70, factor))));
+    const height = Math.max(205, Math.min(425, Math.round(originalHeight * Math.max(0.65, factor))));
     spec.height = height;
+    // Compact map marks to avoid circles/lines covering everything.
+    if (number === 2 && spec.layer?.[1]?.encoding?.size?.scale) {
+      spec.layer[1].encoding.size.scale.range = [40, Math.round(1900 * Math.min(1, factor))];
+    }
+    if (number === 3 && spec.layer?.[1]?.encoding?.strokeWidth?.scale) {
+      spec.layer[1].encoding.strokeWidth.scale.range = [0.6, Math.max(3, Math.round(9 * Math.min(1, factor)))];
+    }
     if (spec.projection && typeof spec.projection.scale === 'number') {
       // Keep geographic proportions consistent when the map grows/shrinks.
       const verticalFactor = height / originalHeight;
@@ -67,6 +75,10 @@ function prepareResponsiveSpec(number, original, availableWidth) {
     // stretching all marks and font sizes into oversized plots.
     spec.height = Math.round(originalHeight);
   }
+  // Use serif titles and Calibri axis/legend labels consistently.
+  spec.config = spec.config || {};
+  spec.config.font = 'Calibri, Arial, sans-serif';
+  spec.config.title = {...(spec.config.title || {}), font: 'Times New Roman, Times, serif', fontSize: 15};
   return spec;
 }
 
@@ -78,6 +90,15 @@ async function renderChart(number) {
   if (width <= 0 || (lastSizes.get(number) === width && node.querySelector('svg'))) return;
   lastSizes.set(number, width);
   const spec = prepareResponsiveSpec(number, base, width);
+  if ([1,2,3,13].includes(number)) spec.title = null;
+  if (number === 2) {
+    if (spec.layer?.[1]?.encoding?.size) spec.layer[1].encoding.size.legend = null;
+    if (spec.layer?.[1]?.encoding?.color) spec.layer[1].encoding.color.legend = null;
+  }
+  if (number === 3) {
+    if (spec.layer?.[1]?.encoding?.strokeWidth) spec.layer[1].encoding.strokeWidth.legend = null;
+    if (spec.layer?.[1]?.encoding?.color) spec.layer[1].encoding.color.legend = null;
+  }
   try {
     await vegaEmbed(node, spec, {
       mode: 'vega-lite',

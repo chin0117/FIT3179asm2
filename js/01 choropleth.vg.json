@@ -1,6 +1,6 @@
 {
   "description": "Context: all-purpose domestic day trips by destination state, June quarter 2026, from TRA DoTS. Not nature-specific.",
-  "title": "Domestic day trips by destination state \u00b7 absolute counts",
+  "title": "Domestic day trips by destination state · absolute counts",
   "width": 640,
   "height": 390,
   "projection": {
@@ -76,7 +76,7 @@
   },
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "config": {
-    "font": "Inter, system-ui, sans-serif",
+    "font": "Calibri, Arial, sans-serif",
     "view": {
       "stroke": null
     },
@@ -89,6 +89,11 @@
     "legend": {
       "labelColor": "#334155",
       "titleColor": "#334155"
+    },
+    "title": {
+      "font": "Times New Roman, Times, serif",
+      "fontSize": 15,
+      "fontWeight": "bold"
     }
   }
 }

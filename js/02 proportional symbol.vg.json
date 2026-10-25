@@ -1,6 +1,6 @@
 {
   "description": "NSW NPWS Park Visitation Survey, financial year 2024-25. Figures are total park VISITS (repeat visits possible).",
-  "title": "Leading NSW parks and protected areas \u00b7 2024-25",
+  "title": "Leading NSW parks and protected areas · 2024-25",
   "width": 650,
   "height": 410,
   "projection": {
@@ -132,7 +132,7 @@
   ],
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "config": {
-    "font": "Inter, system-ui, sans-serif",
+    "font": "Calibri, Arial, sans-serif",
     "view": {
       "stroke": null
     },
@@ -145,6 +145,11 @@
     "legend": {
       "labelColor": "#334155",
       "titleColor": "#334155"
+    },
+    "title": {
+      "font": "Times New Roman, Times, serif",
+      "fontSize": 15,
+      "fontWeight": "bold"
     }
   }
 }

@@ -99,7 +99,7 @@
   },
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "config": {
-    "font": "Inter, system-ui, sans-serif",
+    "font": "Calibri, Arial, sans-serif",
     "view": {
       "stroke": null
     },
@@ -112,6 +112,11 @@
     "legend": {
       "labelColor": "#334155",
       "titleColor": "#334155"
+    },
+    "title": {
+      "font": "Times New Roman, Times, serif",
+      "fontSize": 15,
+      "fontWeight": "bold"
     }
   }
 }

@@ -91,6 +91,43 @@
           }
         ]
       }
+    },
+    {
+      "data": {
+        "url": "data/nsw_parks.csv"
+      },
+      "transform": [
+        {
+          "filter": "datum.park === 'Blue Mountains NP'"
+        },
+        {
+          "calculate": "'Blue Mountains: ' + format(datum.visitors, '.1f') + 'm visits'",
+          "as": "callout"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "dx": 12,
+        "dy": -15,
+        "fontSize": 11,
+        "fontWeight": "bold",
+        "align": "left",
+        "color": "#22584b"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "callout",
+          "type": "nominal"
+        }
+      }
     }
   ],
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",

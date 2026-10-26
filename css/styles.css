@@ -124,3 +124,85 @@ footer {font-size:13px;color:#667c71;text-align:center;padding:40px 0;}
   .micro-notes{font-size:15px;}
   .chapter-lead{font-size:16px;}
 }
+
+
+/* FINAL: Every idiom forms a two-column pair, except faceted chart 09. */
+.geography-grid, .panel-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  align-items: stretch;
+}
+.geography-grid > .panel,
+.geography-grid > .geo-card-wide,
+.geography-grid > .pareto-card,
+.panel-grid > .panel,
+.panel-grid > .panel-half {
+  grid-column: span 1;
+  min-width: 0;
+  height: 100%;
+}
+/* Chart 09 is the single full-width small-multiples view. */
+.panel-grid > .panel-wide { grid-column: 1 / -1; }
+/* Space is used for charts and concise insights, not empty padding. */
+.panel { padding: 17px 18px; }
+.plot { min-height: 0; padding: 9px 0 8px; }
+.panel-top { padding-bottom: 8px; }
+.micro-notes { margin: 7px 0 9px; padding: 10px 12px; }
+/* Equal card bottoms for paired visuals (including flow and waterfall). */
+.panel { display:flex; flex-direction:column; }
+.panel .source { margin-top: auto; }
+/* The faceted plot gets all the width of its full-row panel. */
+#chart5 { width:100%; justify-content:center; }
+#chart5 .vega-embed { margin-inline:auto; }
+@media (max-width: 790px) {
+  .geography-grid, .panel-grid { grid-template-columns: minmax(0, 1fr); }
+  .geography-grid > .panel,
+  .geography-grid > .geo-card-wide,
+  .geography-grid > .pareto-card,
+  .panel-grid > .panel,
+  .panel-grid > .panel-half,
+  .panel-grid > .panel-wide { grid-column: 1; }
+}
+
+/* VERIFIED TWO-PER-ROW LAYOUT · 2026-10-26
+   Override all older three-column and wide-card rules explicitly. */
+html[data-layout-version="two-column-20261026"] .geography-grid,
+html[data-layout-version="two-column-20261026"] .panel-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  align-items: stretch;
+  width: 100%;
+}
+html[data-layout-version="two-column-20261026"] .geography-grid > article.panel,
+html[data-layout-version="two-column-20261026"] .panel-grid > article.panel {
+  grid-column: auto;
+  min-width: 0;
+  height: 100%;
+}
+/* Exception: the faceted chart occupies a full row. */
+html[data-layout-version="two-column-20261026"] .panel-grid > article.panel:has(#chart5) {
+  grid-column: 1 / -1;
+}
+html[data-layout-version="two-column-20261026"] .panel .source { margin-top: auto; }
+html[data-layout-version="two-column-20261026"] #chart5 {
+  width:100%;
+  display:flex;
+  justify-content:center;
+}
+html[data-layout-version="two-column-20261026"] .plot,
+html[data-layout-version="two-column-20261026"] .plot .vega-embed {
+  max-width: 100%;
+  min-width: 0;
+}
+.layout-version {display:block;font-size:12px;color:#577d6a;margin-bottom:8px}
+@media (max-width: 790px) {
+  html[data-layout-version="two-column-20261026"] .geography-grid,
+  html[data-layout-version="two-column-20261026"] .panel-grid {
+    grid-template-columns: minmax(0,1fr);
+  }
+  html[data-layout-version="two-column-20261026"] .panel-grid > article.panel:has(#chart5) {
+    grid-column: auto;
+  }
+}

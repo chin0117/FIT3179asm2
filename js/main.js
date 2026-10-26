@@ -2,7 +2,7 @@
  * Uses the original 12 editable Vega-Lite specifications and re-computes only
  * their presentation dimensions; data/encodings remain unchanged.
  */
-const LAYOUT_BUILD = "legend-centre-heatmap-fix-20261026-v8";
+const LAYOUT_BUILD = "20261026-controls-sources-v9";
 const chartFiles = {
   1: "01 choropleth.vg.json",
   2: "02 proportional symbol.vg.json",
@@ -182,6 +182,10 @@ async function renderChart(number) {
   if (width <= 0 || (lastSizes.get(number) === width && node.querySelector('svg'))) return;
   lastSizes.set(number, width);
   const spec = prepareResponsiveSpec(number, base, width);
+  // For Chart 11, discard stale controls from the previous render before
+  // Vega recreates the state dropdown inside its chart container.
+  const chart11FilterSlot = number === 8 ? document.getElementById('chart11-filter-slot') : null;
+  if (chart11FilterSlot) chart11FilterSlot.replaceChildren();
   // Keep only the numbered heading above the card; no repeated Vega plot title.
   delete spec.title;
   if (spec.title) {
@@ -211,6 +215,13 @@ async function renderChart(number) {
       tooltip: {theme: 'light'},
       hover: true
     });
+    // Move Chart 11's live Vega dropdown next to its custom year legend.
+    // Re-parenting preserves Vega's existing control event handlers.
+    if (chart11FilterSlot) {
+      const bindings = node.querySelector('.vega-bindings') ||
+        node.closest('article')?.querySelector('.vega-bindings');
+      if (bindings) chart11FilterSlot.appendChild(bindings);
+    }
   } catch (error) {
     node.innerHTML = '<p class="error">This chart could not load. Check the browser console, dataset URL, and your internet connection.</p>';
     console.error(`Vega-Lite chart ${number} failed`, error);

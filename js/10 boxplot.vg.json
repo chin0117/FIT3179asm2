@@ -162,13 +162,6 @@
         ],
         "y2": {
           "field": "maximum"
-        },
-        "opacity": {
-          "condition": {
-            "test": "boxState === 'All states' || datum.state === boxState",
-            "value": 1
-          },
-          "value": 0.16
         }
       }
     },
@@ -259,13 +252,6 @@
         ],
         "y2": {
           "field": "q3"
-        },
-        "opacity": {
-          "condition": {
-            "test": "boxState === 'All states' || datum.state === boxState",
-            "value": 1
-          },
-          "value": 0.16
         }
       }
     },
@@ -364,14 +350,7 @@
             "title": "Maximum nights/trip",
             "format": ".2f"
           }
-        ],
-        "opacity": {
-          "condition": {
-            "test": "boxState === 'All states' || datum.state === boxState",
-            "value": 1
-          },
-          "value": 0.16
-        }
+        ]
       }
     },
     {
@@ -457,14 +436,7 @@
             "title": "Maximum nights/trip",
             "format": ".2f"
           }
-        ],
-        "opacity": {
-          "condition": {
-            "test": "boxState === 'All states' || datum.state === boxState",
-            "value": 1
-          },
-          "value": 0.16
-        }
+        ]
       }
     },
     {
@@ -555,13 +527,6 @@
           "field": "minimum",
           "type": "quantitative",
           "format": ".2f"
-        },
-        "opacity": {
-          "condition": {
-            "test": "boxState === 'All states' || datum.state === boxState",
-            "value": 1
-          },
-          "value": 0.16
         }
       }
     },
@@ -653,35 +618,7 @@
           "field": "maximum",
           "type": "quantitative",
           "format": ".2f"
-        },
-        "opacity": {
-          "condition": {
-            "test": "boxState === 'All states' || datum.state === boxState",
-            "value": 1
-          },
-          "value": 0.16
         }
-      }
-    }
-  ],
-  "params": [
-    {
-      "name": "boxState",
-      "value": "All states",
-      "bind": {
-        "input": "select",
-        "options": [
-          "All states",
-          "NSW",
-          "VIC",
-          "QLD",
-          "WA",
-          "SA",
-          "TAS",
-          "NT",
-          "ACT"
-        ],
-        "name": "Highlight state: "
       }
     }
   ]

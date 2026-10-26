@@ -116,23 +116,7 @@
               "#D08C3F"
             ]
           },
-          "legend": {
-            "orient": "right",
-            "direction": "vertical",
-            "title": "Quarter",
-            "offset": 7,
-            "titleLimit": 120,
-            "labelLimit": 110,
-            "labelFontSize": 13,
-            "titleFontSize": 14,
-            "symbolSize": 90,
-            "fillColor": "#F7FBF9",
-            "strokeColor": "#C7D9D0",
-            "cornerRadius": 7,
-            "padding": 9,
-            "labelColor": "#233F38",
-            "titleColor": "#234D41"
-          }
+          "legend": null
         },
         "tooltip": [
           {

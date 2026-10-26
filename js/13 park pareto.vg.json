@@ -41,7 +41,7 @@
         "y": {
           "field": "visits_m",
           "type": "quantitative",
-          "title": "Park visits (millions)",
+          "title": "Park visit volume (million)",
           "scale": {
             "zero": true
           },
@@ -102,7 +102,7 @@
         "y": {
           "field": "cumulative_pct",
           "type": "quantitative",
-          "title": "Cumulative share (%)",
+          "title": "Cumulative visit share (%)",
           "scale": {
             "domain": [
               0,

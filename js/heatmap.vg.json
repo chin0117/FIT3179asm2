@@ -1,0 +1,240 @@
+{
+  "description": "Relative domestic visitor nights; each cell / the state mean of the 5 available quarters. This is a short-term quarter profile, NOT multi-year evidence of seasonality. Seven discrete ordered colour bands and numeric cell labels improve mid-range discrimination.",
+  "width": 460,
+  "height": 255,
+  "data": {
+    "url": "data/visitor_nights_quarterly.csv"
+  },
+  "transform": [
+    {
+      "joinaggregate": [
+        {
+          "op": "mean",
+          "field": "nights",
+          "as": "state_mean"
+        }
+      ],
+      "groupby": [
+        "state"
+      ]
+    },
+    {
+      "calculate": "datum.nights / datum.state_mean",
+      "as": "relative_index"
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "quarter",
+      "type": "ordinal",
+      "sort": [
+        "Jun 25",
+        "Sep 25",
+        "Dec 25",
+        "Mar 26",
+        "Jun 26"
+      ],
+      "title": "Quarter",
+      "axis": {
+        "labelAngle": 0,
+        "labelFontSize": 13,
+        "titleFontSize": 14
+      }
+    },
+    "y": {
+      "field": "state",
+      "type": "nominal",
+      "title": null,
+      "sort": [
+        "NSW",
+        "VIC",
+        "QLD",
+        "WA",
+        "SA",
+        "TAS",
+        "NT",
+        "ACT"
+      ]
+    },
+    "tooltip": [
+      {
+        "field": "state",
+        "type": "nominal"
+      },
+      {
+        "field": "quarter",
+        "type": "nominal"
+      },
+      {
+        "field": "nights",
+        "type": "quantitative",
+        "title": "Nights ('000)",
+        "format": ",.0f"
+      },
+      {
+        "field": "relative_index",
+        "type": "quantitative",
+        "title": "Relative demand",
+        "format": ".2f"
+      }
+    ]
+  },
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "config": {
+    "font": "Calibri, Arial, sans-serif",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelColor": "#334155",
+      "titleColor": "#334155",
+      "gridColor": "#ecf2f0",
+      "domainColor": "#bac9c5",
+      "labelFontSize": 13,
+      "titleFontSize": 14,
+      "labelFont": "Calibri, Arial, sans-serif",
+      "titleFont": "Calibri, Arial, sans-serif"
+    },
+    "legend": {
+      "labelColor": "#233F38",
+      "titleColor": "#234D41",
+      "fillColor": "#F7FBF9",
+      "strokeColor": "#C7D9D0",
+      "cornerRadius": 7,
+      "padding": 9,
+      "labelFontSize": 13,
+      "titleFontSize": 14
+    },
+    "title": {
+      "font": "Times New Roman, Times, serif",
+      "fontSize": 19,
+      "fontWeight": "normal",
+      "anchor": "middle"
+    },
+    "header": {
+      "labelFontSize": 15,
+      "titleFontSize": 15,
+      "labelFont": "Calibri, Arial, sans-serif"
+    }
+  },
+  "params": [
+    {
+      "name": "heatmapState",
+      "value": "All states",
+      "bind": {
+        "input": "select",
+        "options": [
+          "All states",
+          "NSW",
+          "VIC",
+          "QLD",
+          "WA",
+          "SA",
+          "TAS",
+          "NT",
+          "ACT"
+        ],
+        "name": "Focus state: "
+      }
+    },
+    {
+      "name": "minRelativeIndex",
+      "value": 0.6,
+      "bind": {
+        "input": "range",
+        "min": 0.6,
+        "max": 1.5,
+        "step": 0.05,
+        "name": "Highlight index >= "
+      }
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "rect",
+        "stroke": "#ffffff",
+        "strokeWidth": 1.8,
+        "cornerRadius": 2
+      },
+      "encoding": {
+        "color": {
+          "field": "relative_index",
+          "type": "quantitative",
+          "title": "Relative to 5-quarter avg",
+          "scale": {
+            "type": "quantize",
+            "domain": [
+              0.6,
+              1.5
+            ],
+            "range": [
+              "#FFF1B6",
+              "#FCD595",
+              "#F8B47C",
+              "#ED906C",
+              "#D46A75",
+              "#A54F8A",
+              "#6F3D8E"
+            ]
+          },
+          "legend": {
+            "orient": "right",
+            "direction": "vertical",
+            "titleLimit": 120,
+            "offset": 7,
+            "labelLimit": 110,
+            "labelFontSize": 13,
+            "titleFontSize": 14,
+            "gradientLength": 158,
+            "gradientThickness": 15,
+            "title": "Index / state average",
+            "format": ".2f",
+            "fillColor": "#F7FBF9",
+            "strokeColor": "#C7D9D0",
+            "cornerRadius": 7,
+            "padding": 9,
+            "labelColor": "#233F38",
+            "titleColor": "#234D41"
+          }
+        },
+        "opacity": {
+          "condition": {
+            "test": "datum.relative_index >= minRelativeIndex && (heatmapState === 'All states' || datum.state === heatmapState)",
+            "value": 1
+          },
+          "value": 0.2
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 11,
+        "fontWeight": "bold",
+        "baseline": "middle"
+      },
+      "encoding": {
+        "text": {
+          "field": "relative_index",
+          "type": "quantitative",
+          "format": ".2f"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.relative_index >= 1.09",
+            "value": "#FFFFFF"
+          },
+          "value": "#263449"
+        },
+        "opacity": {
+          "condition": {
+            "test": "datum.relative_index >= minRelativeIndex && (heatmapState === 'All states' || datum.state === heatmapState)",
+            "value": 1
+          },
+          "value": 0.2
+        }
+      }
+    }
+  ]
+}

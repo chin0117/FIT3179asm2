@@ -2,14 +2,14 @@
  * Uses the original 12 editable Vega-Lite specifications and re-computes only
  * their presentation dimensions; data/encodings remain unchanged.
  */
-const LAYOUT_BUILD = "source-legend-balance-20261026-v7";
+const LAYOUT_BUILD = "legend-centre-heatmap-fix-20261026-v8";
 const chartFiles = {
   1: "01 choropleth.vg.json",
   2: "02 proportional symbol.vg.json",
   3: "03 flow map.vg.json",
   4: "04 streamgraph.vg.json",
   5: "05 small multiple.vg.json",
-  6: "06 heatmap.vg.json",
+  6: "heatmap.vg.json",
   7: "07 slope chart.vg.json",
   8: "08 dumbbell.vg.json",
   9: "09 waterfall.vg.json",
@@ -18,6 +18,9 @@ const chartFiles = {
   12: "12 grouped bar.vg.json",
   13: "13 park pareto.vg.json"
 };
+// Chart 10 is also stored inline as a safety fallback for incomplete GitHub Pages deployments.
+// Source JSON still remains editable in js/heatmap.vg.json.
+const heatmapSpecFallback = {"description":"Relative domestic visitor nights; each cell / the state mean of the 5 available quarters. This is a short-term quarter profile, NOT multi-year evidence of seasonality. Seven discrete ordered colour bands and numeric cell labels improve mid-range discrimination.","width":460,"height":255,"data":{"url":"data/visitor_nights_quarterly.csv"},"transform":[{"joinaggregate":[{"op":"mean","field":"nights","as":"state_mean"}],"groupby":["state"]},{"calculate":"datum.nights / datum.state_mean","as":"relative_index"}],"encoding":{"x":{"field":"quarter","type":"ordinal","sort":["Jun 25","Sep 25","Dec 25","Mar 26","Jun 26"],"title":"Quarter","axis":{"labelAngle":0,"labelFontSize":13,"titleFontSize":14}},"y":{"field":"state","type":"nominal","title":null,"sort":["NSW","VIC","QLD","WA","SA","TAS","NT","ACT"]},"tooltip":[{"field":"state","type":"nominal"},{"field":"quarter","type":"nominal"},{"field":"nights","type":"quantitative","title":"Nights ('000)","format":",.0f"},{"field":"relative_index","type":"quantitative","title":"Relative demand","format":".2f"}]},"$schema":"https://vega.github.io/schema/vega-lite/v5.json","config":{"font":"Calibri, Arial, sans-serif","view":{"stroke":null},"axis":{"labelColor":"#334155","titleColor":"#334155","gridColor":"#ecf2f0","domainColor":"#bac9c5","labelFontSize":13,"titleFontSize":14,"labelFont":"Calibri, Arial, sans-serif","titleFont":"Calibri, Arial, sans-serif"},"legend":{"labelColor":"#233F38","titleColor":"#234D41","fillColor":"#F7FBF9","strokeColor":"#C7D9D0","cornerRadius":7,"padding":9,"labelFontSize":13,"titleFontSize":14},"title":{"font":"Times New Roman, Times, serif","fontSize":19,"fontWeight":"normal","anchor":"middle"},"header":{"labelFontSize":15,"titleFontSize":15,"labelFont":"Calibri, Arial, sans-serif"}},"params":[{"name":"heatmapState","value":"All states","bind":{"input":"select","options":["All states","NSW","VIC","QLD","WA","SA","TAS","NT","ACT"],"name":"Focus state: "}},{"name":"minRelativeIndex","value":0.6,"bind":{"input":"range","min":0.6,"max":1.5,"step":0.05,"name":"Highlight index >= "}}],"layer":[{"mark":{"type":"rect","stroke":"#ffffff","strokeWidth":1.8,"cornerRadius":2},"encoding":{"color":{"field":"relative_index","type":"quantitative","title":"Relative to 5-quarter avg","scale":{"type":"quantize","domain":[0.6,1.5],"range":["#FFF1B6","#FCD595","#F8B47C","#ED906C","#D46A75","#A54F8A","#6F3D8E"]},"legend":{"orient":"right","direction":"vertical","titleLimit":120,"offset":7,"labelLimit":110,"labelFontSize":13,"titleFontSize":14,"gradientLength":158,"gradientThickness":15,"title":"Index / state average","format":".2f","fillColor":"#F7FBF9","strokeColor":"#C7D9D0","cornerRadius":7,"padding":9,"labelColor":"#233F38","titleColor":"#234D41"}},"opacity":{"condition":{"test":"datum.relative_index >= minRelativeIndex && (heatmapState === 'All states' || datum.state === heatmapState)","value":1},"value":0.2}}},{"mark":{"type":"text","fontSize":11,"fontWeight":"bold","baseline":"middle"},"encoding":{"text":{"field":"relative_index","type":"quantitative","format":".2f"},"color":{"condition":{"test":"datum.relative_index >= 1.09","value":"#FFFFFF"},"value":"#263449"},"opacity":{"condition":{"test":"datum.relative_index >= minRelativeIndex && (heatmapState === 'All states' || datum.state === heatmapState)","value":1},"value":0.2}}}]};
 const chartOrder = [1, 2, 3, 13, 4, 7, 11, 9, 5, 6, 8, 10, 12];
 const baseSpecs = new Map();
 const lastSizes = new Map();
@@ -50,7 +53,11 @@ function prepareResponsiveSpec(number, original, availableWidth) {
     fillColor: '#F7FBF9',
     strokeColor: '#C7D9D0',
     cornerRadius: 9,
-    padding: 10
+    padding: 10,
+    layout: {
+      ...((spec.config.legend || {}).layout || {}),
+      bottom: {anchor: 'middle', center: true, direction: 'horizontal', margin: 10}
+    }
   };
   spec.config.axis = {...(spec.config.axis || {}), labelFontSize:13, titleFontSize:14};
   spec.config.header = {...(spec.config.header || {}), labelFontSize:15, titleFontSize:15};
@@ -82,6 +89,9 @@ function prepareResponsiveSpec(number, original, availableWidth) {
         value.legend.padding = 10;
         value.legend.labelFontSize = 13;
         value.legend.titleFontSize = 14;
+        if (value.legend.orient === 'bottom') {
+          value.legend.direction = 'horizontal';
+        }
         if (forceBottom) {
           value.legend.title = null; // Labels themselves explain the categories.
           value.legend.symbolSize = 90;
@@ -189,7 +199,7 @@ async function renderChart(number) {
     if (spec.layer?.[1]?.encoding?.color) spec.layer[1].encoding.color.legend = null;
   }
   if (number === 3) {
-    // Custom line-width key sits beside this chart in the HTML.
+    // Chart 03 intentionally has no legend; insight text explains thickness.
     if (spec.layer?.[1]?.encoding?.strokeWidth) spec.layer[1].encoding.strokeWidth.legend = null;
     if (spec.layer?.[1]?.encoding?.color) spec.layer[1].encoding.color.legend = null;
   }
@@ -216,9 +226,16 @@ async function startDashboard() {
       if (!result.ok) throw new Error(`HTTP ${result.status}`);
       baseSpecs.set(number, await result.json());
     } catch (error) {
-      const node = document.getElementById(`chart${number}`);
-      if (node) node.innerHTML = '<p class="error">Missing Vega-Lite specification. Check the JSON filename and server.</p>';
-      console.error(url, error);
+      if (number === 6) {
+        // Incomplete uploads sometimes omit the original spaced filename.
+        // The inline copy lets Chart 10 render with its full interactions.
+        baseSpecs.set(number, JSON.parse(JSON.stringify(heatmapSpecFallback)));
+        console.warn('Heatmap JSON could not load; using packaged fallback:', url, error);
+      } else {
+        const node = document.getElementById(`chart${number}`);
+        if (node) node.innerHTML = '<p class="error">Missing Vega-Lite specification. Check the JSON filename and server.</p>';
+        console.error(url, error);
+      }
     }
   }));
   await Promise.all(chartOrder.map(number => renderChart(number)));

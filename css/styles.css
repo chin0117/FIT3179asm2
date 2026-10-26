@@ -426,3 +426,29 @@ article.panel>.visual-key.boxplot-key {
 .source-list strong {display:block;font:400 18px/1.25 var(--heading);color:#1D4A3E;margin-bottom:4px;}
 .source-list p {font:15px/1.45 var(--body);color:var(--muted);margin:0;overflow-wrap:anywhere;}
 @media(max-width:790px){.source-list{grid-template-columns:minmax(0,1fr);}}
+
+
+/* 26 October: consistent horizontally centred legends beneath charts. */
+.plot-with-bottom-key > .visual-key.bottom-key,
+article.panel > .visual-key.boxplot-key {
+  display: flex;
+  width: fit-content;
+  max-width: 100%;
+  margin: 10px auto 12px;
+  align-self: center;
+  justify-content: center;
+  align-items: center;
+  flex-flow: row wrap;
+}
+/* Native SVG charts (including their legends) are horizontally centred. */
+.panel .plot { align-items: center; justify-content: flex-start; }
+.panel .plot > .vega-embed { display: block; width: fit-content; max-width: 100%; margin-inline: auto; }
+/* Chart 03: take the full plotting width, because its side legend was removed. */
+#chart3 { width: 100%; margin-inline: auto; }
+/* Compact, editable source placeholders until real links are provided. */
+.source-list-simple {grid-template-columns: repeat(2,minmax(0,1fr));gap:8px 16px;}
+.source-list-simple > li {background:transparent;border:0;border-bottom:1px solid #E1EAE5;border-radius:0;padding:7px 3px;}
+.source-list-simple strong {font-size:16px;margin-bottom:2px;}
+.source-list-simple p {font-size:14px;line-height:1.35;}
+.source-link-placeholder {color:#668879;font-style:italic;}
+@media(max-width:790px){.source-list-simple{grid-template-columns:minmax(0,1fr);}}

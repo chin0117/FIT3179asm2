@@ -6,7 +6,7 @@
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <meta content="An evidence-led Vega-Lite dashboard about Australian nature-based tourism and domestic travel context." name="description"/>
 <title>Nature-based Tourism in Australia</title>
-<link href="css/styles.css?v=interactive-right-20261026-v2" rel="stylesheet"/>
+<link href="css/styles.css?v=legends-vertical-20261026-v3" rel="stylesheet"/>
 <script src="https://cdn.jsdelivr.net/npm/vega@5.33.0/build/vega.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.23.0/build/vega-lite.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.29.0/build/vega-embed.min.js"></script>
@@ -29,8 +29,8 @@
 <section class="chapter" id="geography"><p class="eyebrow">CHAPTER 1 / SPATIAL PATTERNS</p><h2>Where do travel demand and park visits cluster?</h2><div class="chapter-lead short-lines"><span class="short-line">First, locate travel demand and park visitation.</span><span class="short-line">State totals show all-purpose day trips.</span><span class="short-line">Park symbols show visits to natural areas.</span><span class="short-line">Flow lines reveal interstate connections.</span></div>
 <div class="geography-grid">
 <article class="panel geo-card"><div class="panel-top"><h3 class="card-title">01 · Victoria narrowly leads NSW in domestic day-trip volume</h3></div><div aria-label="01 · Victoria narrowly leads NSW in domestic day-trip volume" class="plot" id="chart1" role="img"></div><div aria-label="Key insight" class="micro-notes"><span class="short-line">Victoria narrowly leads NSW in June 2026 trips.</span><span class="short-line">These counts include all travel purposes.</span><span class="short-line">Values are not adjusted for population.</span><span class="short-line interaction-tip">Click a state to focus; double-click to reset.</span></div><p class="source"><span class="short-line">Source: TRA Domestic Tourism Statistics (DoTS), June quarter</span><span class="short-line">2026; state boundary GeoJSON. Units: thousands of trips.</span></p></article>
-<article class="panel geo-card"><div class="panel-top"><h3 class="card-title">02 · Blue Mountains leads the ten NSW parks shown</h3></div><div class="plot-with-side-key"><div aria-label="02 · Blue Mountains leads the ten NSW parks shown" class="plot" id="chart2" role="img"></div><div aria-label="Park visits symbol legend" class="visual-key side-key">
-<span class="visual-key-title">How to read the circles</span>
+<article class="panel geo-card"><div class="panel-top"><h3 class="card-title">02 · Blue Mountains leads the ten NSW parks shown</h3></div><div class="plot-with-side-key chart-vertical-key"><div aria-label="02 · Blue Mountains leads the ten NSW parks shown" class="plot" id="chart2" role="img"></div><div aria-label="Park visits symbol legend" class="visual-key side-key">
+<span class="visual-key-title">Park visits</span>
 <div class="symbol-key">
 <span class="symbol-key-item"><span aria-hidden="true" class="symbol-circle small"></span><span>1.5m visits</span></span>
 <span class="symbol-key-item"><span aria-hidden="true" class="symbol-circle medium"></span><span>4.3m visits</span></span>
@@ -38,8 +38,8 @@
 </div>
 <span class="visual-key-note"><span class="short-line">Larger, greener circles indicate more park visits (including</span><span class="short-line">repeat visits).</span></span>
 </div></div><div aria-label="Key insight" class="micro-notes"><span class="short-line">Blue Mountains records 7.8 million park visits.</span><span class="short-line">Visits may include repeat entries by one person.</span><span class="short-line">Three parks account for 54.7% of selected visits.</span></div><p class="source"><span class="short-line">Source: NSW NPWS Park Visitation Survey as reported</span><span class="short-line">by Destination NSW, FY2024-25; top 10 only. Units:</span><span class="short-line">millions of visits.</span></p></article>
-<article class="panel geo-card"><div class="panel-top"><h3 class="card-title">03 · NSW-Queensland is the largest corridor in this sample</h3></div><div class="plot-with-side-key"><div aria-label="03 · NSW-Queensland is the largest corridor in this sample" class="plot" id="chart3" role="img"></div><div aria-label="Interstate travel flow thickness legend" class="visual-key side-key">
-<span class="visual-key-title">Line width shows two-way overnight trips</span>
+<article class="panel geo-card"><div class="panel-top"><h3 class="card-title">03 · NSW-Queensland is the largest corridor in this sample</h3></div><div class="plot-with-side-key chart-vertical-key"><div aria-label="03 · NSW-Queensland is the largest corridor in this sample" class="plot" id="chart3" role="img"></div><div aria-label="Interstate travel flow thickness legend" class="visual-key side-key">
+<span class="visual-key-title">Two-way trips</span>
 <div class="line-key">
 <span class="line-key-item"><span aria-hidden="true" class="flow-line small"></span><span>Lower volume</span></span>
 <span class="line-key-item"><span aria-hidden="true" class="flow-line medium"></span><span>Medium volume</span></span>
@@ -71,7 +71,7 @@
 </div>
 <div class="chapter-methods"><h3>Sources and interpretation</h3><p>Nature participation: 2008-2015.</p><p>NSW park visits: 2024-25.</p><p>Domestic tourism context: 2025-2026.</p><p>These different measures cannot form one continuous trend.</p><p>Park visits may include repeat visits.</p><p>Map areas show trip counts, not per-capita rates.</p></div></section>
 </main>
-<footer><div class="container"><span class="layout-version">Colour + box labels update 26 Oct 2026</span><span class="short-line">FIT3179 · Nature-Based Tourism in Australia</span><span class="short-line">Vega-Lite project · Historical and recent evidence</span><span class="short-line">AI-assisted layout; verify all findings before submission</span><span class="short-line build-stamp">Interactive charts · responsive right-side legends · 26 Oct 2026</span></div></footer>
-<script src="js/main.js?v=interactive-right-20261026-v2"></script>
+<footer><div class="container"><span class="layout-version">Colour + box labels update 26 Oct 2026</span><span class="short-line">FIT3179 · Nature-Based Tourism in Australia</span><span class="short-line">Vega-Lite project · Historical and recent evidence</span><span class="short-line">AI-assisted layout; verify all findings before submission</span><span class="short-line build-stamp">Vertical map legends (Charts 02-03) · 26 Oct 2026</span></div></footer>
+<script src="js/main.js?v=legends-vertical-20261026-v3"></script>
 </body>
 </html>

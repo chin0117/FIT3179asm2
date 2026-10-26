@@ -234,3 +234,75 @@ html[data-layout-version="two-column-20261026"] .plot .vega-embed {
  .plot-with-side-key .symbol-key,.plot-with-side-key .line-key {flex-direction:row;align-items:center;justify-content:center;}
  .plot-with-side-key .visual-key-note {text-align:center;}
 }
+
+
+/* Vertical RIGHT legends, explicitly scoped to Charts 02 and 03.
+   This must appear after the old max-width:1090 horizontal-key rule. */
+.plot-with-side-key.chart-vertical-key {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(100px, 23%, 138px);
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-width: 0;
+}
+.plot-with-side-key.chart-vertical-key > .plot {
+  min-width: 0;
+  max-width: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+.plot-with-side-key.chart-vertical-key > .visual-key.side-key {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  justify-content: center;
+  align-self: center;
+  margin: 0;
+  width: 100%;
+  min-width: 0;
+  padding: 11px 9px;
+  gap: 11px;
+}
+.plot-with-side-key.chart-vertical-key .visual-key-title {
+  display: block;
+  text-align: left;
+  font: bold 15px/1.2 'Times New Roman', Times, serif;
+}
+.plot-with-side-key.chart-vertical-key .symbol-key,
+.plot-with-side-key.chart-vertical-key .line-key {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 11px;
+  width: 100%;
+}
+.plot-with-side-key.chart-vertical-key .symbol-key-item,
+.plot-with-side-key.chart-vertical-key .line-key-item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  white-space: normal;
+  gap: 8px;
+  width: 100%;
+  font: 13px/1.25 Calibri, Carlito, Arial, sans-serif;
+}
+.plot-with-side-key.chart-vertical-key .visual-key-note {
+  flex-basis: auto;
+  text-align: left;
+  overflow-wrap: break-word;
+  font: 12px/1.35 Calibri, Carlito, Arial, sans-serif;
+}
+.plot-with-side-key.chart-vertical-key .flow-line {width: 28px;}
+/* Only very narrow phones stack; laptops always show vertical keys at right. */
+@media (max-width: 375px) {
+  .plot-with-side-key.chart-vertical-key {grid-template-columns: minmax(0, 1fr);}
+  .plot-with-side-key.chart-vertical-key > .visual-key.side-key {
+    align-items: center;
+  }
+  .plot-with-side-key.chart-vertical-key .visual-key-note {text-align: center;}
+}

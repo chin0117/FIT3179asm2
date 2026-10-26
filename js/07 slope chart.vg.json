@@ -1,5 +1,5 @@
 {
-  "description": "Nature visitor segments in 2008 and 2015. End labels show increases in millions, calculated from the dataset; legend identifies the visitor categories. Annotation labels are precomputed from the supplied endpoint CSV for reliable rendering.",
+  "description": "Visitor increase labels at the 2015 endpoints. Annotation year uses the same ordinal string categories as the CSV-derived line layers.",
   "width": 440,
   "height": 300,
   "data": {
@@ -98,21 +98,21 @@
         "values": [
           {
             "type": "Domestic day",
-            "year": 2015,
+            "year": "2015",
             "label_y": 19.54,
             "change": "+6.21m",
             "value_2015": 19.02
           },
           {
             "type": "Domestic overnight",
-            "year": 2015,
+            "year": "2015",
             "label_y": 17.59,
             "change": "+5.06m",
             "value_2015": 18.14
           },
           {
             "type": "International",
-            "year": 2015,
+            "year": "2015",
             "label_y": 4.47,
             "change": "+1.07m",
             "value_2015": 4.47
@@ -123,7 +123,7 @@
         "type": "text",
         "align": "left",
         "baseline": "middle",
-        "dx": 12,
+        "dx": 15,
         "fontSize": 14,
         "fontWeight": "bold"
       },
@@ -132,9 +132,15 @@
           "field": "year",
           "type": "ordinal",
           "sort": [
-            2008,
-            2015
-          ]
+            "2008",
+            "2015"
+          ],
+          "axis": {
+            "values": [
+              "2008",
+              "2015"
+            ]
+          }
         },
         "y": {
           "field": "label_y",
@@ -147,7 +153,19 @@
         "color": {
           "field": "type",
           "type": "nominal",
-          "legend": null
+          "legend": null,
+          "scale": {
+            "domain": [
+              "Domestic day",
+              "Domestic overnight",
+              "International"
+            ],
+            "range": [
+              "#16876A",
+              "#6558BB",
+              "#C05697"
+            ]
+          }
         },
         "tooltip": [
           {

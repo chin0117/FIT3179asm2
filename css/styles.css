@@ -571,3 +571,21 @@ footer .last-modified {font-weight:400;color:#526C63;}
 /* Chapter titles now use the CHAPTER N / Topic format as the main heading. */
 .chapter h2 { font-weight: 400; max-width: none; white-space: nowrap; font-size: clamp(16px, 2.5vw, 35px); letter-spacing: -0.018em; }
 @media (max-width: 740px) { .chapter h2 { font-size: clamp(15px, 3.55vw, 23px); } }
+
+/* Two-tier chapter headings: only the CHAPTER prefix is all caps. */
+.chapter .chapter-kicker {
+  display:block; text-transform:none; color:#376a5d;
+  font:700 13px/1.5 var(--heading); letter-spacing:.075em;
+  margin:0 0 7px;
+}
+.chapter > h2 {
+  font-family:var(--heading); font-size:clamp(30px,3.5vw,48px);
+  font-weight:700; line-height:1.13; letter-spacing:-.02em;
+  white-space:normal; max-width:30ch; margin:0 0 16px;
+}
+@media (max-width:740px) {
+  .chapter .chapter-kicker {font-size:12px;}
+  .chapter > h2 {font-size:clamp(25px,5.2vw,36px);max-width:100%;}
+}
+/* Keep the chapter kicker visible when navigating via the sticky chapter nav. */
+.chapter { scroll-margin-top: 94px; }

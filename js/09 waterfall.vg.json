@@ -66,11 +66,16 @@
           "field": "kind",
           "type": "nominal",
           "legend": {
-            "orient": "bottom",
-            "direction": "horizontal",
+            "orient": "right",
+            "direction": "vertical",
             "title": "Bar meaning",
             "symbolType": "square",
-            "labelLimit": 135
+            "labelLimit": 110,
+            "offset": 7,
+            "titleLimit": 120,
+            "labelFontSize": 11,
+            "titleFontSize": 11,
+            "symbolSize": 90
           },
           "scale": {
             "domain": [

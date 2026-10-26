@@ -54,10 +54,15 @@
         "scheme": "tealblues"
       },
       "legend": {
-        "orient": "bottom",
-        "direction": "horizontal",
-        "gradientLength": 220,
-        "titleLimit": 180
+        "orient": "right",
+        "direction": "vertical",
+        "gradientLength": 130,
+        "titleLimit": 120,
+        "offset": 7,
+        "labelLimit": 110,
+        "labelFontSize": 11,
+        "titleFontSize": 11,
+        "gradientThickness": 12
       }
     },
     "tooltip": [
@@ -72,7 +77,14 @@
         "title": "Day trips ('000)",
         "format": ",.0f"
       }
-    ]
+    ],
+    "opacity": {
+      "condition": {
+        "param": "selectedState",
+        "value": 1
+      },
+      "value": 0.3
+    }
   },
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "config": {
@@ -95,5 +107,18 @@
       "fontSize": 15,
       "fontWeight": "bold"
     }
-  }
+  },
+  "params": [
+    {
+      "name": "selectedState",
+      "select": {
+        "type": "point",
+        "fields": [
+          "state"
+        ],
+        "on": "click",
+        "clear": "dblclick"
+      }
+    }
+  ]
 }

@@ -214,3 +214,23 @@ html[data-layout-version="two-column-20261026"] .plot .vega-embed {
 .boxplot-key-box {width:17px;height:13px;border:1px solid #24454D;background:#7FBDAD;}
 .boxplot-key-median {width:20px;height:0;border-top:4px solid #C66B2B;}
 @media (max-width:800px){.boxplot-key {gap:8px 11px;}.boxplot-key-item{font-size:12px;}}
+
+/* Interactive and legend layout, 26 Oct 2026 */
+.plot-with-side-key {display:grid;grid-template-columns:minmax(0,1fr) 122px;gap:8px;align-items:center;min-width:0;}
+.plot-with-side-key>.plot {width:100%;min-width:0;}
+.plot-with-side-key>.visual-key {margin:4px 0;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;min-width:0;padding:10px 8px;gap:10px;}
+.plot-with-side-key .symbol-key,.plot-with-side-key .line-key {display:flex;flex-direction:column;align-items:flex-start;gap:10px;}
+.plot-with-side-key .visual-key-note {text-align:left;min-width:0;overflow-wrap:anywhere;}
+.plot-with-side-key .visual-key-title {line-height:1.25;overflow-wrap:anywhere;}
+.plot-with-side-key .symbol-key-item,.plot-with-side-key .line-key-item {white-space:normal;line-height:1.2;}
+.plot-with-side-key .visual-key-compact {align-items:flex-start;}
+.interaction-tip {margin-top:8px;color:#215d65;font-weight:600;}
+.build-stamp {margin:8px auto 0;text-align:center;color:#406d62;max-width:none;}
+.vega-bindings {font:13px/1.4 Calibri,Carlito,Arial,sans-serif;color:#36594f;display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;margin:4px 0 9px;}
+.vega-bindings input[type=range]{accent-color:#287d6a;max-width:170px;}
+@media(max-width:1090px){
+ .plot-with-side-key {grid-template-columns:minmax(0,1fr);gap:4px;}
+ .plot-with-side-key>.visual-key {flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:center;padding:8px;}
+ .plot-with-side-key .symbol-key,.plot-with-side-key .line-key {flex-direction:row;align-items:center;justify-content:center;}
+ .plot-with-side-key .visual-key-note {text-align:center;}
+}

@@ -79,9 +79,15 @@
         ]
       },
       "legend": {
-        "orient": "bottom",
-        "direction": "horizontal",
-        "title": "Visitor group"
+        "orient": "right",
+        "direction": "vertical",
+        "title": "Visitor group",
+        "offset": 7,
+        "titleLimit": 120,
+        "labelLimit": 110,
+        "labelFontSize": 11,
+        "titleFontSize": 11,
+        "symbolSize": 90
       }
     },
     "tooltip": [
@@ -100,7 +106,14 @@
         "title": "Visitors (million)",
         "format": ".2f"
       }
-    ]
+    ],
+    "opacity": {
+      "condition": {
+        "param": "focusVisitorType",
+        "value": 1
+      },
+      "value": 0.2
+    }
   },
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "config": {
@@ -123,5 +136,17 @@
       "fontSize": 15,
       "fontWeight": "bold"
     }
-  }
+  },
+  "params": [
+    {
+      "name": "focusVisitorType",
+      "select": {
+        "type": "point",
+        "fields": [
+          "visitor_type"
+        ]
+      },
+      "bind": "legend"
+    }
+  ]
 }

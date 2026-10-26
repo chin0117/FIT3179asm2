@@ -65,9 +65,15 @@
             ]
           },
           "legend": {
-            "orient": "bottom",
-            "direction": "horizontal",
-            "title": "Two-way overnight trips ('000)"
+            "orient": "right",
+            "direction": "vertical",
+            "title": "Two-way overnight trips ('000)",
+            "offset": 7,
+            "titleLimit": 120,
+            "labelLimit": 110,
+            "labelFontSize": 11,
+            "titleFontSize": 11,
+            "symbolSize": 90
           }
         },
         "color": {
@@ -91,8 +97,28 @@
             "title": "Trips ('000)",
             "format": ",.0f"
           }
-        ]
-      }
+        ],
+        "opacity": {
+          "condition": {
+            "param": "selectedCorridor",
+            "value": 0.9
+          },
+          "value": 0.12
+        }
+      },
+      "params": [
+        {
+          "name": "selectedCorridor",
+          "select": {
+            "type": "point",
+            "fields": [
+              "corridor"
+            ],
+            "on": "click",
+            "clear": "dblclick"
+          }
+        }
+      ]
     }
   ],
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",

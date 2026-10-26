@@ -72,9 +72,16 @@
             "scheme": "goldgreen"
           },
           "legend": {
-            "orient": "top-right",
+            "orient": "right",
             "direction": "vertical",
-            "title": "Park visits (millions)"
+            "title": "Park visits (millions)",
+            "offset": 7,
+            "titleLimit": 120,
+            "labelLimit": 110,
+            "labelFontSize": 11,
+            "titleFontSize": 11,
+            "gradientLength": 130,
+            "gradientThickness": 12
           }
         },
         "tooltip": [

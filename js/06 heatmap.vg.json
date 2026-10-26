@@ -73,9 +73,15 @@
         ]
       },
       "legend": {
-        "orient": "bottom",
-        "direction": "horizontal",
-        "titleLimit": 180
+        "orient": "right",
+        "direction": "vertical",
+        "titleLimit": 120,
+        "offset": 7,
+        "labelLimit": 110,
+        "labelFontSize": 11,
+        "titleFontSize": 11,
+        "gradientLength": 130,
+        "gradientThickness": 12
       }
     },
     "tooltip": [
@@ -99,7 +105,14 @@
         "title": "Relative demand",
         "format": ".2f"
       }
-    ]
+    ],
+    "opacity": {
+      "condition": {
+        "test": "datum.relative_index >= minRelativeIndex",
+        "value": 1
+      },
+      "value": 0.18
+    }
   },
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "config": {
@@ -122,5 +135,18 @@
       "fontSize": 15,
       "fontWeight": "bold"
     }
-  }
+  },
+  "params": [
+    {
+      "name": "minRelativeIndex",
+      "value": 0.6,
+      "bind": {
+        "input": "range",
+        "min": 0.6,
+        "max": 1.5,
+        "step": 0.05,
+        "name": "Highlight index >= "
+      }
+    }
+  ]
 }

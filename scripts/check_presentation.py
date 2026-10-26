@@ -11,9 +11,11 @@ assert len(soup.select('.source-list > li')) == 6
 assert len(soup.select('.source-list a[href^="https://"]')) == 6
 assert len(soup.select('.panel .source')) == 0
 assert not soup.select('.micro-notes .interaction-tip')
-assert soup.select_one('.authorship').get_text(' ', strip=True) == (
-    'Create by: Chin Hui Ni Last modified: 26 October 2026'
-)
+assert soup.select_one('.authorship').get_text(' ', strip=True) == 'Create by: Chin Hui Ni'
+assert soup.select_one('.last-modified').get_text(' ', strip=True) == 'Last modified: 26 October 2026'
+assert soup.select_one('.chapter-conclusion h3').get_text(' ', strip=True) == 'Conclusion'
+assert soup.select_one('.chapter-methods h3').get_text(' ', strip=True) == 'Data sources'
+assert 'interpretation' not in soup.select_one('.chapter-methods').get_text(' ', strip=True).lower()
 assert soup.select_one('#chart11-filter-slot')
 assert not soup.select_one('#chart10').find_parent('article').select('.boxplot-key')
 for f in (root / 'js').glob('*.vg.json'):
@@ -26,4 +28,8 @@ assert chart11.get('params')
 chart12 = json.loads((root / 'js' / '10 boxplot.vg.json').read_text())
 assert not chart12.get('params')
 assert 'boxState' not in json.dumps(chart12)
-print('PASS: 13 charts, 6 source links, clean insights, Chart 11 shared row and Chart 12 no filter')
+chart6 = json.loads((root / 'js' / '07 slope chart.vg.json').read_text())
+assert chart6['encoding']['color']['legend']['orient'] == 'bottom'
+assert chart6['layer'][2]['encoding']['text']['field'] == 'visitor_increase'
+assert 'joinaggregate' in chart6['layer'][2]['transform'][0]
+print('PASS: 13 charts, Chart 6 growth labels/legend, conclusion, 6 source links, authorship and controls')

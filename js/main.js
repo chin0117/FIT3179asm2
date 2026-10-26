@@ -2,7 +2,7 @@
  * Uses the original 12 editable Vega-Lite specifications and re-computes only
  * their presentation dimensions; data/encodings remain unchanged.
  */
-const LAYOUT_BUILD = "20261026-legend-hero-v10";
+const LAYOUT_BUILD = "20261026-slope-conclusion-v11";
 const chartFiles = {
   1: "01 choropleth.vg.json",
   2: "02 proportional symbol.vg.json",
@@ -30,9 +30,9 @@ const maximumWidths = {
 };
 const geoCharts = new Set([1, 2, 3]);
 // Native Vega-Lite legends for these charts; other charts use HTML side keys.
-const nativeLegendCharts = new Set([1, 4, 6, 8, 9, 12]);
+const nativeLegendCharts = new Set([1, 4, 6, 7, 8, 9, 12]);
 // Dashboard card numbers 05, 08, 11, 13 must use horizontal BOTTOM legends.
-const bottomLegendCharts = new Set([4, 9, 8, 6]);
+const bottomLegendCharts = new Set([4, 9, 8, 6, 7]);
 let resizeTimeout;
 
 function prepareResponsiveSpec(number, original, availableWidth) {

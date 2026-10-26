@@ -549,3 +549,21 @@ footer .last-modified {font-weight:400;color:#526C63;}
   .chapter h2 {font-size:clamp(15px,3.35vw,26px);letter-spacing:-0.03em;}
   .hero .eyebrow {font-size:11px;}
 }
+
+/* Concise concluding finding before the source links. */
+.chapter-conclusion {
+  margin: 28px 0 14px;
+  padding: 20px 25px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.chapter-conclusion h3 {font: 400 26px/1.25 var(--heading); margin: 0 0 10px;}
+.conclusion-lines {font: 17px/1.45 var(--body); color: var(--ink);}
+.conclusion-lines .short-line {max-width: 56ch; margin-bottom: 3px;}
+.chapter-methods {margin-top: 14px;}
+.chapter-methods > h3 {font: 400 26px/1.25 var(--heading); margin: 0 0 14px;}
+@media (max-width: 790px) {
+  .chapter-conclusion {padding: 18px;}
+  .conclusion-lines {font-size: 16px;}
+}

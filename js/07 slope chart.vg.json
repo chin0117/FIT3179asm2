@@ -1,5 +1,5 @@
 {
-  "description": "Nature visitor segments in 2008 and 2015, based on 2016 State of the Environment series.",
+  "description": "Nature visitor segments in 2008 and 2015. End labels show increases in millions, calculated from the dataset; legend identifies the visitor categories.",
   "width": 440,
   "height": 300,
   "data": {
@@ -37,24 +37,6 @@
         "detail": {
           "field": "type",
           "type": "nominal"
-        },
-        "color": {
-          "field": "type",
-          "type": "nominal",
-          "scale": {
-            "domain": [
-              "Domestic day",
-              "Domestic overnight",
-              "International"
-            ],
-            "range": [
-              "#16876A",
-              "#6558BB",
-              "#C05697"
-            ]
-          },
-          "title": "Segment",
-          "legend": null
         },
         "tooltip": [
           {
@@ -94,23 +76,6 @@
           "field": "visitors_m",
           "type": "quantitative"
         },
-        "color": {
-          "field": "type",
-          "type": "nominal",
-          "legend": null,
-          "scale": {
-            "domain": [
-              "Domestic day",
-              "Domestic overnight",
-              "International"
-            ],
-            "range": [
-              "#16876A",
-              "#6558BB",
-              "#C05697"
-            ]
-          }
-        },
         "tooltip": [
           {
             "field": "type",
@@ -131,15 +96,40 @@
     {
       "transform": [
         {
-          "filter": "datum.year === '2015'"
+          "joinaggregate": [
+            {
+              "op": "min",
+              "field": "visitors_m",
+              "as": "segment_min"
+            },
+            {
+              "op": "max",
+              "field": "visitors_m",
+              "as": "segment_max"
+            }
+          ],
+          "groupby": [
+            "type"
+          ]
+        },
+        {
+          "filter": "datum.year == 2015"
+        },
+        {
+          "calculate": "'+' + format(datum.segment_max - datum.segment_min, '.2f') + 'm'",
+          "as": "visitor_increase"
+        },
+        {
+          "calculate": "datum.visitors_m + (datum.type === 'Domestic day' ? 0.45 : datum.type === 'Domestic overnight' ? -0.60 : 0)",
+          "as": "annotation_y"
         }
       ],
       "mark": {
         "type": "text",
-        "dx": 12,
+        "dx": 10,
         "align": "left",
-        "fontWeight": 700,
-        "fontSize": 11
+        "fontWeight": "bold",
+        "fontSize": 13
       },
       "encoding": {
         "x": {
@@ -151,13 +141,31 @@
           ]
         },
         "y": {
-          "field": "visitors_m",
+          "field": "annotation_y",
           "type": "quantitative"
         },
         "text": {
-          "field": "type",
+          "field": "visitor_increase",
           "type": "nominal"
-        }
+        },
+        "tooltip": [
+          {
+            "field": "type",
+            "type": "nominal",
+            "title": "Visitor group"
+          },
+          {
+            "field": "visitor_increase",
+            "type": "nominal",
+            "title": "Increase, 2008-2015"
+          },
+          {
+            "field": "visitors_m",
+            "type": "quantitative",
+            "title": "2015 visitors (millions)",
+            "format": ".2f"
+          }
+        ]
       }
     }
   ],
@@ -197,6 +205,40 @@
       "labelFontSize": 15,
       "titleFontSize": 15,
       "labelFont": "Calibri, Arial, sans-serif"
+    }
+  },
+  "encoding": {
+    "color": {
+      "field": "type",
+      "type": "nominal",
+      "title": null,
+      "scale": {
+        "domain": [
+          "Domestic day",
+          "Domestic overnight",
+          "International"
+        ],
+        "range": [
+          "#16876A",
+          "#6558BB",
+          "#C05697"
+        ]
+      },
+      "legend": {
+        "orient": "bottom",
+        "direction": "horizontal",
+        "title": null,
+        "labelFontSize": 13,
+        "symbolSize": 110,
+        "columns": 3,
+        "fillColor": "#F7FBF9",
+        "strokeColor": "#C7D9D0",
+        "cornerRadius": 9,
+        "padding": 10,
+        "offset": 10,
+        "labelColor": "#233F38",
+        "labelLimit": 160
+      }
     }
   }
 }

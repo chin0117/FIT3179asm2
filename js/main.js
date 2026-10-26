@@ -2,6 +2,7 @@
  * Uses the original 12 editable Vega-Lite specifications and re-computes only
  * their presentation dimensions; data/encodings remain unchanged.
  */
+const LAYOUT_BUILD = "two-column-20261026";
 const chartFiles = {
   1: "01 choropleth.vg.json",
   2: "02 proportional symbol.vg.json",
@@ -34,15 +35,24 @@ function prepareResponsiveSpec(number, original, availableWidth) {
   // Faceted charts have separate plot widths for each state. Their facet
   // count must change on small screens to avoid eight horizontal panels.
   if (number === 5) {
-    const columns = contentWidth >= 760 ? 4 : contentWidth >= 440 ? 2 : 1;
-    const estimatedAxisAndHeading = 65; // pixels per small plot
+    const columns = contentWidth >= 800 ? 4 : contentWidth >= 450 ? 2 : 1;
+    // Reserve space for each independent y-axis, state label and facet gaps.
+    // The available full-row width determines the actual size of each plot.
+    const axisAllowancePerFacet = columns === 4 ? 60 : 52;
     const gap = 14;
-    const innerWidth = Math.max(112, Math.min(184,
-      Math.floor((contentWidth - 40 - columns * estimatedAxisAndHeading - (columns - 1) * gap) / columns)
+    const outerPadding = 32;
+    const innerWidth = Math.max(115, Math.min(270,
+      Math.floor((contentWidth - outerPadding - columns * axisAllowancePerFacet - (columns - 1) * gap) / columns)
     ));
     spec.columns = columns;
     spec.spec.width = innerWidth;
-    spec.spec.height = columns === 4 ? 132 : 120;
+    spec.spec.height = columns === 4 ? 154 : columns === 2 ? 145 : 120;
+    spec.spec.encoding.x.axis.labelFontSize = columns === 4 ? 10 : 9;
+    spec.spec.encoding.y.axis.labelFontSize = columns === 4 ? 10 : 9;
+    spec.config = spec.config || {};
+    spec.config.facet = {...(spec.config.facet || {}), spacing: 14};
+    spec.config.font = 'Calibri, Arial, sans-serif';
+    spec.config.title = {...(spec.config.title || {}), font: 'Times New Roman, Times, serif', fontSize: 15};
     return spec;
   }
 
@@ -91,6 +101,11 @@ async function renderChart(number) {
   lastSizes.set(number, width);
   const spec = prepareResponsiveSpec(number, base, width);
   if ([1,2,3,13].includes(number)) spec.title = null;
+  if (number === 13 && spec.layer?.[0]?.encoding?.x?.axis) {
+    spec.layer[0].encoding.x.axis.labelAngle = -48;
+    spec.layer[0].encoding.x.axis.labelFontSize = 9;
+    spec.layer[0].encoding.x.axis.labelLimit = 90;
+  }
   if (number === 2) {
     if (spec.layer?.[1]?.encoding?.size) spec.layer[1].encoding.size.legend = null;
     if (spec.layer?.[1]?.encoding?.color) spec.layer[1].encoding.color.legend = null;
@@ -116,9 +131,9 @@ async function renderChart(number) {
 async function startDashboard() {
   await Promise.all(chartOrder.map(async number => {
     const filename = chartFiles[number];
-    const url = `js/${encodeURIComponent(filename)}`;
+    const url = `js/${encodeURIComponent(filename)}?v=${LAYOUT_BUILD}`;
     try {
-      const result = await fetch(url);
+      const result = await fetch(url, {cache: "no-store"});
       if (!result.ok) throw new Error(`HTTP ${result.status}`);
       baseSpecs.set(number, await result.json());
     } catch (error) {

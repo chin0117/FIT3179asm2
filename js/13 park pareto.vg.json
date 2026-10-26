@@ -1,9 +1,8 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "Advanced Pareto combination chart. Top-ten NSW park visits in FY2024-25, cumulative share derived solely from included park counts.",
-  "title": "NSW park visit concentration · 2024-25",
   "width": 900,
-  "height": 285,
+  "height": 230,
   "data": {
     "url": "data/nsw_park_pareto.csv"
   },

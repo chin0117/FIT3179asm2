@@ -1,6 +1,5 @@
 {
   "description": "Five observations per state, Jun 2025 through Jun 2026. Annual seasonality cannot be inferred from just five quarterly data points. Minimum/maximum labels are shown for each state; the dark median line is within each box. Every box uses 5 quarterly average values, not raw trip durations.",
-  "title": "Overnight trip length by state",
   "width": 450,
   "height": 310,
   "data": {

@@ -1,6 +1,5 @@
 {
   "description": "Relative domestic visitor nights; each cell / the state mean of the 5 available quarters. This is a short-term quarter profile, NOT multi-year evidence of seasonality. Seven discrete ordered colour bands and numeric cell labels improve mid-range discrimination.",
-  "title": "Visitor nights index · 2025-2026",
   "width": 460,
   "height": 255,
   "data": {

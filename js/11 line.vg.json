@@ -1,6 +1,5 @@
 {
   "description": "Lorenz curve computed only over the 10 highest-visit NSW parks, FY2024-25; curve cannot be generalized to all NSW parks.",
-  "title": "Concentration of NSW park visits",
   "width": 440,
   "height": 300,
   "layer": [

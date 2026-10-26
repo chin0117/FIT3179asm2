@@ -1,6 +1,5 @@
 {
   "description": "NVS, year ending December 2024. Bidirectional state-pair counts are added so the same corridor is not hidden under an overlapping reverse-direction line. Not nature-specific.",
-  "title": "Interstate overnight travel · 2024",
   "width": 640,
   "height": 390,
   "projection": {

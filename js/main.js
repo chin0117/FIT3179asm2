@@ -2,7 +2,7 @@
  * Uses the original 12 editable Vega-Lite specifications and re-computes only
  * their presentation dimensions; data/encodings remain unchanged.
  */
-const LAYOUT_BUILD = "typography-frame-20261026-v6";
+const LAYOUT_BUILD = "source-legend-balance-20261026-v7";
 const chartFiles = {
   1: "01 choropleth.vg.json",
   2: "02 proportional symbol.vg.json",
@@ -49,8 +49,8 @@ function prepareResponsiveSpec(number, original, availableWidth) {
     offset: 8,
     fillColor: '#F7FBF9',
     strokeColor: '#C7D9D0',
-    cornerRadius: 7,
-    padding: 9
+    cornerRadius: 9,
+    padding: 10
   };
   spec.config.axis = {...(spec.config.axis || {}), labelFontSize:13, titleFontSize:14};
   spec.config.header = {...(spec.config.header || {}), labelFontSize:15, titleFontSize:15};
@@ -78,8 +78,8 @@ function prepareResponsiveSpec(number, original, availableWidth) {
         value.legend.offset = 8;
         value.legend.fillColor = '#F7FBF9';
         value.legend.strokeColor = '#C7D9D0';
-        value.legend.cornerRadius = 7;
-        value.legend.padding = 9;
+        value.legend.cornerRadius = 9;
+        value.legend.padding = 10;
         value.legend.labelFontSize = 13;
         value.legend.titleFontSize = 14;
         if (forceBottom) {
@@ -134,7 +134,9 @@ function prepareResponsiveSpec(number, original, availableWidth) {
   if (geoCharts.has(number)) {
     const factor = targetWidth / originalWidth;
     const height = Math.max(205, Math.min(425, Math.round(originalHeight * Math.max(0.65, factor))));
-    spec.height = height;
+    spec.height = number === 3
+      ? Math.max(270, Math.min(385, Math.round(targetWidth * 0.82)))
+      : height;
     // Compact map marks to avoid circles/lines covering everything.
     if (number === 2 && spec.layer?.[1]?.encoding?.size?.scale) {
       spec.layer[1].encoding.size.scale.range = [40, Math.round(1900 * Math.min(1, factor))];
@@ -145,12 +147,15 @@ function prepareResponsiveSpec(number, original, availableWidth) {
     if (spec.projection && typeof spec.projection.scale === 'number') {
       // Keep geographic proportions consistent when the map grows/shrinks.
       const verticalFactor = height / originalHeight;
-      spec.projection.scale = Math.round(original.projection.scale * Math.min(factor, verticalFactor));
+      // Give the flow map more visual emphasis; it has no axis labels.
+      const scaleBoost = number === 3 ? 1.12 : 1;
+      spec.projection.scale = Math.round(original.projection.scale * Math.min(factor, verticalFactor) * scaleBoost);
     }
   } else {
     // Use wider, moderately tall charts for full-width panels, rather than
     // stretching all marks and font sizes into oversized plots.
     spec.height = Math.round(originalHeight);
+    if (number === 13) spec.height = 230;
   }
   // Use serif titles and Calibri axis/legend labels consistently.
   spec.config = spec.config || {};
@@ -167,7 +172,8 @@ async function renderChart(number) {
   if (width <= 0 || (lastSizes.get(number) === width && node.querySelector('svg'))) return;
   lastSizes.set(number, width);
   const spec = prepareResponsiveSpec(number, base, width);
-  if ([1,2,3,13].includes(number)) spec.title = null;
+  // Keep only the numbered heading above the card; no repeated Vega plot title.
+  delete spec.title;
   if (spec.title) {
     spec.config.title = {...(spec.config.title || {}), fontSize: width < 410 ? 17 : 19,
                          fontWeight: 'normal', anchor: 'middle'};

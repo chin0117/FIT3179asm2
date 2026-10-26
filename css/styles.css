@@ -381,3 +381,48 @@ html[data-layout-version="two-column-20261026"] .plot .vega-embed {
   .panel .card-title {font-size: 16px;letter-spacing:-0.04em;}
   .micro-notes {font-size: 16px;}
 }
+
+/* FINAL 2026-10-26: consistent content-width legend frames. */
+:root { --legend-background: #F7FBF9; --legend-border: #C7D9D0; }
+.visual-key,
+.visual-key.bottom-key,
+.visual-key.boxplot-key {
+  background:var(--legend-background);
+  border:1.5px solid var(--legend-border);
+  border-radius:9px;
+  box-shadow:none;
+  padding:10px 13px;
+}
+/* Native Vega legends size to their contents. HTML legends do the same. */
+.plot-with-bottom-key>.visual-key.bottom-key,
+article.panel>.visual-key.boxplot-key {
+  display:inline-flex;
+  width:fit-content;
+  max-width:100%;
+  flex-wrap:wrap;
+  align-self:center;
+  margin:10px auto 12px;
+  justify-content:center;
+  align-items:center;
+  gap:9px 18px;
+}
+.plot-with-bottom-key>.visual-key.bottom-key .line-key-item {font-size:14px;}
+.plot-with-side-key.chart-vertical-key>.visual-key.side-key {
+  background:var(--legend-background);
+  border:1.5px solid var(--legend-border);
+  border-radius:9px;
+  padding:11px 9px;
+}
+/* Relocating per-card citations avoids artificial whitespace at card bottoms. */
+.panel .micro-notes {margin-top:12px;margin-bottom:7px;}
+.panel .plot-with-side-key + .micro-notes {margin-top:12px;}
+#chart3 {margin-top:0;}
+/* A consolidated source index at the end of Chapter 3. */
+.chapter-methods {margin-top:28px;padding:24px 26px;}
+.chapter-methods>p {max-width:none;line-height:1.45;margin:0 0 4px;}
+.source-section-title {font:400 23px/1.25 var(--heading);margin:22px 0 13px;}
+.source-list {list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 18px;margin:0;padding:0;counter-reset:source;}
+.source-list>li {background:#F7FBF9;border:1px solid #DAE8DF;border-radius:9px;padding:11px 13px;min-width:0;}
+.source-list strong {display:block;font:400 18px/1.25 var(--heading);color:#1D4A3E;margin-bottom:4px;}
+.source-list p {font:15px/1.45 var(--body);color:var(--muted);margin:0;overflow-wrap:anywhere;}
+@media(max-width:790px){.source-list{grid-template-columns:minmax(0,1fr);}}

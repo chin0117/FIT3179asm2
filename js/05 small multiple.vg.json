@@ -1,6 +1,5 @@
 {
   "description": "All-purpose domestic overnight trips, five quarters (Jun 2025-Jun 2026), DoTS. Small multiples count as ONE idiom.",
-  "title": "Overnight trips by state · 2025-2026",
   "data": {
     "url": "data/overnight_trips_quarterly.csv"
   },

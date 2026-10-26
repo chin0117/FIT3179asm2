@@ -120,13 +120,13 @@
           "as": "visitor_increase"
         },
         {
-          "calculate": "datum.visitors_m + (datum.type === 'Domestic day' ? 0.45 : datum.type === 'Domestic overnight' ? -0.60 : 0)",
+          "calculate": "datum.visitors_m + (datum.type === 'Domestic day' ? 0.55 : datum.type === 'Domestic overnight' ? -0.55 : 0.15)",
           "as": "annotation_y"
         }
       ],
       "mark": {
         "type": "text",
-        "dx": 10,
+        "dx": 12,
         "align": "left",
         "fontWeight": "bold",
         "fontSize": 13
@@ -148,6 +148,23 @@
           "field": "visitor_increase",
           "type": "nominal"
         },
+        "color": {
+          "field": "type",
+          "type": "nominal",
+          "legend": null,
+          "scale": {
+            "domain": [
+              "Domestic day",
+              "Domestic overnight",
+              "International"
+            ],
+            "range": [
+              "#1f9d7a",
+              "#6b5fc6",
+              "#c75aa1"
+            ]
+          }
+        },
         "tooltip": [
           {
             "field": "type",
@@ -157,7 +174,7 @@
           {
             "field": "visitor_increase",
             "type": "nominal",
-            "title": "Increase, 2008-2015"
+            "title": "Increase, 2008\u20132015"
           },
           {
             "field": "visitors_m",

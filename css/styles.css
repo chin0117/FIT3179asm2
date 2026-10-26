@@ -506,3 +506,46 @@ article.panel > .visual-key.boxplot-key {
   .chart11-filter-slot .vega-bind {gap:3px;flex-wrap:nowrap;}
   .chart11-filter-slot .vega-bind select {max-width:105px;font-size:13px;}
 }
+
+
+/* Final presentation refinements - 26 October 2026. */
+/* Single-line cover headline, with fluid font sizing to avoid horizontal scrolling. */
+.hero h1 {
+  max-width: none;
+  white-space: nowrap;
+  width: max-content;
+  max-width: 100%;
+  font-size: clamp(17px, 4.05vw, 56px);
+  line-height: 1.11;
+  letter-spacing: -0.023em;
+}
+/* The cover eyebrow is deliberately Calibri, unlike the serif chapter headings. */
+.hero .eyebrow {
+  font-family: var(--body);
+  font-size: 13px;
+  letter-spacing: .11em;
+}
+/* Each chapter heading appears on one line, scaling to suit the screen. */
+.chapter h2 {
+  max-width: none;
+  white-space: nowrap;
+  font-size: clamp(17px, 2.9vw, 39px);
+  letter-spacing: -0.018em;
+}
+/* Centre the three separate footer lines. */
+footer .footer-content {text-align:center;display:flex;flex-direction:column;align-items:center;gap:3px;}
+footer .footer-main,
+footer .authorship,
+footer .last-modified {font: 15px/1.4 var(--body);margin:0 auto;max-width:100%;text-align:center;}
+footer .footer-main {font-size:16px;color:#284F43;font-weight:600;}
+footer .authorship {font-weight:400;color:#526C63;}
+footer .last-modified {font-weight:400;color:#526C63;}
+/* Vega-Lite's Chart 13 legend is vertical and inside the upper-right plot edge. */
+#chart12 .vega-embed {position:relative;}
+/* Keep a little separation between the compact full-width facets and the following pair. */
+#chart5 + .micro-notes {display:none;}
+@media (max-width: 740px) {
+  .hero h1 {font-size:clamp(15px,4.02vw,30px);letter-spacing:-0.035em;}
+  .chapter h2 {font-size:clamp(15px,3.35vw,26px);letter-spacing:-0.03em;}
+  .hero .eyebrow {font-size:11px;}
+}

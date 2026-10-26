@@ -1,127 +1,131 @@
 {
-  "description": "Historical reported nature visitors by travel type, 2008-15. Segment measures should not be interpreted as unique people across segments.",
+  "description": "NVS, year ending December 2024. Bidirectional state-pair counts are added so the same corridor is not hidden under an overlapping reverse-direction line. Not nature-specific.",
   "width": 640,
-  "height": 290,
-  "data": {
-    "url": "data/nature_visitors.csv"
+  "height": 390,
+  "projection": {
+    "type": "mercator",
+    "center": [
+      134,
+      -28
+    ],
+    "scale": 540
   },
-  "transform": [
+  "layer": [
     {
-      "fold": [
-        "International",
-        "Domestic_overnight",
-        "Domestic_day"
-      ],
-      "as": [
-        "type",
-        "visitors_m"
-      ]
+      "data": {
+        "url": "https://raw.githubusercontent.com/rowanhogan/australian-states/master/states.geojson",
+        "format": {
+          "type": "json",
+          "property": "features"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#f1f6f3",
+        "stroke": "#c2d3cc",
+        "strokeWidth": 1
+      }
     },
     {
-      "calculate": "datum.type === 'Domestic_day' ? 'Domestic day' : datum.type === 'Domestic_overnight' ? 'Domestic overnight' : 'International'",
-      "as": "visitor_type"
-    },
-    {
-      "stack": "visitors_m",
-      "as": [
-        "y0",
-        "y1"
-      ],
-      "offset": "center",
-      "groupby": [
-        "Year"
-      ],
-      "sort": [
+      "data": {
+        "url": "data/two_way_corridors.csv"
+      },
+      "mark": {
+        "type": "line",
+        "opacity": 0.53,
+        "strokeCap": "round"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "detail": {
+          "field": "corridor",
+          "type": "nominal"
+        },
+        "order": {
+          "field": "point_order",
+          "type": "quantitative"
+        },
+        "strokeWidth": {
+          "field": "two_way_trips_000",
+          "type": "quantitative",
+          "title": "Two-way overnight trips ('000)",
+          "scale": {
+            "type": "sqrt",
+            "range": [
+              1,
+              11
+            ]
+          },
+          "legend": {
+            "orient": "right",
+            "direction": "vertical",
+            "title": "Two-way overnight trips ('000)",
+            "offset": 7,
+            "titleLimit": 120,
+            "labelLimit": 110,
+            "labelFontSize": 13,
+            "titleFontSize": 14,
+            "symbolSize": 90,
+            "fillColor": "#F7FBF9",
+            "strokeColor": "#C7D9D0",
+            "cornerRadius": 7,
+            "padding": 9,
+            "labelColor": "#233F38",
+            "titleColor": "#234D41"
+          }
+        },
+        "color": {
+          "field": "two_way_trips_000",
+          "type": "quantitative",
+          "title": "Trips ('000)",
+          "scale": {
+            "scheme": "orangered"
+          },
+          "legend": null
+        },
+        "tooltip": [
+          {
+            "field": "corridor",
+            "type": "nominal",
+            "title": "Two-way state pair"
+          },
+          {
+            "field": "two_way_trips_000",
+            "type": "quantitative",
+            "title": "Trips ('000)",
+            "format": ",.0f"
+          }
+        ],
+        "opacity": {
+          "condition": {
+            "param": "selectedCorridor",
+            "value": 0.9
+          },
+          "value": 0.12
+        }
+      },
+      "params": [
         {
-          "field": "visitor_type",
-          "order": "ascending"
+          "name": "selectedCorridor",
+          "select": {
+            "type": "point",
+            "fields": [
+              "corridor"
+            ],
+            "on": "click",
+            "clear": "dblclick"
+          }
         }
       ]
     }
   ],
-  "mark": {
-    "type": "area",
-    "opacity": 0.92,
-    "interpolate": "monotone"
-  },
-  "encoding": {
-    "x": {
-      "field": "Year",
-      "type": "ordinal",
-      "title": "Year",
-      "axis": {
-        "labelAngle": 0,
-        "labelFontSize": 13,
-        "titleFontSize": 14
-      }
-    },
-    "y": {
-      "field": "y0",
-      "type": "quantitative",
-      "title": "Centred segment count (millions)"
-    },
-    "y2": {
-      "field": "y1"
-    },
-    "color": {
-      "field": "visitor_type",
-      "type": "nominal",
-      "title": "Nature-visitor type",
-      "scale": {
-        "domain": [
-          "Domestic day",
-          "Domestic overnight",
-          "International"
-        ],
-        "range": [
-          "#16876A",
-          "#6558BB",
-          "#C05697"
-        ]
-      },
-      "legend": {
-        "orient": "right",
-        "direction": "vertical",
-        "title": "Visitor group",
-        "offset": 7,
-        "titleLimit": 120,
-        "labelLimit": 110,
-        "labelFontSize": 13,
-        "titleFontSize": 14,
-        "symbolSize": 90,
-        "fillColor": "#F7FBF9",
-        "strokeColor": "#C7D9D0",
-        "cornerRadius": 7,
-        "padding": 9,
-        "labelColor": "#233F38",
-        "titleColor": "#234D41"
-      }
-    },
-    "tooltip": [
-      {
-        "field": "Year",
-        "type": "ordinal"
-      },
-      {
-        "field": "visitor_type",
-        "type": "nominal",
-        "title": "Segment"
-      },
-      {
-        "field": "visitors_m",
-        "type": "quantitative",
-        "title": "Visitors (million)",
-        "format": ".2f"
-      }
-    ],
-    "opacity": {
-      "condition": {
-        "param": "focusVisitorType",
-        "value": 1
-      },
-      "value": 0.2
-    }
-  },
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "config": {
     "font": "Calibri, Arial, sans-serif",
@@ -159,17 +163,5 @@
       "titleFontSize": 15,
       "labelFont": "Calibri, Arial, sans-serif"
     }
-  },
-  "params": [
-    {
-      "name": "focusVisitorType",
-      "select": {
-        "type": "point",
-        "fields": [
-          "visitor_type"
-        ]
-      },
-      "bind": "legend"
-    }
-  ]
+  }
 }

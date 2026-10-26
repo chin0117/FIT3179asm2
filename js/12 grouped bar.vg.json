@@ -50,20 +50,21 @@
         ]
       },
       "legend": {
-        "orient": "right",
+        "orient": "top-right",
         "direction": "vertical",
-        "offset": 7,
+        "offset": 6,
         "titleLimit": 120,
-        "labelLimit": 110,
-        "labelFontSize": 13,
+        "labelLimit": 90,
+        "labelFontSize": 14,
         "titleFontSize": 14,
-        "symbolSize": 90,
+        "symbolSize": 110,
         "fillColor": "#F7FBF9",
         "strokeColor": "#C7D9D0",
-        "cornerRadius": 7,
-        "padding": 9,
+        "cornerRadius": 9,
+        "padding": 10,
         "labelColor": "#233F38",
-        "titleColor": "#234D41"
+        "titleColor": "#234D41",
+        "title": null
       }
     },
     "tooltip": [

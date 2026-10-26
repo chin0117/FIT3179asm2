@@ -162,5 +162,17 @@
       "fontSize": 15,
       "fontWeight": "bold"
     }
-  }
+  },
+  "params": [
+    {
+      "name": "spendXZoom",
+      "select": {
+        "type": "interval",
+        "encodings": [
+          "x"
+        ]
+      },
+      "bind": "scales"
+    }
+  ]
 }

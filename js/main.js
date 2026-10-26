@@ -2,7 +2,7 @@
  * Uses the original 12 editable Vega-Lite specifications and re-computes only
  * their presentation dimensions; data/encodings remain unchanged.
  */
-const LAYOUT_BUILD = "legends-vertical-20261026-v3";
+const LAYOUT_BUILD = "interactive-legend-lock-20261026-v4";
 const chartFiles = {
   1: "01 choropleth.vg.json",
   2: "02 proportional symbol.vg.json",
@@ -28,12 +28,15 @@ const maximumWidths = {
 const geoCharts = new Set([1, 2, 3]);
 // Native Vega-Lite legends for these charts; other charts use HTML side keys.
 const nativeLegendCharts = new Set([1, 4, 6, 8, 9, 12]);
+// Dashboard card numbers 05, 08, 11, 13 must use horizontal BOTTOM legends.
+const bottomLegendCharts = new Set([4, 9, 8, 12]);
 let resizeTimeout;
 
 function prepareResponsiveSpec(number, original, availableWidth) {
   const spec = JSON.parse(JSON.stringify(original));
   const contentWidth = Math.max(260, Math.floor(availableWidth));
-  const legendOnRight = nativeLegendCharts.has(number) && contentWidth >= 480;
+  const forceBottom = bottomLegendCharts.has(number);
+  const legendOnRight = nativeLegendCharts.has(number) && !forceBottom && contentWidth >= 480;
   spec.config = spec.config || {};
   spec.config.legend = {
     ...(spec.config.legend || {}),
@@ -51,11 +54,16 @@ function prepareResponsiveSpec(number, original, availableWidth) {
     if (!obj || typeof obj !== 'object') return;
     for (const [key, value] of Object.entries(obj)) {
       if (['color', 'size', 'strokeWidth'].includes(key) && value && typeof value === 'object' && value.legend && typeof value.legend === 'object') {
-        value.legend.orient = legendOnRight ? 'right' : 'bottom';
-        value.legend.direction = legendOnRight ? 'vertical' : 'horizontal';
+        value.legend.orient = forceBottom ? 'bottom' : legendOnRight ? 'right' : 'bottom';
+        value.legend.direction = forceBottom ? 'horizontal' : legendOnRight ? 'vertical' : 'horizontal';
         value.legend.titleLimit = legendOnRight ? 105 : 150;
         value.legend.labelLimit = legendOnRight ? 105 : 145;
         value.legend.offset = 7;
+        if (forceBottom) {
+          value.legend.title = null; // Labels themselves explain the categories.
+          value.legend.symbolSize = 90;
+          value.legend.labelLimit = 135;
+        }
         if (value.type === 'quantitative' && key === 'color') {
           value.legend.gradientLength = legendOnRight ? 132 : 190;
           value.legend.gradientThickness = 12;

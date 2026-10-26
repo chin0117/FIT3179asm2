@@ -11,7 +11,7 @@
     {
       "mark": {
         "type": "bar",
-        "color": "#66a89d",
+        "color": "#73589F",
         "cornerRadiusTopLeft": 2,
         "cornerRadiusTopRight": 2
       },
@@ -45,7 +45,7 @@
             "zero": true
           },
           "axis": {
-            "titleColor": "#28695e"
+            "titleColor": "#73589F"
           }
         },
         "tooltip": [
@@ -72,7 +72,7 @@
     {
       "mark": {
         "type": "line",
-        "color": "#b26735",
+        "color": "#C15F79",
         "point": {
           "filled": true,
           "size": 68
@@ -108,7 +108,7 @@
           },
           "axis": {
             "orient": "right",
-            "titleColor": "#b26735"
+            "titleColor": "#C15F79"
           }
         },
         "tooltip": [
@@ -147,5 +147,23 @@
     "view": {
       "stroke": null
     }
-  }
+  },
+  "params": [
+    {
+      "name": "topParks",
+      "value": 10,
+      "bind": {
+        "input": "range",
+        "min": 3,
+        "max": 10,
+        "step": 1,
+        "name": "Show top parks: "
+      }
+    }
+  ],
+  "transform": [
+    {
+      "filter": "datum.rank <= topParks"
+    }
+  ]
 }

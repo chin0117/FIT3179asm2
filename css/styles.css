@@ -306,3 +306,24 @@ html[data-layout-version="two-column-20261026"] .plot .vega-embed {
   }
   .plot-with-side-key.chart-vertical-key .visual-key-note {text-align: center;}
 }
+
+/* 26 Oct: chart 04 Pareto + chart 07 Lorenz keys BELOW the plot. */
+.plot-with-bottom-key {display:flex;flex-direction:column;gap:3px;min-width:0;width:100%;}
+.plot-with-bottom-key > .plot {width:100%;max-width:100%;min-width:0;}
+.plot-with-bottom-key > .visual-key.bottom-key {
+  display:flex;flex-direction:row;flex-wrap:wrap;justify-content:center;align-items:center;
+  gap:8px 18px;width:100%;margin:3px 0 8px;padding:9px 11px;min-width:0;
+}
+.plot-with-bottom-key .bottom-key .line-key-item {
+  display:inline-flex;flex-direction:row;white-space:normal;align-items:center;gap:7px;
+  font:13px/1.3 Calibri,Carlito,Arial,sans-serif;
+}
+.pareto-bar{background:#73589F;} .pareto-line{border-top-color:#C15F79;}
+.lorenz-line.observed{border-top-color:#24628A;}
+.vega-bindings select,.vega-bindings input {font:13px Calibri,Carlito,Arial,sans-serif;}
+.vega-bindings select {padding:4px 7px;border:1px solid #b7cac0;border-radius:6px;background:white;max-width:170px;}
+.vega-bindings input[type=range] {max-width:160px;}
+/* Keep parameter controls below each SVG instead of beside it. */
+.plot { flex-direction: column; align-items: center; }
+.plot > .vega-embed {max-width:100%; margin-inline:auto;}
+.plot .vega-bindings {width:100%; margin-top:8px;}

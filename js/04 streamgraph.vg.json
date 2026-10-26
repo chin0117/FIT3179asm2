@@ -73,10 +73,15 @@
           "International"
         ],
         "range": [
-          "#65b89b",
-          "#236b68",
-          "#e4ad6c"
+          "#008B78",
+          "#6366B3",
+          "#CF8434"
         ]
+      },
+      "legend": {
+        "orient": "bottom",
+        "direction": "horizontal",
+        "title": "Visitor group"
       }
     },
     "tooltip": [

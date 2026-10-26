@@ -206,3 +206,11 @@ html[data-layout-version="two-column-20261026"] .plot .vega-embed {
     grid-column: auto;
   }
 }
+
+/* Direct box-plot explanation directly below its chart. */
+.boxplot-key {justify-content:center;gap:8px 15px;padding:9px 10px;min-height:42px;}
+.boxplot-key-item {display:inline-flex;gap:7px;align-items:center;color:#365a50;white-space:normal;font:13px/1.3 Calibri,Carlito,Arial,sans-serif;}
+.boxplot-key-cap {width:20px;height:0;border-top:2px solid #24454D;position:relative;}
+.boxplot-key-box {width:17px;height:13px;border:1px solid #24454D;background:#7FBDAD;}
+.boxplot-key-median {width:20px;height:0;border-top:4px solid #C66B2B;}
+@media (max-width:800px){.boxplot-key {gap:8px 11px;}.boxplot-key-item{font-size:12px;}}

@@ -41,10 +41,15 @@
           "field": "type",
           "type": "nominal",
           "scale": {
+            "domain": [
+              "Domestic day",
+              "Domestic overnight",
+              "International"
+            ],
             "range": [
-              "#ca8a36",
-              "#2f9281",
-              "#346d93"
+              "#008B78",
+              "#6366B3",
+              "#CF8434"
             ]
           },
           "title": "Segment",
@@ -93,10 +98,15 @@
           "type": "nominal",
           "legend": null,
           "scale": {
+            "domain": [
+              "Domestic day",
+              "Domestic overnight",
+              "International"
+            ],
             "range": [
-              "#ca8a36",
-              "#2f9281",
-              "#346d93"
+              "#008B78",
+              "#6366B3",
+              "#CF8434"
             ]
           }
         },

@@ -1,77 +1,10 @@
 {
-  "description": "Five observations per state, Jun 2025 through Jun 2026. Annual seasonality cannot be inferred from just five quarterly data points.",
-  "title": "Average nights per overnight trip \u00b7 June 2025-June 2026",
+  "description": "Five observations per state, Jun 2025 through Jun 2026. Annual seasonality cannot be inferred from just five quarterly data points. Minimum/maximum labels are shown for each state; the dark median line is within each box. Every box uses 5 quarterly average values, not raw trip durations.",
+  "title": "Average overnight-trip length: minimum, median and maximum",
   "width": 450,
-  "height": 300,
+  "height": 310,
   "data": {
     "url": "data/trip_length.csv"
-  },
-  "mark": {
-    "type": "boxplot",
-    "extent": "min-max",
-    "size": 28,
-    "median": {
-      "color": "#12343b",
-      "strokeWidth": 2
-    },
-    "rule": {
-      "color": "#12343b",
-      "strokeWidth": 1.8
-    },
-    "ticks": {
-      "color": "#12343b",
-      "strokeWidth": 1.8
-    },
-    "box": {
-      "fill": "#80b7c2",
-      "stroke": "#12343b",
-      "strokeWidth": 1.2
-    }
-  },
-  "encoding": {
-    "x": {
-      "field": "state",
-      "type": "nominal",
-      "title": null,
-      "sort": [
-        "NSW",
-        "VIC",
-        "QLD",
-        "WA",
-        "SA",
-        "TAS",
-        "NT",
-        "ACT"
-      ]
-    },
-    "y": {
-      "field": "average_nights",
-      "type": "quantitative",
-      "title": "Average nights per overnight trip",
-      "scale": {
-        "zero": false
-      }
-    },
-    "color": {
-      "field": "state",
-      "type": "nominal",
-      "legend": null,
-      "scale": {
-        "scheme": "tealblues"
-      }
-    },
-    "tooltip": [
-      {
-        "field": "state",
-        "type": "nominal"
-      },
-      {
-        "field": "average_nights",
-        "type": "quantitative",
-        "title": "Average nights / trip",
-        "format": ".2f"
-      }
-    ]
   },
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "config": {
@@ -94,5 +27,566 @@
       "fontSize": 15,
       "fontWeight": "bold"
     }
-  }
+  },
+  "transform": [
+    {
+      "aggregate": [
+        {
+          "op": "min",
+          "field": "average_nights",
+          "as": "minimum"
+        },
+        {
+          "op": "q1",
+          "field": "average_nights",
+          "as": "q1"
+        },
+        {
+          "op": "median",
+          "field": "average_nights",
+          "as": "median"
+        },
+        {
+          "op": "q3",
+          "field": "average_nights",
+          "as": "q3"
+        },
+        {
+          "op": "max",
+          "field": "average_nights",
+          "as": "maximum"
+        }
+      ],
+      "groupby": [
+        "state"
+      ]
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "rule",
+        "color": "#24454D",
+        "strokeWidth": 2
+      },
+      "encoding": {
+        "x": {
+          "field": "state",
+          "type": "nominal",
+          "title": null,
+          "sort": [
+            "NSW",
+            "VIC",
+            "QLD",
+            "WA",
+            "SA",
+            "TAS",
+            "NT",
+            "ACT"
+          ],
+          "axis": {
+            "labelAngle": 0,
+            "labelFontSize": 11,
+            "labelPadding": 7
+          }
+        },
+        "y": {
+          "field": "minimum",
+          "type": "quantitative",
+          "title": "Average nights per overnight trip",
+          "scale": {
+            "zero": false,
+            "domain": [
+              2.4,
+              5.1
+            ]
+          },
+          "axis": {
+            "tickCount": 6
+          }
+        },
+        "tooltip": [
+          {
+            "field": "state",
+            "type": "nominal",
+            "title": "State"
+          },
+          {
+            "field": "minimum",
+            "type": "quantitative",
+            "title": "Minimum nights/trip",
+            "format": ".2f"
+          },
+          {
+            "field": "q1",
+            "type": "quantitative",
+            "title": "First quartile (Q1)",
+            "format": ".2f"
+          },
+          {
+            "field": "median",
+            "type": "quantitative",
+            "title": "Median (Q2)",
+            "format": ".2f"
+          },
+          {
+            "field": "q3",
+            "type": "quantitative",
+            "title": "Third quartile (Q3)",
+            "format": ".2f"
+          },
+          {
+            "field": "maximum",
+            "type": "quantitative",
+            "title": "Maximum nights/trip",
+            "format": ".2f"
+          }
+        ],
+        "y2": {
+          "field": "maximum"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "bar",
+        "size": 29,
+        "color": "#7FBDAD",
+        "stroke": "#24454D",
+        "strokeWidth": 1.25,
+        "opacity": 0.93
+      },
+      "encoding": {
+        "x": {
+          "field": "state",
+          "type": "nominal",
+          "title": null,
+          "sort": [
+            "NSW",
+            "VIC",
+            "QLD",
+            "WA",
+            "SA",
+            "TAS",
+            "NT",
+            "ACT"
+          ],
+          "axis": {
+            "labelAngle": 0,
+            "labelFontSize": 11,
+            "labelPadding": 7
+          }
+        },
+        "y": {
+          "field": "q1",
+          "type": "quantitative",
+          "title": "Average nights per overnight trip",
+          "scale": {
+            "zero": false,
+            "domain": [
+              2.4,
+              5.1
+            ]
+          },
+          "axis": {
+            "tickCount": 6
+          }
+        },
+        "tooltip": [
+          {
+            "field": "state",
+            "type": "nominal",
+            "title": "State"
+          },
+          {
+            "field": "minimum",
+            "type": "quantitative",
+            "title": "Minimum nights/trip",
+            "format": ".2f"
+          },
+          {
+            "field": "q1",
+            "type": "quantitative",
+            "title": "First quartile (Q1)",
+            "format": ".2f"
+          },
+          {
+            "field": "median",
+            "type": "quantitative",
+            "title": "Median (Q2)",
+            "format": ".2f"
+          },
+          {
+            "field": "q3",
+            "type": "quantitative",
+            "title": "Third quartile (Q3)",
+            "format": ".2f"
+          },
+          {
+            "field": "maximum",
+            "type": "quantitative",
+            "title": "Maximum nights/trip",
+            "format": ".2f"
+          }
+        ],
+        "y2": {
+          "field": "q3"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "fold": [
+            "minimum",
+            "maximum"
+          ],
+          "as": [
+            "limit",
+            "value"
+          ]
+        }
+      ],
+      "mark": {
+        "type": "tick",
+        "orient": "horizontal",
+        "size": 29,
+        "thickness": 2.5,
+        "color": "#24454D"
+      },
+      "encoding": {
+        "x": {
+          "field": "state",
+          "type": "nominal",
+          "title": null,
+          "sort": [
+            "NSW",
+            "VIC",
+            "QLD",
+            "WA",
+            "SA",
+            "TAS",
+            "NT",
+            "ACT"
+          ],
+          "axis": {
+            "labelAngle": 0,
+            "labelFontSize": 11,
+            "labelPadding": 7
+          }
+        },
+        "y": {
+          "field": "value",
+          "type": "quantitative",
+          "title": "Average nights per overnight trip",
+          "scale": {
+            "zero": false,
+            "domain": [
+              2.4,
+              5.1
+            ]
+          },
+          "axis": {
+            "tickCount": 6
+          }
+        },
+        "tooltip": [
+          {
+            "field": "state",
+            "type": "nominal",
+            "title": "State"
+          },
+          {
+            "field": "minimum",
+            "type": "quantitative",
+            "title": "Minimum nights/trip",
+            "format": ".2f"
+          },
+          {
+            "field": "q1",
+            "type": "quantitative",
+            "title": "First quartile (Q1)",
+            "format": ".2f"
+          },
+          {
+            "field": "median",
+            "type": "quantitative",
+            "title": "Median (Q2)",
+            "format": ".2f"
+          },
+          {
+            "field": "q3",
+            "type": "quantitative",
+            "title": "Third quartile (Q3)",
+            "format": ".2f"
+          },
+          {
+            "field": "maximum",
+            "type": "quantitative",
+            "title": "Maximum nights/trip",
+            "format": ".2f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "tick",
+        "orient": "horizontal",
+        "size": 34,
+        "thickness": 3.5,
+        "color": "#C66B2B"
+      },
+      "encoding": {
+        "x": {
+          "field": "state",
+          "type": "nominal",
+          "title": null,
+          "sort": [
+            "NSW",
+            "VIC",
+            "QLD",
+            "WA",
+            "SA",
+            "TAS",
+            "NT",
+            "ACT"
+          ],
+          "axis": {
+            "labelAngle": 0,
+            "labelFontSize": 11,
+            "labelPadding": 7
+          }
+        },
+        "y": {
+          "field": "median",
+          "type": "quantitative",
+          "title": "Average nights per overnight trip",
+          "scale": {
+            "zero": false,
+            "domain": [
+              2.4,
+              5.1
+            ]
+          },
+          "axis": {
+            "tickCount": 6
+          }
+        },
+        "tooltip": [
+          {
+            "field": "state",
+            "type": "nominal",
+            "title": "State"
+          },
+          {
+            "field": "minimum",
+            "type": "quantitative",
+            "title": "Minimum nights/trip",
+            "format": ".2f"
+          },
+          {
+            "field": "q1",
+            "type": "quantitative",
+            "title": "First quartile (Q1)",
+            "format": ".2f"
+          },
+          {
+            "field": "median",
+            "type": "quantitative",
+            "title": "Median (Q2)",
+            "format": ".2f"
+          },
+          {
+            "field": "q3",
+            "type": "quantitative",
+            "title": "Third quartile (Q3)",
+            "format": ".2f"
+          },
+          {
+            "field": "maximum",
+            "type": "quantitative",
+            "title": "Maximum nights/trip",
+            "format": ".2f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "dy": 14,
+        "fontSize": 10,
+        "fontWeight": "bold",
+        "color": "#24454D"
+      },
+      "encoding": {
+        "x": {
+          "field": "state",
+          "type": "nominal",
+          "title": null,
+          "sort": [
+            "NSW",
+            "VIC",
+            "QLD",
+            "WA",
+            "SA",
+            "TAS",
+            "NT",
+            "ACT"
+          ],
+          "axis": {
+            "labelAngle": 0,
+            "labelFontSize": 11,
+            "labelPadding": 7
+          }
+        },
+        "y": {
+          "field": "minimum",
+          "type": "quantitative",
+          "title": "Average nights per overnight trip",
+          "scale": {
+            "zero": false,
+            "domain": [
+              2.4,
+              5.1
+            ]
+          },
+          "axis": {
+            "tickCount": 6
+          }
+        },
+        "tooltip": [
+          {
+            "field": "state",
+            "type": "nominal",
+            "title": "State"
+          },
+          {
+            "field": "minimum",
+            "type": "quantitative",
+            "title": "Minimum nights/trip",
+            "format": ".2f"
+          },
+          {
+            "field": "q1",
+            "type": "quantitative",
+            "title": "First quartile (Q1)",
+            "format": ".2f"
+          },
+          {
+            "field": "median",
+            "type": "quantitative",
+            "title": "Median (Q2)",
+            "format": ".2f"
+          },
+          {
+            "field": "q3",
+            "type": "quantitative",
+            "title": "Third quartile (Q3)",
+            "format": ".2f"
+          },
+          {
+            "field": "maximum",
+            "type": "quantitative",
+            "title": "Maximum nights/trip",
+            "format": ".2f"
+          }
+        ],
+        "text": {
+          "field": "minimum",
+          "type": "quantitative",
+          "format": ".2f"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "dy": -12,
+        "fontSize": 10,
+        "fontWeight": "bold",
+        "color": "#24454D"
+      },
+      "encoding": {
+        "x": {
+          "field": "state",
+          "type": "nominal",
+          "title": null,
+          "sort": [
+            "NSW",
+            "VIC",
+            "QLD",
+            "WA",
+            "SA",
+            "TAS",
+            "NT",
+            "ACT"
+          ],
+          "axis": {
+            "labelAngle": 0,
+            "labelFontSize": 11,
+            "labelPadding": 7
+          }
+        },
+        "y": {
+          "field": "maximum",
+          "type": "quantitative",
+          "title": "Average nights per overnight trip",
+          "scale": {
+            "zero": false,
+            "domain": [
+              2.4,
+              5.1
+            ]
+          },
+          "axis": {
+            "tickCount": 6
+          }
+        },
+        "tooltip": [
+          {
+            "field": "state",
+            "type": "nominal",
+            "title": "State"
+          },
+          {
+            "field": "minimum",
+            "type": "quantitative",
+            "title": "Minimum nights/trip",
+            "format": ".2f"
+          },
+          {
+            "field": "q1",
+            "type": "quantitative",
+            "title": "First quartile (Q1)",
+            "format": ".2f"
+          },
+          {
+            "field": "median",
+            "type": "quantitative",
+            "title": "Median (Q2)",
+            "format": ".2f"
+          },
+          {
+            "field": "q3",
+            "type": "quantitative",
+            "title": "Third quartile (Q3)",
+            "format": ".2f"
+          },
+          {
+            "field": "maximum",
+            "type": "quantitative",
+            "title": "Maximum nights/trip",
+            "format": ".2f"
+          }
+        ],
+        "text": {
+          "field": "maximum",
+          "type": "quantitative",
+          "format": ".2f"
+        }
+      }
+    }
+  ]
 }

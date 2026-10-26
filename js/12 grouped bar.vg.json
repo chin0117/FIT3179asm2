@@ -1,6 +1,6 @@
 {
   "description": "All-purpose domestic overnight trips, June quarter 2025 vs June quarter 2026. Holiday travel does not equate to nature-based tourism.",
-  "title": "Main reasons for overnight travel · June 2025 vs June 2026",
+  "title": "Main reasons for overnight travel \u00b7 June 2025 vs June 2026",
   "width": 450,
   "height": 300,
   "data": {
@@ -37,15 +37,15 @@
     "color": {
       "field": "quarter",
       "type": "nominal",
-      "title": "Comparison",
+      "title": "Quarter",
       "scale": {
         "domain": [
           "Q2 2025",
           "Q2 2026"
         ],
         "range": [
-          "#9ab0a8",
-          "#298878"
+          "#2f7f95",
+          "#d08c3f"
         ]
       },
       "legend": {

@@ -55,10 +55,7 @@
     "color": {
       "field": "state",
       "type": "nominal",
-      "legend": {
-        "orient": "bottom",
-        "direction": "horizontal"
-      },
+      "legend": null,
       "scale": {
         "scheme": "tealblues"
       }

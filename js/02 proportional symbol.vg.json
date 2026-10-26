@@ -72,8 +72,8 @@
             "scheme": "goldgreen"
           },
           "legend": {
-            "orient": "bottom",
-            "direction": "horizontal",
+            "orient": "top-right",
+            "direction": "vertical",
             "title": "Park visits (millions)"
           }
         },

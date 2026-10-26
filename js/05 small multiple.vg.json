@@ -1,6 +1,6 @@
 {
   "description": "All-purpose domestic overnight trips, five quarters (Jun 2025-Jun 2026), DoTS. Small multiples count as ONE idiom.",
-  "title": "Quarterly overnight trips by state · June 2025-June 2026",
+  "title": "Overnight trips by state · 2025-2026",
   "data": {
     "url": "data/overnight_trips_quarterly.csv"
   },
@@ -51,7 +51,8 @@
         "title": null,
         "axis": {
           "labelAngle": -35,
-          "labelFontSize": 9
+          "labelFontSize": 13,
+          "titleFontSize": 14
         }
       },
       "y": {
@@ -63,7 +64,8 @@
         },
         "axis": {
           "title": null,
-          "labelFontSize": 9
+          "labelFontSize": 13,
+          "titleFontSize": 14
         }
       },
       "tooltip": [
@@ -99,19 +101,35 @@
       "labelColor": "#334155",
       "titleColor": "#334155",
       "gridColor": "#ecf2f0",
-      "domainColor": "#bac9c5"
+      "domainColor": "#bac9c5",
+      "labelFontSize": 13,
+      "titleFontSize": 14,
+      "labelFont": "Calibri, Arial, sans-serif",
+      "titleFont": "Calibri, Arial, sans-serif"
     },
     "legend": {
-      "labelColor": "#334155",
-      "titleColor": "#334155"
+      "labelColor": "#233F38",
+      "titleColor": "#234D41",
+      "fillColor": "#F7FBF9",
+      "strokeColor": "#C7D9D0",
+      "cornerRadius": 7,
+      "padding": 9,
+      "labelFontSize": 13,
+      "titleFontSize": 14
     },
     "facet": {
       "spacing": 10
     },
     "title": {
       "font": "Times New Roman, Times, serif",
-      "fontSize": 15,
-      "fontWeight": "bold"
+      "fontSize": 19,
+      "fontWeight": "normal",
+      "anchor": "middle"
+    },
+    "header": {
+      "labelFontSize": 15,
+      "titleFontSize": 15,
+      "labelFont": "Calibri, Arial, sans-serif"
     }
   },
   "columns": 4

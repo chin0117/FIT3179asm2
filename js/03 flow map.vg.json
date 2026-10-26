@@ -1,6 +1,6 @@
 {
   "description": "NVS, year ending December 2024. Bidirectional state-pair counts are added so the same corridor is not hidden under an overlapping reverse-direction line. Not nature-specific.",
-  "title": "Overnight travel between state pairs · year ending Dec 2024",
+  "title": "Interstate overnight travel · 2024",
   "width": 640,
   "height": 390,
   "projection": {
@@ -71,9 +71,15 @@
             "offset": 7,
             "titleLimit": 120,
             "labelLimit": 110,
-            "labelFontSize": 11,
-            "titleFontSize": 11,
-            "symbolSize": 90
+            "labelFontSize": 13,
+            "titleFontSize": 14,
+            "symbolSize": 90,
+            "fillColor": "#F7FBF9",
+            "strokeColor": "#C7D9D0",
+            "cornerRadius": 7,
+            "padding": 9,
+            "labelColor": "#233F38",
+            "titleColor": "#234D41"
           }
         },
         "color": {
@@ -131,16 +137,32 @@
       "labelColor": "#334155",
       "titleColor": "#334155",
       "gridColor": "#ecf2f0",
-      "domainColor": "#bac9c5"
+      "domainColor": "#bac9c5",
+      "labelFontSize": 13,
+      "titleFontSize": 14,
+      "labelFont": "Calibri, Arial, sans-serif",
+      "titleFont": "Calibri, Arial, sans-serif"
     },
     "legend": {
-      "labelColor": "#334155",
-      "titleColor": "#334155"
+      "labelColor": "#233F38",
+      "titleColor": "#234D41",
+      "fillColor": "#F7FBF9",
+      "strokeColor": "#C7D9D0",
+      "cornerRadius": 7,
+      "padding": 9,
+      "labelFontSize": 13,
+      "titleFontSize": 14
     },
     "title": {
       "font": "Times New Roman, Times, serif",
-      "fontSize": 15,
-      "fontWeight": "bold"
+      "fontSize": 19,
+      "fontWeight": "normal",
+      "anchor": "middle"
+    },
+    "header": {
+      "labelFontSize": 15,
+      "titleFontSize": 15,
+      "labelFont": "Calibri, Arial, sans-serif"
     }
   }
 }

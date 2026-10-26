@@ -1,6 +1,6 @@
 {
   "description": "Five observations per state, Jun 2025 through Jun 2026. Annual seasonality cannot be inferred from just five quarterly data points. Minimum/maximum labels are shown for each state; the dark median line is within each box. Every box uses 5 quarterly average values, not raw trip durations.",
-  "title": "Average overnight-trip length: minimum, median and maximum",
+  "title": "Overnight trip length by state",
   "width": 450,
   "height": 310,
   "data": {
@@ -16,16 +16,32 @@
       "labelColor": "#334155",
       "titleColor": "#334155",
       "gridColor": "#ecf2f0",
-      "domainColor": "#bac9c5"
+      "domainColor": "#bac9c5",
+      "labelFontSize": 13,
+      "titleFontSize": 14,
+      "labelFont": "Calibri, Arial, sans-serif",
+      "titleFont": "Calibri, Arial, sans-serif"
     },
     "legend": {
-      "labelColor": "#334155",
-      "titleColor": "#334155"
+      "labelColor": "#233F38",
+      "titleColor": "#234D41",
+      "fillColor": "#F7FBF9",
+      "strokeColor": "#C7D9D0",
+      "cornerRadius": 7,
+      "padding": 9,
+      "labelFontSize": 13,
+      "titleFontSize": 14
     },
     "title": {
       "font": "Times New Roman, Times, serif",
-      "fontSize": 15,
-      "fontWeight": "bold"
+      "fontSize": 19,
+      "fontWeight": "normal",
+      "anchor": "middle"
+    },
+    "header": {
+      "labelFontSize": 15,
+      "titleFontSize": 15,
+      "labelFont": "Calibri, Arial, sans-serif"
     }
   },
   "transform": [
@@ -86,8 +102,9 @@
           ],
           "axis": {
             "labelAngle": 0,
-            "labelFontSize": 11,
-            "labelPadding": 7
+            "labelFontSize": 13,
+            "labelPadding": 7,
+            "titleFontSize": 14
           }
         },
         "y": {
@@ -102,7 +119,9 @@
             ]
           },
           "axis": {
-            "tickCount": 6
+            "tickCount": 6,
+            "labelFontSize": 13,
+            "titleFontSize": 14
           }
         },
         "tooltip": [
@@ -180,8 +199,9 @@
           ],
           "axis": {
             "labelAngle": 0,
-            "labelFontSize": 11,
-            "labelPadding": 7
+            "labelFontSize": 13,
+            "labelPadding": 7,
+            "titleFontSize": 14
           }
         },
         "y": {
@@ -196,7 +216,9 @@
             ]
           },
           "axis": {
-            "tickCount": 6
+            "tickCount": 6,
+            "labelFontSize": 13,
+            "titleFontSize": 14
           }
         },
         "tooltip": [
@@ -285,8 +307,9 @@
           ],
           "axis": {
             "labelAngle": 0,
-            "labelFontSize": 11,
-            "labelPadding": 7
+            "labelFontSize": 13,
+            "labelPadding": 7,
+            "titleFontSize": 14
           }
         },
         "y": {
@@ -301,7 +324,9 @@
             ]
           },
           "axis": {
-            "tickCount": 6
+            "tickCount": 6,
+            "labelFontSize": 13,
+            "titleFontSize": 14
           }
         },
         "tooltip": [
@@ -375,8 +400,9 @@
           ],
           "axis": {
             "labelAngle": 0,
-            "labelFontSize": 11,
-            "labelPadding": 7
+            "labelFontSize": 13,
+            "labelPadding": 7,
+            "titleFontSize": 14
           }
         },
         "y": {
@@ -391,7 +417,9 @@
             ]
           },
           "axis": {
-            "tickCount": 6
+            "tickCount": 6,
+            "labelFontSize": 13,
+            "titleFontSize": 14
           }
         },
         "tooltip": [
@@ -465,8 +493,9 @@
           ],
           "axis": {
             "labelAngle": 0,
-            "labelFontSize": 11,
-            "labelPadding": 7
+            "labelFontSize": 13,
+            "labelPadding": 7,
+            "titleFontSize": 14
           }
         },
         "y": {
@@ -481,7 +510,9 @@
             ]
           },
           "axis": {
-            "tickCount": 6
+            "tickCount": 6,
+            "labelFontSize": 13,
+            "titleFontSize": 14
           }
         },
         "tooltip": [
@@ -560,8 +591,9 @@
           ],
           "axis": {
             "labelAngle": 0,
-            "labelFontSize": 11,
-            "labelPadding": 7
+            "labelFontSize": 13,
+            "labelPadding": 7,
+            "titleFontSize": 14
           }
         },
         "y": {
@@ -576,7 +608,9 @@
             ]
           },
           "axis": {
-            "tickCount": 6
+            "tickCount": 6,
+            "labelFontSize": 13,
+            "titleFontSize": 14
           }
         },
         "tooltip": [

@@ -327,3 +327,57 @@ html[data-layout-version="two-column-20261026"] .plot .vega-embed {
 .plot { flex-direction: column; align-items: center; }
 .plot > .vega-embed {max-width:100%; margin-inline:auto;}
 .plot .vega-bindings {width:100%; margin-top:8px;}
+
+
+/* Final typography & framed legends · 2026-10-26 */
+.panel-top { padding-bottom: 9px; }
+.panel .card-title {
+  max-width: none;
+  font-family: var(--heading);
+  font-size: clamp(18px, 1.62vw, 23px);
+  font-weight: 400;
+  line-height: 1.25;
+  white-space: nowrap;
+  letter-spacing: -0.025em;
+}
+.micro-notes {
+  font-family: var(--body);
+  font-size: 18px;
+  line-height: 1.46;
+  color: #284F43;
+  padding: 12px 14px;
+}
+.micro-notes .short-line {max-width: none; margin: 0 0 5px;}
+.micro-notes .short-line:last-child {margin-bottom:0;}
+.visual-key, .visual-key.bottom-key, .visual-key.side-key {
+  background: #F7FBF9;
+  border: 1.5px solid #C7D9D0;
+  border-radius: 9px;
+  padding: 11px 12px;
+}
+.visual-key, .visual-key .line-key-item,
+.visual-key .symbol-key-item, .visual-key .boxplot-key-item,
+.plot-with-bottom-key .bottom-key .line-key-item {
+  font-family: var(--body);
+  font-size: 14px;
+  line-height: 1.4;
+}
+.visual-key-title {font-size: 15px;}
+.visual-key-note {font-size: 14px;}
+.plot-with-side-key.chart-vertical-key .symbol-key-item,
+.plot-with-side-key.chart-vertical-key .line-key-item {
+  font-size: 14px;
+}
+.plot-with-side-key.chart-vertical-key .visual-key-note {font-size: 13px;}
+.vega-bindings, .vega-bindings select, .vega-bindings input {font-size: 15px;}
+/* Keep single-line headlines at paired laptop widths without clipping. */
+@media (max-width: 1100px) {
+  .panel .card-title {font-size: clamp(16px,1.64vw,19px);letter-spacing:-0.04em;}
+}
+@media (max-width: 790px) {
+  .panel .card-title {font-size: clamp(17px, 4.2vw, 23px);}
+}
+@media (max-width: 470px) {
+  .panel .card-title {font-size: 16px;letter-spacing:-0.04em;}
+  .micro-notes {font-size: 16px;}
+}

@@ -1,6 +1,6 @@
 {
   "description": "All-purpose domestic overnight trips, June quarter 2025 vs June quarter 2026. Holiday travel does not equate to nature-based tourism.",
-  "title": "Main reasons for overnight travel · June 2025 vs June 2026",
+  "title": "Overnight trips by purpose · 2025-2026",
   "width": 450,
   "height": 300,
   "data": {
@@ -22,7 +22,9 @@
         "Other"
       ],
       "axis": {
-        "labelAngle": 0
+        "labelAngle": 0,
+        "labelFontSize": 13,
+        "titleFontSize": 14
       }
     },
     "xOffset": {
@@ -54,9 +56,15 @@
         "offset": 7,
         "titleLimit": 120,
         "labelLimit": 110,
-        "labelFontSize": 11,
-        "titleFontSize": 11,
-        "symbolSize": 90
+        "labelFontSize": 13,
+        "titleFontSize": 14,
+        "symbolSize": 90,
+        "fillColor": "#F7FBF9",
+        "strokeColor": "#C7D9D0",
+        "cornerRadius": 7,
+        "padding": 9,
+        "labelColor": "#233F38",
+        "titleColor": "#234D41"
       }
     },
     "tooltip": [
@@ -93,16 +101,32 @@
       "labelColor": "#334155",
       "titleColor": "#334155",
       "gridColor": "#ecf2f0",
-      "domainColor": "#bac9c5"
+      "domainColor": "#bac9c5",
+      "labelFontSize": 13,
+      "titleFontSize": 14,
+      "labelFont": "Calibri, Arial, sans-serif",
+      "titleFont": "Calibri, Arial, sans-serif"
     },
     "legend": {
-      "labelColor": "#334155",
-      "titleColor": "#334155"
+      "labelColor": "#233F38",
+      "titleColor": "#234D41",
+      "fillColor": "#F7FBF9",
+      "strokeColor": "#C7D9D0",
+      "cornerRadius": 7,
+      "padding": 9,
+      "labelFontSize": 13,
+      "titleFontSize": 14
     },
     "title": {
       "font": "Times New Roman, Times, serif",
-      "fontSize": 15,
-      "fontWeight": "bold"
+      "fontSize": 19,
+      "fontWeight": "normal",
+      "anchor": "middle"
+    },
+    "header": {
+      "labelFontSize": 15,
+      "titleFontSize": 15,
+      "labelFont": "Calibri, Arial, sans-serif"
     }
   },
   "params": [

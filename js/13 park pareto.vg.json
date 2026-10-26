@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "Advanced Pareto combination chart. Top-ten NSW park visits in FY2024-25, cumulative share derived solely from included park counts.",
-  "title": "The leading three parks account for 54.7% of these visits",
+  "title": "NSW park visit concentration · 2024-25",
   "width": 900,
   "height": 285,
   "data": {
@@ -34,7 +34,9 @@
           ],
           "axis": {
             "labelAngle": -30,
-            "labelLimit": 130
+            "labelLimit": 130,
+            "labelFontSize": 13,
+            "titleFontSize": 14
           }
         },
         "y": {
@@ -45,7 +47,9 @@
             "zero": true
           },
           "axis": {
-            "titleColor": "#73589F"
+            "titleColor": "#73589F",
+            "labelFontSize": 13,
+            "titleFontSize": 14
           }
         },
         "tooltip": [
@@ -108,7 +112,9 @@
           },
           "axis": {
             "orient": "right",
-            "titleColor": "#C15F79"
+            "titleColor": "#C15F79",
+            "labelFontSize": 13,
+            "titleFontSize": 14
           }
         },
         "tooltip": [
@@ -136,16 +142,34 @@
     "font": "Calibri, Arial, sans-serif",
     "title": {
       "font": "Times New Roman, Times, serif",
-      "fontSize": 15,
-      "fontWeight": "bold"
+      "fontSize": 19,
+      "fontWeight": "normal",
+      "anchor": "middle"
     },
     "axis": {
-      "labelFontSize": 11,
-      "titleFontSize": 12,
-      "gridColor": "#edf2ee"
+      "labelFontSize": 13,
+      "titleFontSize": 14,
+      "gridColor": "#edf2ee",
+      "labelFont": "Calibri, Arial, sans-serif",
+      "titleFont": "Calibri, Arial, sans-serif"
     },
     "view": {
       "stroke": null
+    },
+    "header": {
+      "labelFontSize": 15,
+      "titleFontSize": 15,
+      "labelFont": "Calibri, Arial, sans-serif"
+    },
+    "legend": {
+      "fillColor": "#F7FBF9",
+      "strokeColor": "#C7D9D0",
+      "cornerRadius": 7,
+      "padding": 9,
+      "labelFontSize": 13,
+      "titleFontSize": 14,
+      "labelColor": "#233F38",
+      "titleColor": "#234D41"
     }
   },
   "params": [

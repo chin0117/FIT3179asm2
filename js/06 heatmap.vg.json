@@ -1,6 +1,6 @@
 {
   "description": "Relative domestic visitor nights; each cell / the state mean of the 5 available quarters. This is a short-term quarter profile, NOT multi-year evidence of seasonality. Seven discrete ordered colour bands and numeric cell labels improve mid-range discrimination.",
-  "title": "Visitor nights indexed to each state's five-quarter average",
+  "title": "Visitor nights index · 2025-2026",
   "width": 460,
   "height": 255,
   "data": {
@@ -37,7 +37,9 @@
       ],
       "title": "Quarter",
       "axis": {
-        "labelAngle": 0
+        "labelAngle": 0,
+        "labelFontSize": 13,
+        "titleFontSize": 14
       }
     },
     "y": {
@@ -88,16 +90,32 @@
       "labelColor": "#334155",
       "titleColor": "#334155",
       "gridColor": "#ecf2f0",
-      "domainColor": "#bac9c5"
+      "domainColor": "#bac9c5",
+      "labelFontSize": 13,
+      "titleFontSize": 14,
+      "labelFont": "Calibri, Arial, sans-serif",
+      "titleFont": "Calibri, Arial, sans-serif"
     },
     "legend": {
-      "labelColor": "#334155",
-      "titleColor": "#334155"
+      "labelColor": "#233F38",
+      "titleColor": "#234D41",
+      "fillColor": "#F7FBF9",
+      "strokeColor": "#C7D9D0",
+      "cornerRadius": 7,
+      "padding": 9,
+      "labelFontSize": 13,
+      "titleFontSize": 14
     },
     "title": {
       "font": "Times New Roman, Times, serif",
-      "fontSize": 15,
-      "fontWeight": "bold"
+      "fontSize": 19,
+      "fontWeight": "normal",
+      "anchor": "middle"
+    },
+    "header": {
+      "labelFontSize": 15,
+      "titleFontSize": 15,
+      "labelFont": "Calibri, Arial, sans-serif"
     }
   },
   "params": [
@@ -167,12 +185,18 @@
             "titleLimit": 120,
             "offset": 7,
             "labelLimit": 110,
-            "labelFontSize": 11,
-            "titleFontSize": 11,
+            "labelFontSize": 13,
+            "titleFontSize": 14,
             "gradientLength": 158,
             "gradientThickness": 15,
             "title": "Index / state average",
-            "format": ".2f"
+            "format": ".2f",
+            "fillColor": "#F7FBF9",
+            "strokeColor": "#C7D9D0",
+            "cornerRadius": 7,
+            "padding": 9,
+            "labelColor": "#233F38",
+            "titleColor": "#234D41"
           }
         },
         "opacity": {

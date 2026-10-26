@@ -2,7 +2,7 @@
  * Uses the original 12 editable Vega-Lite specifications and re-computes only
  * their presentation dimensions; data/encodings remain unchanged.
  */
-const LAYOUT_BUILD = "interactive-legend-lock-20261026-v4";
+const LAYOUT_BUILD = "typography-frame-20261026-v6";
 const chartFiles = {
   1: "01 choropleth.vg.json",
   2: "02 proportional symbol.vg.json",
@@ -42,13 +42,30 @@ function prepareResponsiveSpec(number, original, availableWidth) {
     ...(spec.config.legend || {}),
     labelFont: 'Calibri, Arial, sans-serif',
     titleFont: 'Times New Roman, Times, serif',
-    labelFontSize: 11,
-    titleFontSize: 11,
+    labelFontSize: 13,
+    titleFontSize: 14,
     titleLimit: legendOnRight ? 110 : 155,
     labelLimit: legendOnRight ? 110 : 145,
-    offset: 8
+    offset: 8,
+    fillColor: '#F7FBF9',
+    strokeColor: '#C7D9D0',
+    cornerRadius: 7,
+    padding: 9
   };
-  // Move native colour/size legends beside their marks when width permits.
+  spec.config.axis = {...(spec.config.axis || {}), labelFontSize:13, titleFontSize:14};
+  spec.config.header = {...(spec.config.header || {}), labelFontSize:15, titleFontSize:15};
+  // Override chart-local tiny axis labels for consistency.
+  function enlargeAxes(obj) {
+    if (!obj || typeof obj !== 'object') return;
+    for (const [k,v] of Object.entries(obj)) {
+      if (k === 'axis' && v && typeof v === 'object') {
+        v.labelFontSize = 13;
+        v.titleFontSize = 14;
+      } else if (!['data','tooltip','config'].includes(k)) enlargeAxes(v);
+    }
+  }
+  enlargeAxes(spec);
+    // Move native colour/size legends beside their marks when width permits.
   // Never create duplicate legends for maps that already have HTML side keys.
   function positionLegends(obj) {
     if (!obj || typeof obj !== 'object') return;
@@ -58,7 +75,13 @@ function prepareResponsiveSpec(number, original, availableWidth) {
         value.legend.direction = forceBottom ? 'horizontal' : legendOnRight ? 'vertical' : 'horizontal';
         value.legend.titleLimit = legendOnRight ? 105 : 150;
         value.legend.labelLimit = legendOnRight ? 105 : 145;
-        value.legend.offset = 7;
+        value.legend.offset = 8;
+        value.legend.fillColor = '#F7FBF9';
+        value.legend.strokeColor = '#C7D9D0';
+        value.legend.cornerRadius = 7;
+        value.legend.padding = 9;
+        value.legend.labelFontSize = 13;
+        value.legend.titleFontSize = 14;
         if (forceBottom) {
           value.legend.title = null; // Labels themselves explain the categories.
           value.legend.symbolSize = 90;
@@ -90,12 +113,12 @@ function prepareResponsiveSpec(number, original, availableWidth) {
     spec.columns = columns;
     spec.spec.width = innerWidth;
     spec.spec.height = columns === 4 ? 154 : columns === 2 ? 145 : 120;
-    spec.spec.encoding.x.axis.labelFontSize = columns === 4 ? 10 : 9;
-    spec.spec.encoding.y.axis.labelFontSize = columns === 4 ? 10 : 9;
+    spec.spec.encoding.x.axis.labelFontSize = columns === 4 ? 12 : 12;
+    spec.spec.encoding.y.axis.labelFontSize = columns === 4 ? 12 : 12;
     spec.config = spec.config || {};
     spec.config.facet = {...(spec.config.facet || {}), spacing: 14};
     spec.config.font = 'Calibri, Arial, sans-serif';
-    spec.config.title = {...(spec.config.title || {}), font: 'Times New Roman, Times, serif', fontSize: 15};
+    spec.config.title = {...(spec.config.title || {}), font: 'Times New Roman, Times, serif', fontSize: 19, fontWeight:'normal', anchor:'middle'};
     return spec;
   }
 
@@ -132,7 +155,7 @@ function prepareResponsiveSpec(number, original, availableWidth) {
   // Use serif titles and Calibri axis/legend labels consistently.
   spec.config = spec.config || {};
   spec.config.font = 'Calibri, Arial, sans-serif';
-  spec.config.title = {...(spec.config.title || {}), font: 'Times New Roman, Times, serif', fontSize: 15};
+  spec.config.title = {...(spec.config.title || {}), font: 'Times New Roman, Times, serif', fontSize: 19, fontWeight:'normal', anchor:'middle'};
   return spec;
 }
 
@@ -145,10 +168,14 @@ async function renderChart(number) {
   lastSizes.set(number, width);
   const spec = prepareResponsiveSpec(number, base, width);
   if ([1,2,3,13].includes(number)) spec.title = null;
+  if (spec.title) {
+    spec.config.title = {...(spec.config.title || {}), fontSize: width < 410 ? 17 : 19,
+                         fontWeight: 'normal', anchor: 'middle'};
+  }
   if (number === 13 && spec.layer?.[0]?.encoding?.x?.axis) {
     spec.layer[0].encoding.x.axis.labelAngle = -48;
-    spec.layer[0].encoding.x.axis.labelFontSize = 9;
-    spec.layer[0].encoding.x.axis.labelLimit = 68;
+    spec.layer[0].encoding.x.axis.labelFontSize = 12;
+    spec.layer[0].encoding.x.axis.labelLimit = 90;
   }
   if (number === 2) {
     // Custom park-colour/size key sits beside this chart in the HTML.

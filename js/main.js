@@ -2,7 +2,7 @@
  * Uses the original 12 editable Vega-Lite specifications and re-computes only
  * their presentation dimensions; data/encodings remain unchanged.
  */
-const LAYOUT_BUILD = "20261026-slope-conclusion-v11";
+const LAYOUT_BUILD = "20261026-annotation-labels-visible-v12";
 const chartFiles = {
   1: "01 choropleth.vg.json",
   2: "02 proportional symbol.vg.json",

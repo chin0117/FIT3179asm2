@@ -567,3 +567,7 @@ footer .last-modified {font-weight:400;color:#526C63;}
   .chapter-conclusion {padding: 18px;}
   .conclusion-lines {font-size: 16px;}
 }
+
+/* Chapter titles now use the CHAPTER N / Topic format as the main heading. */
+.chapter h2 { font-weight: 400; max-width: none; white-space: nowrap; font-size: clamp(16px, 2.5vw, 35px); letter-spacing: -0.018em; }
+@media (max-width: 740px) { .chapter h2 { font-size: clamp(15px, 3.55vw, 23px); } }

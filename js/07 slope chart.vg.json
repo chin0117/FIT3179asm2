@@ -1,5 +1,5 @@
 {
-  "description": "Nature visitor segments in 2008 and 2015. End labels show increases in millions, calculated from the dataset; legend identifies the visitor categories.",
+  "description": "Nature visitor segments in 2008 and 2015. End labels show increases in millions, calculated from the dataset; legend identifies the visitor categories. Annotation labels are precomputed from the supplied endpoint CSV for reliable rendering.",
   "width": 440,
   "height": 300,
   "data": {
@@ -94,76 +94,60 @@
       }
     },
     {
-      "transform": [
-        {
-          "joinaggregate": [
-            {
-              "op": "min",
-              "field": "visitors_m",
-              "as": "segment_min"
-            },
-            {
-              "op": "max",
-              "field": "visitors_m",
-              "as": "segment_max"
-            }
-          ],
-          "groupby": [
-            "type"
-          ]
-        },
-        {
-          "filter": "datum.year == 2015"
-        },
-        {
-          "calculate": "'+' + format(datum.segment_max - datum.segment_min, '.2f') + 'm'",
-          "as": "visitor_increase"
-        },
-        {
-          "calculate": "datum.visitors_m + (datum.type === 'Domestic day' ? 0.55 : datum.type === 'Domestic overnight' ? -0.55 : 0.15)",
-          "as": "annotation_y"
-        }
-      ],
+      "data": {
+        "values": [
+          {
+            "type": "Domestic day",
+            "year": 2015,
+            "label_y": 19.54,
+            "change": "+6.21m",
+            "value_2015": 19.02
+          },
+          {
+            "type": "Domestic overnight",
+            "year": 2015,
+            "label_y": 17.59,
+            "change": "+5.06m",
+            "value_2015": 18.14
+          },
+          {
+            "type": "International",
+            "year": 2015,
+            "label_y": 4.47,
+            "change": "+1.07m",
+            "value_2015": 4.47
+          }
+        ]
+      },
       "mark": {
         "type": "text",
-        "dx": 12,
         "align": "left",
-        "fontWeight": "bold",
-        "fontSize": 13
+        "baseline": "middle",
+        "dx": 12,
+        "fontSize": 14,
+        "fontWeight": "bold"
       },
       "encoding": {
         "x": {
           "field": "year",
           "type": "ordinal",
           "sort": [
-            "2008",
-            "2015"
+            2008,
+            2015
           ]
         },
         "y": {
-          "field": "annotation_y",
+          "field": "label_y",
           "type": "quantitative"
         },
         "text": {
-          "field": "visitor_increase",
+          "field": "change",
           "type": "nominal"
         },
         "color": {
           "field": "type",
           "type": "nominal",
-          "legend": null,
-          "scale": {
-            "domain": [
-              "Domestic day",
-              "Domestic overnight",
-              "International"
-            ],
-            "range": [
-              "#1f9d7a",
-              "#6b5fc6",
-              "#c75aa1"
-            ]
-          }
+          "legend": null
         },
         "tooltip": [
           {
@@ -172,12 +156,12 @@
             "title": "Visitor group"
           },
           {
-            "field": "visitor_increase",
+            "field": "change",
             "type": "nominal",
-            "title": "Increase, 2008\u20132015"
+            "title": "Increase, 2008-2015"
           },
           {
-            "field": "visitors_m",
+            "field": "value_2015",
             "type": "quantitative",
             "title": "2015 visitors (millions)",
             "format": ".2f"

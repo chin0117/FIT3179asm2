@@ -765,3 +765,11 @@ footer .last-modified {font-weight:400;color:#526C63;}
 @media (max-width: 375px) {
   .plot-with-side-key.chart-vertical-key.chart3-key-layout { grid-template-columns: 1fr; }
 }
+
+/* 27 October 2026 - match chapter and conclusion narrative text to chart insights. */
+.chapter-summary-text p,
+.conclusion-summary-text p {
+  font-family: var(--body);
+  font-size: 18px;
+  line-height: 1.46;
+}

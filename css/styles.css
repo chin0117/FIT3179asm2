@@ -640,3 +640,82 @@ footer .last-modified {font-weight:400;color:#526C63;}
   .chapter > h2 {white-space:normal;font-size:clamp(23px,5vw,29px);}
   .story-transition-compact .transition-copy {flex-basis:100%;}
 }
+
+
+/* 27 October 2026: short chapter narrative on the left; two measured KPIs on right. */
+.chapter-summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  align-items: stretch;
+  gap: 16px;
+  margin: 16px 0 0;
+  padding: 13px 15px;
+  background: #e9f2ed;
+  border: 1px solid #d7e8dd;
+  border-left: 3px solid #478e78;
+  border-radius: 0 11px 11px 0;
+  min-width: 0;
+}
+.chapter-summary-text {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  min-width: 0;
+  justify-content: center;
+  padding: 3px 5px;
+}
+.chapter-summary-eyebrow {
+  font: 700 12px/1.35 var(--body);
+  letter-spacing: .06em;
+  color: #2c6857;
+}
+.chapter-summary-text p {
+  font: 16px/1.43 var(--body);
+  color: #365a4d;
+  max-width: 50ch;
+}
+.chapter-kpis {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 11px;
+  min-width: 0;
+}
+.chapter-kpi {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 4px;
+  min-width: 0;
+  padding: 11px 13px;
+  background: #fff;
+  border: 1px solid #d8e6df;
+  border-radius: 9px;
+}
+.chapter-kpi-value {
+  font: 700 clamp(23px,2.3vw,32px)/1.08 var(--heading);
+  color: #226c5b;
+  white-space: nowrap;
+}
+.chapter-kpi-name {
+  font: 700 14px/1.25 var(--body);
+  color: #284f43;
+}
+.chapter-kpi-context {
+  font: 12px/1.3 var(--body);
+  color: #647a70;
+}
+/* Maintain the requested left/right composition on ordinary laptops. */
+@media (max-width: 900px) {
+  .chapter-summary { grid-template-columns: 1fr; gap: 10px; }
+  .chapter-summary-text { padding: 1px 2px; }
+  .chapter-summary-text p { max-width: none; }
+}
+@media (max-width: 490px) {
+  .chapter-summary { padding: 12px; }
+  .chapter-kpis { gap: 7px; }
+  .chapter-kpi { padding: 10px; }
+  .chapter-kpi-value { font-size: 24px; }
+  .chapter-kpi-name { font-size: 13px; }
+  .chapter-kpi-context { font-size: 11px; }
+}

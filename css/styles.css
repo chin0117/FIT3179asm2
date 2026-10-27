@@ -589,3 +589,54 @@ footer .last-modified {font-weight:400;color:#526C63;}
 }
 /* Keep the chapter kicker visible when navigating via the sticky chapter nav. */
 .chapter { scroll-margin-top: 94px; }
+
+
+/* 27 October: one-line chapter question headings on laptop and desktop. */
+.chapter > h2 {
+  display:block;
+  width:100%;
+  max-width:none;
+  white-space:nowrap;
+  font-size:clamp(24px, 2.65vw, 40px);
+  letter-spacing:-0.025em;
+  line-height:1.15;
+  margin:0 0 14px;
+}
+/* Compact chapter-to-chapter summary strips rather than tall text callouts. */
+.story-transition.story-transition-compact {
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:6px 18px;
+  margin:12px 0 0;
+  padding:11px 16px;
+  min-width:0;
+  background:#E8F1ED;
+  border-left:3px solid #478E78;
+  border-radius:0 8px 8px 0;
+  font:16px/1.4 var(--body);
+  color:#365A4D;
+}
+.story-transition-compact .transition-label {
+  font:700 12px/1.4 var(--body);
+  letter-spacing:.045em;
+  color:#236450;
+  white-space:nowrap;
+}
+.story-transition-compact .transition-copy {
+  display:inline;
+  flex:1 1 330px;
+  min-width:0;
+  line-height:1.4;
+}
+.chapter + .chapter {padding-top:34px;}
+@media (max-width:790px) {
+  .chapter > h2 {font-size:clamp(19px,3.0vw,27px);letter-spacing:-.035em;}
+  .story-transition.story-transition-compact {padding:10px 13px;gap:4px 10px;font-size:15px;}
+}
+@media (max-width:640px) {
+  /* Let long questions wrap on very narrow phones instead of clipping. */
+  .chapter > h2 {white-space:normal;font-size:clamp(23px,5vw,29px);}
+  .story-transition-compact .transition-copy {flex-basis:100%;}
+}

@@ -870,3 +870,17 @@ footer .last-modified {font-weight:400;color:#526C63;}
 @media (max-width: 470px) {
   .chart11-plot-shell > .chart11-change { left:auto; right:6px; top:6px; }
 }
+
+/* Transparent generative-AI acknowledgement beneath footer authorship. */
+footer .ai-acknowledgement {
+  font: 13px/1.55 var(--body);
+  color: #61796e;
+  font-weight: 400;
+  text-align: center;
+  max-width: 850px;
+  margin: 10px auto 0;
+  padding: 12px 14px 0;
+  border-top: 1px solid #dce8e1;
+  overflow-wrap: anywhere;
+}
+footer .ai-acknowledgement strong {font-weight: 600; color:#375c50;}

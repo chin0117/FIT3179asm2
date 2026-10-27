@@ -83,7 +83,7 @@ function showStateSpendingDifference(state) {
   const signed = value => `${value >= 0 ? '+' : '−'}$${Math.abs(value).toFixed(2)}`;
   const overline = document.createElement('span');
   overline.className = 'change-state';
-  overline.textContent = `${selectedSpendState} - Spending increase`;
+  overline.textContent = `${selectedSpendState} · Spending increase`;
   const heading = document.createElement('strong');
   heading.textContent = `${signed(delta)} per trip`;
   const percentage = document.createElement('span');
@@ -91,7 +91,7 @@ function showStateSpendingDifference(state) {
   percentage.textContent = `${percent >= 0 ? '+' : '−'}${Math.abs(percent).toFixed(1)}%`;
   const context = document.createElement('span');
   context.className = 'change-baseline';
-  context.textContent = `2025 ${money(before)} → 2026 ${money(after)}`;
+  context.textContent = `2025 ${money(before)} => 2026 ${money(after)}`;
   const summary = document.createElement('span');
   summary.className = 'change-summary';
   summary.append(heading, percentage);

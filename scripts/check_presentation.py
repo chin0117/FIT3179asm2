@@ -1,4 +1,4 @@
-"""Verify presentation and links for the 26 October 2026 final dashboard."""
+"""Verify presentation and links for the 27 October 2026 dashboard."""
 from pathlib import Path
 import json
 from bs4 import BeautifulSoup
@@ -12,7 +12,7 @@ assert len(soup.select('.source-list a[href^="https://"]')) == 6
 assert len(soup.select('.panel .source')) == 0
 assert not soup.select('.micro-notes .interaction-tip')
 assert soup.select_one('.authorship').get_text(' ', strip=True) == 'Create by: Chin Hui Ni'
-assert soup.select_one('.last-modified').get_text(' ', strip=True) == 'Last modified: 26 October 2026'
+assert soup.select_one('.last-modified').get_text(' ', strip=True) == 'Last modified: 27 October 2026'
 assert soup.select_one('.chapter-conclusion h3').get_text(' ', strip=True) == 'Conclusion'
 assert soup.select_one('.chapter-methods h3').get_text(' ', strip=True) == 'Data sources'
 assert 'interpretation' not in soup.select_one('.chapter-methods').get_text(' ', strip=True).lower()

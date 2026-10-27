@@ -2,7 +2,7 @@
  * Uses the original 12 editable Vega-Lite specifications and re-computes only
  * their presentation dimensions; data/encodings remain unchanged.
  */
-const LAYOUT_BUILD = "20261027-overlay-repair-v14";
+const LAYOUT_BUILD = "20261027-right-callout-mapbalance-v15";
 const chartFiles = {
   1: "01 choropleth.vg.json",
   2: "02 proportional symbol.vg.json",
@@ -83,7 +83,7 @@ function showStateSpendingDifference(state) {
   const signed = value => `${value >= 0 ? '+' : '−'}A$${Math.abs(value).toFixed(2)}`;
   const overline = document.createElement('span');
   overline.className = 'change-state';
-  overline.textContent = `${selectedSpendState} · Spending increase`;
+  overline.textContent = `${selectedSpendState} - Spending increase`;
   const heading = document.createElement('strong');
   heading.textContent = `${signed(delta)} per trip`;
   const percentage = document.createElement('span');
@@ -233,7 +233,7 @@ function prepareResponsiveSpec(number, original, availableWidth) {
     const factor = targetWidth / originalWidth;
     const height = Math.max(205, Math.min(425, Math.round(originalHeight * Math.max(0.65, factor))));
     spec.height = number === 3
-      ? Math.max(270, Math.min(385, Math.round(targetWidth * 0.82)))
+      ? Math.max(310, Math.min(405, Math.round(targetWidth * 0.92)))
       : height;
     // Compact map marks to avoid circles/lines covering everything.
     if (number === 2 && spec.layer?.[1]?.encoding?.size?.scale) {
@@ -246,7 +246,7 @@ function prepareResponsiveSpec(number, original, availableWidth) {
       // Keep geographic proportions consistent when the map grows/shrinks.
       const verticalFactor = height / originalHeight;
       // Give the flow map more visual emphasis; it has no axis labels.
-      const scaleBoost = number === 3 ? 1.12 : 1;
+      const scaleBoost = number === 3 ? 1.26 : 1;
       spec.projection.scale = Math.round(original.projection.scale * Math.min(factor, verticalFactor) * scaleBoost);
     }
   } else {

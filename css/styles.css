@@ -165,7 +165,7 @@ footer {font-size:13px;color:#667c71;text-align:center;padding:40px 0;}
   .panel-grid > .panel-wide { grid-column: 1; }
 }
 
-/* VERIFIED TWO-PER-ROW LAYOUT · 2026-10-26
+/* VERIFIED TWO-PER-ROW LAYOUT - 2026-10-26
    Override all older three-column and wide-card rules explicitly. */
 html[data-layout-version="two-column-20261026"] .geography-grid,
 html[data-layout-version="two-column-20261026"] .panel-grid {
@@ -329,7 +329,7 @@ html[data-layout-version="two-column-20261026"] .plot .vega-embed {
 .plot .vega-bindings {width:100%; margin-top:8px;}
 
 
-/* Final typography & framed legends · 2026-10-26 */
+/* Final typography & framed legends - 2026-10-26 */
 .panel-top { padding-bottom: 9px; }
 .panel .card-title {
   max-width: none;
@@ -841,4 +841,32 @@ footer .last-modified {font-weight:400;color:#526C63;}
   .chart11-plot-shell > .chart11-change {left:6px;top:6px;padding:7px 9px;max-width:210px;}
   .chart11-change .change-summary strong {font-size:17px;}
   .chart11-change .change-baseline {font-size:11px;}
+}
+
+
+/* 27 Oct 2026: tighten the flow-map card without changing the paired-card height.
+   The map fills the flexible middle area, and both card insights share a baseline. */
+.geo-card:has(#chart3) .plot-with-side-key.chart3-key-layout {
+  flex: 1 1 auto;
+  align-items: center;
+  gap: 7px;
+  min-height: 0;
+}
+.geo-card:has(#chart3) #chart3 {
+  justify-content: center;
+  padding-top: 1px;
+  padding-bottom: 1px;
+}
+.geo-card:has(#chart3) > .micro-notes,
+.geography-grid .pareto-card > .micro-notes {
+  margin-top: auto;
+}
+/* State spending box: top-RIGHT inside Chart 11, clear of the filter row. */
+.chart11-plot-shell > .chart11-change {
+  left: auto;
+  right: 10px;
+  top: 10px;
+}
+@media (max-width: 470px) {
+  .chart11-plot-shell > .chart11-change { left:auto; right:6px; top:6px; }
 }

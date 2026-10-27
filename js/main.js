@@ -79,8 +79,8 @@ function showStateSpendingDifference(state) {
   }
   const delta = Math.round((after - before + Number.EPSILON) * 100) / 100;
   const percent = delta / before * 100;
-  const money = value => `A$${value.toFixed(2)}`;
-  const signed = value => `${value >= 0 ? '+' : '−'}A$${Math.abs(value).toFixed(2)}`;
+  const money = value => `$${value.toFixed(2)}`;
+  const signed = value => `${value >= 0 ? '+' : '−'}$${Math.abs(value).toFixed(2)}`;
   const overline = document.createElement('span');
   overline.className = 'change-state';
   overline.textContent = `${selectedSpendState} - Spending increase`;

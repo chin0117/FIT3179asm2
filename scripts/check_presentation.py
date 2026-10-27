@@ -30,6 +30,8 @@ assert not chart12.get('params')
 assert 'boxState' not in json.dumps(chart12)
 chart6 = json.loads((root / 'js' / '07 slope chart.vg.json').read_text())
 assert chart6['encoding']['color']['legend']['orient'] == 'bottom'
-assert chart6['layer'][2]['encoding']['text']['field'] == 'visitor_increase'
-assert 'joinaggregate' in chart6['layer'][2]['transform'][0]
+assert chart6['layer'][2]['encoding']['text']['field'] == 'change'
+annotations = chart6['layer'][2]['data']['values']
+assert {entry['type'] for entry in annotations} == {'Domestic day', 'Domestic overnight', 'International'}
+assert all(str(entry['year']) == '2015' for entry in annotations)
 print('PASS: 13 charts, Chart 6 growth labels/legend, conclusion, 6 source links, authorship and controls')

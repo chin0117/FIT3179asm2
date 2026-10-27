@@ -719,3 +719,49 @@ footer .last-modified {font-weight:400;color:#526C63;}
   .chapter-kpi-name { font-size: 13px; }
   .chapter-kpi-context { font-size: 11px; }
 }
+
+
+/* 27 October: findings describe each chapter, without a 'Next' label. */
+.chapter-summary-text { gap: 0; }
+.chapter-summary-text p { max-width: 59ch; font-size: 17px; line-height: 1.46; }
+
+/* Keep Chart 3's framed two-way-trip legend visible to the RIGHT of its map. */
+.plot-with-side-key.chart-vertical-key.chart3-key-layout {
+  grid-template-columns: minmax(0,1fr) clamp(105px, 23%, 138px);
+}
+.chart3-key-layout .flow-key .line-key-item { align-items: center; }
+.chart3-key-layout .flow-key .flow-line { background:#d36743; flex: 0 0 27px; }
+.chart3-key-layout .flow-key .visual-key-note { font-size: 12px; }
+
+/* Overall conclusion: short synthesis on the left, three data KPIs on the right. */
+.chapter-conclusion.conclusion-with-kpis {
+  display: grid;
+  grid-template-columns: minmax(0,.85fr) minmax(0,1.5fr);
+  gap: 20px;
+  padding: 18px 20px;
+  align-items: stretch;
+  min-width: 0;
+}
+.conclusion-summary-text {
+  align-self: center;
+  padding: 2px 1px;
+  min-width: 0;
+}
+.conclusion-with-kpis .conclusion-summary-text h3 { margin:0 0 9px; }
+.conclusion-summary-text p { font:16px/1.48 var(--body); color:#365a4d; }
+.conclusion-kpis { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; min-width:0; }
+.conclusion-kpis .chapter-kpi { background:#f7fbf8; }
+.conclusion-kpis .chapter-kpi-value { font-size: clamp(23px,2.3vw,31px); }
+.conclusion-kpis .chapter-kpi-name { font-size:13px; }
+.conclusion-kpis .chapter-kpi-context { font-size:12px; }
+@media (max-width: 920px) {
+  .chapter-conclusion.conclusion-with-kpis { grid-template-columns: 1fr; gap:13px; }
+  .conclusion-kpis .chapter-kpi-name { font-size:14px; }
+}
+@media (max-width: 575px) {
+  .conclusion-kpis { grid-template-columns: 1fr; }
+  .conclusion-kpis .chapter-kpi { min-height: 80px; }
+}
+@media (max-width: 375px) {
+  .plot-with-side-key.chart-vertical-key.chart3-key-layout { grid-template-columns: 1fr; }
+}

@@ -22,6 +22,14 @@
         "period",
         "spend"
       ]
+    },
+    {
+      "calculate": "datum['Jun 2026'] - datum['Jun 2025']",
+      "as": "spending_change_aud"
+    },
+    {
+      "calculate": "(datum['Jun 2026'] - datum['Jun 2025']) / datum['Jun 2025']",
+      "as": "spending_change_ratio"
     }
   ],
   "layer": [
@@ -132,6 +140,18 @@
             "type": "quantitative",
             "title": "AUD per trip",
             "format": "$,.2f"
+          },
+          {
+            "field": "spending_change_aud",
+            "type": "quantitative",
+            "title": "Change per trip",
+            "format": "+$,.2f"
+          },
+          {
+            "field": "spending_change_ratio",
+            "type": "quantitative",
+            "title": "Change (%)",
+            "format": "+.1%"
           }
         ],
         "opacity": {

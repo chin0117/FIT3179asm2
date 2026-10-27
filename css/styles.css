@@ -766,10 +766,22 @@ footer .last-modified {font-weight:400;color:#526C63;}
   .plot-with-side-key.chart-vertical-key.chart3-key-layout { grid-template-columns: 1fr; }
 }
 
-/* 27 October 2026 - match chapter and conclusion narrative text to chart insights. */
+/* 27 October 2026 — match chapter and conclusion narrative text to chart insights. */
 .chapter-summary-text p,
 .conclusion-summary-text p {
   font-family: var(--body);
   font-size: 18px;
   line-height: 1.46;
 }
+
+/* Chart 11: calculated difference for the state chosen in the live Vega filter. */
+.chart11-change {
+  display:flex; align-items:center; justify-content:center; flex-wrap:wrap;
+  gap:4px 12px; padding:10px 12px; margin:0 auto 12px; max-width:100%;
+  border:1px solid #bddbd1; border-radius:9px; background:#f0f8f5;
+  font:16px/1.45 var(--body); text-align:center; color:#244d42;
+}
+.chart11-change[hidden] {display:none;}
+.chart11-change strong {font-weight:700; color:#146653;}
+.chart11-change .change-baseline {color:#496b61;font-size:14px;}
+@media(max-width:470px){.chart11-change{font-size:15px;}.chart11-change .change-baseline{font-size:13px;}}

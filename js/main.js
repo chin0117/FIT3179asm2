@@ -2,7 +2,7 @@
  * Uses the original 12 editable Vega-Lite specifications and re-computes only
  * their presentation dimensions; data/encodings remain unchanged.
  */
-const LAYOUT_BUILD = "20261026-annotation-labels-visible-v12";
+const LAYOUT_BUILD = "20261027-state-spending-change-v13";
 const chartFiles = {
   1: "01 choropleth.vg.json",
   2: "02 proportional symbol.vg.json",
@@ -34,6 +34,60 @@ const nativeLegendCharts = new Set([1, 4, 6, 7, 8, 9, 12]);
 // Dashboard card numbers 05, 08, 11, 13 must use horizontal BOTTOM legends.
 const bottomLegendCharts = new Set([4, 9, 8, 6, 7]);
 let resizeTimeout;
+
+// Source: the same editable CSV used by Chart 11. No hard-coded spending amounts.
+const spendingByState = new Map();
+let selectedSpendState = 'All states';
+
+async function loadStateSpending() {
+  try {
+    const response = await fetch('data/spend_per_trip.csv?v=' + LAYOUT_BUILD, {cache:'no-store'});
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const rows = (await response.text()).trim().split(/\r?\n/);
+    const columns = rows.shift().replace(/^\uFEFF/, '').split(',');
+    const stateIndex = columns.indexOf('state');
+    const periodIndex = columns.indexOf('period');
+    const valueIndex = columns.indexOf('spend_per_trip_aud');
+    if (Math.min(stateIndex, periodIndex, valueIndex) < 0) throw new Error('Unexpected spending CSV headings');
+    for (const row of rows) {
+      if (!row.trim()) continue;
+      const cells = row.split(',');
+      const state = cells[stateIndex].trim();
+      const period = cells[periodIndex].trim();
+      const value = Number(cells[valueIndex]);
+      if (!Number.isFinite(value)) continue;
+      if (!spendingByState.has(state)) spendingByState.set(state, {});
+      spendingByState.get(state)[period] = value;
+    }
+  } catch (error) {
+    console.warn('Could not load state spending comparisons:', error);
+  }
+}
+
+function showStateSpendingDifference(state) {
+  selectedSpendState = state || 'All states';
+  const panel = document.getElementById('chart11-change');
+  if (!panel) return;
+  const values = spendingByState.get(selectedSpendState);
+  const before = values?.['Jun 2025'];
+  const after = values?.['Jun 2026'];
+  if (!Number.isFinite(before) || !Number.isFinite(after)) {
+    panel.hidden = true;
+    panel.replaceChildren();
+    return;
+  }
+  const delta = Math.round((after - before + Number.EPSILON) * 100) / 100;
+  const percent = delta / before * 100;
+  const money = value => `A$${value.toFixed(2)}`;
+  const signed = value => `${value >= 0 ? '+' : '-'}A$${Math.abs(value).toFixed(2)}`;
+  const heading = document.createElement('strong');
+  heading.textContent = `${selectedSpendState}: ${signed(delta)} per trip (${percent >= 0 ? '+' : '-'}${Math.abs(percent).toFixed(1)}%)`;
+  const context = document.createElement('span');
+  context.className = 'change-baseline';
+  context.textContent = `Jun 2025 ${money(before)} -> Jun 2026 ${money(after)}`;
+  panel.replaceChildren(heading, context);
+  panel.hidden = false;
+}
 
 function prepareResponsiveSpec(number, original, availableWidth) {
   const spec = JSON.parse(JSON.stringify(original));
@@ -186,7 +240,11 @@ async function renderChart(number) {
   // For Chart 11, discard stale controls from the previous render before
   // Vega recreates the state dropdown inside its chart container.
   const chart11FilterSlot = number === 8 ? document.getElementById('chart11-filter-slot') : null;
-  if (chart11FilterSlot) chart11FilterSlot.replaceChildren();
+  if (chart11FilterSlot) {
+    chart11FilterSlot.replaceChildren();
+    const param = spec.params?.find(param => param.name === 'focusSpendState');
+    if (param) param.value = selectedSpendState;
+  }
   // Keep only the numbered heading above the card; no repeated Vega plot title.
   delete spec.title;
   if (spec.title) {
@@ -221,7 +279,18 @@ async function renderChart(number) {
     if (chart11FilterSlot) {
       const bindings = node.querySelector('.vega-bindings') ||
         node.closest('article')?.querySelector('.vega-bindings');
-      if (bindings) chart11FilterSlot.appendChild(bindings);
+      if (bindings) {
+        chart11FilterSlot.appendChild(bindings);
+        const stateSelect = bindings.querySelector('select');
+        if (stateSelect) {
+          // The existing Vega binding keeps highlighting the selected state.
+          // Our listener only updates the additional data-derived delta panel.
+          stateSelect.addEventListener('change', () =>
+            showStateSpendingDifference(stateSelect.value)
+          );
+          showStateSpendingDifference(stateSelect.value);
+        }
+      }
     }
   } catch (error) {
     node.innerHTML = '<p class="error">This chart could not load. Check the browser console, dataset URL, and your internet connection.</p>';
@@ -230,6 +299,7 @@ async function renderChart(number) {
 }
 
 async function startDashboard() {
+  await loadStateSpending();
   await Promise.all(chartOrder.map(async number => {
     const filename = chartFiles[number];
     const url = `js/${encodeURIComponent(filename)}?v=${LAYOUT_BUILD}`;

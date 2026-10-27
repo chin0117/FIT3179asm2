@@ -1,5 +1,5 @@
 {
-  "description": "Derived $ spent / number of trips: DoTS June quarter 2025 and June quarter 2026, all-purpose domestic day trips, not park spending.",
+  "description": "Derived $ spent / number of trips: DoTS June quarter 2025 and June quarter 2026, all-purpose domestic day trips, not park spending. State focus is controlled by the dashboard HTML selector.",
   "width": 450,
   "height": 300,
   "data": {
@@ -205,22 +205,7 @@
   "params": [
     {
       "name": "focusSpendState",
-      "value": "All states",
-      "bind": {
-        "input": "select",
-        "name": "Focus state: ",
-        "options": [
-          "All states",
-          "NSW",
-          "VIC",
-          "QLD",
-          "WA",
-          "SA",
-          "TAS",
-          "NT",
-          "ACT"
-        ]
-      }
+      "value": "All states"
     }
   ]
 }

@@ -2,7 +2,7 @@
  * Uses the original 12 editable Vega-Lite specifications and re-computes only
  * their presentation dimensions; data/encodings remain unchanged.
  */
-const LAYOUT_BUILD = "20261027-state-spending-change-v13";
+const LAYOUT_BUILD = "20261027-overlay-repair-v14";
 const chartFiles = {
   1: "01 choropleth.vg.json",
   2: "02 proportional symbol.vg.json",
@@ -36,6 +36,7 @@ const bottomLegendCharts = new Set([4, 9, 8, 6, 7]);
 let resizeTimeout;
 
 // Source: the same editable CSV used by Chart 11. No hard-coded spending amounts.
+const chartViews = new Map();
 const spendingByState = new Map();
 let selectedSpendState = 'All states';
 
@@ -79,14 +80,46 @@ function showStateSpendingDifference(state) {
   const delta = Math.round((after - before + Number.EPSILON) * 100) / 100;
   const percent = delta / before * 100;
   const money = value => `A$${value.toFixed(2)}`;
-  const signed = value => `${value >= 0 ? '+' : '-'}A$${Math.abs(value).toFixed(2)}`;
+  const signed = value => `${value >= 0 ? '+' : '−'}A$${Math.abs(value).toFixed(2)}`;
+  const overline = document.createElement('span');
+  overline.className = 'change-state';
+  overline.textContent = `${selectedSpendState} · Spending increase`;
   const heading = document.createElement('strong');
-  heading.textContent = `${selectedSpendState}: ${signed(delta)} per trip (${percent >= 0 ? '+' : '-'}${Math.abs(percent).toFixed(1)}%)`;
+  heading.textContent = `${signed(delta)} per trip`;
+  const percentage = document.createElement('span');
+  percentage.className = 'change-percent';
+  percentage.textContent = `${percent >= 0 ? '+' : '−'}${Math.abs(percent).toFixed(1)}%`;
   const context = document.createElement('span');
   context.className = 'change-baseline';
-  context.textContent = `Jun 2025 ${money(before)} -> Jun 2026 ${money(after)}`;
-  panel.replaceChildren(heading, context);
+  context.textContent = `2025 ${money(before)} → 2026 ${money(after)}`;
+  const summary = document.createElement('span');
+  summary.className = 'change-summary';
+  summary.append(heading, percentage);
+  panel.replaceChildren(overline, summary, context);
   panel.hidden = false;
+}
+
+// The dashboard owns the select control, so it survives Vega re-renders and resizes.
+async function setSpendingFocus(state) {
+  showStateSpendingDifference(state);
+  const view = chartViews.get(8);
+  if (view) {
+    try {
+      view.signal('focusSpendState', selectedSpendState);
+      await view.runAsync();
+    } catch (error) {
+      console.warn('Could not update Chart 11 state highlight:', error);
+    }
+  }
+}
+
+function connectSpendingDropdown() {
+  const select = document.getElementById('chart11-focus-select');
+  if (!select) return;
+  select.value = selectedSpendState;
+  select.addEventListener('change', () => { void setSpendingFocus(select.value); });
+  // Keep the top-left callout hidden until the user selects one state.
+  showStateSpendingDifference(select.value);
 }
 
 function prepareResponsiveSpec(number, original, availableWidth) {
@@ -237,13 +270,15 @@ async function renderChart(number) {
   if (width <= 0 || (lastSizes.get(number) === width && node.querySelector('svg'))) return;
   lastSizes.set(number, width);
   const spec = prepareResponsiveSpec(number, base, width);
-  // For Chart 11, discard stale controls from the previous render before
-  // Vega recreates the state dropdown inside its chart container.
-  const chart11FilterSlot = number === 8 ? document.getElementById('chart11-filter-slot') : null;
-  if (chart11FilterSlot) {
-    chart11FilterSlot.replaceChildren();
+  // Reapply the selected state on resize without recreating the HTML dropdown.
+  if (number === 8) {
     const param = spec.params?.find(param => param.name === 'focusSpendState');
-    if (param) param.value = selectedSpendState;
+    if (param) { param.value = selectedSpendState; delete param.bind; }
+  }
+  // Pareto: remove any pre-existing HTML legend from older templates.
+  if (number === 13) {
+    const card = node.closest('.pareto-card');
+    card?.querySelectorAll('.pareto-key, [aria-label="Pareto legend"]').forEach(key => key.remove());
   }
   // Keep only the numbered heading above the card; no repeated Vega plot title.
   delete spec.title;
@@ -267,29 +302,20 @@ async function renderChart(number) {
     if (spec.layer?.[1]?.encoding?.color) spec.layer[1].encoding.color.legend = null;
   }
   try {
-    await vegaEmbed(node, spec, {
+    const result = await vegaEmbed(node, spec, {
       mode: 'vega-lite',
       renderer: 'svg',
       actions: false,
       tooltip: {theme: 'light'},
       hover: true
     });
-    // Move Chart 11's live Vega dropdown next to its custom year legend.
-    // Re-parenting preserves Vega's existing control event handlers.
-    if (chart11FilterSlot) {
-      const bindings = node.querySelector('.vega-bindings') ||
-        node.closest('article')?.querySelector('.vega-bindings');
-      if (bindings) {
-        chart11FilterSlot.appendChild(bindings);
-        const stateSelect = bindings.querySelector('select');
-        if (stateSelect) {
-          // The existing Vega binding keeps highlighting the selected state.
-          // Our listener only updates the additional data-derived delta panel.
-          stateSelect.addEventListener('change', () =>
-            showStateSpendingDifference(stateSelect.value)
-          );
-          showStateSpendingDifference(stateSelect.value);
-        }
+    // Save the Vega view for the persistent external state selector.
+    if (number === 8) {
+      chartViews.set(8, result.view);
+      // When re-rendering after resize, preserve the previously selected state.
+      if (selectedSpendState !== 'All states') {
+        result.view.signal('focusSpendState', selectedSpendState);
+        await result.view.runAsync();
       }
     }
   } catch (error) {
@@ -300,6 +326,7 @@ async function renderChart(number) {
 
 async function startDashboard() {
   await loadStateSpending();
+  connectSpendingDropdown();
   await Promise.all(chartOrder.map(async number => {
     const filename = chartFiles[number];
     const url = `js/${encodeURIComponent(filename)}?v=${LAYOUT_BUILD}`;
